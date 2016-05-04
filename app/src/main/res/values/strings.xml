@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">CustemView</string>
+    <string name="title_activity_drop_dowm">DropDowmActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+</resources>

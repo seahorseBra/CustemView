@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AlmanacItemView">
+        <attr name="rank_orientation" format="string"/>
+        <attr name="content_orientation" format="string"/>
+        <attr name="contentTextColor" format="color"/>
+        <attr name="imageRes" format="reference"/>
+        <attr name="maxLine" format="integer"/>
+        <attr name="interval" format="dimension"/>
+    </declare-styleable>
+</resources>
