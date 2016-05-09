@@ -22,7 +22,9 @@
         <activity
             android:name=".DropDownActivity"
             android:label="@string/title_activity_drop_dowm" />
-        <activity android:name=".AnimationActivity"></activity>
+        <activity android:name=".AnimationActivity" />
+        <activity android:name=".CustomScroller"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
     </application>
 
 </manifest>
