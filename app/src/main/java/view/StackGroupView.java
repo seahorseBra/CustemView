@@ -1,10 +1,10 @@
 package view;
 
+import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +17,10 @@ public class StackGroupView extends ViewGroup {
 
     private static final String TAG = "StackGroupView";
     private int mScreenHeight;
-    private int mLastY = 0;
+    private int mViewWidth;
+    private int mLastX = 0;
     private OverScroller mScroller;
+    private int firstViewPosition = 0;
     private int mEnd;
     private int mStart;
 
@@ -30,51 +32,29 @@ public class StackGroupView extends ViewGroup {
     @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     public StackGroupView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mScroller = new OverScroller(context);
         mScreenHeight = context.getResources().getDisplayMetrics().heightPixels;
+        mViewWidth = context.getResources().getDisplayMetrics().widthPixels;
+        mScroller = new OverScroller(context);
     }
 
-    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-
-        int y = (int)event.getY();
+        View childAt = getChildAt(firstViewPosition);
+        int x = (int)event.getX();
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                mLastY = y;
-                mStart = getScrollY();
+                mLastX = x;
+                mStart = x;
                 break;
             case MotionEvent.ACTION_MOVE:
-                if (!mScroller.isFinished()) {
-                    mScroller.abortAnimation();
+                int dx = mLastX - x;
+                if (dx >) {
                 }
-                int dy = mLastY - y;
-                if (getScrollY() < 0) {
-                    dy = 0;
-                }
-                if (getScrollY() > (getChildCount()- 1) * mScreenHeight) {
-                    dy = 0;
-                }
-                scrollBy(0, dy);
-                mLastY = y;
                 break;
             case MotionEvent.ACTION_UP:
-                mEnd = getScrollY();
-                int dScrollY = mEnd - mStart;
-                if (dScrollY > 0) {
-                    if (dScrollY < mScreenHeight / 3) {
-                        mScroller.startScroll(0, getScrollY(), 0, -dScrollY);
-                    } else {
-                        mScroller.startScroll(0, getScrollY(), 0, mScreenHeight - dScrollY);
-                    }
-                } else {
-                    if (Math.abs(dScrollY) < mScreenHeight / 3) {
-                        mScroller.startScroll(0, getScrollY(), 0, -dScrollY);
-                    } else {
-                        mScroller.startScroll(0, getScrollY(), 0, -mScreenHeight - dScrollY);
-                    }
-                }
+
                 break;
         }
         postInvalidate();
@@ -89,10 +69,6 @@ public class StackGroupView extends ViewGroup {
     @Override
     public void computeScroll() {
         super.computeScroll();
-        if (mScroller.computeScrollOffset()) {
-            scrollTo(0, mScroller.getCurrY());
-            postInvalidate();
-        }
     }
 
     @Override
@@ -101,8 +77,15 @@ public class StackGroupView extends ViewGroup {
     }
 
     @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+    }
+
+    @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        measureWidth(widthMeasureSpec);
+        measureHeight(heightMeasureSpec);
         int childCount = getChildCount();
         for (int i = 0; i < childCount; ++i) {
             measureChild(getChildAt(i), widthMeasureSpec, heightMeasureSpec);
@@ -110,18 +93,69 @@ public class StackGroupView extends ViewGroup {
 
     }
 
+    private int measureWidth(int widthMeasureSpec) {
+        int mode = MeasureSpec.getMode(widthMeasureSpec);
+        int size = MeasureSpec.getSize(widthMeasureSpec);
+
+        switch (mode){
+            case MeasureSpec.AT_MOST:
+
+                break;
+            case MeasureSpec.EXACTLY:
+                mViewWidth = size;
+                break;
+        }
+        return size;
+    }
+    private int measureHeight(int heightMeasureSpec) {
+        int mode = MeasureSpec.getMode(heightMeasureSpec);
+        int size = MeasureSpec.getSize(heightMeasureSpec);
+
+        switch (mode){
+            case MeasureSpec.AT_MOST:
+                mScreenHeight = mScreenHeight/3;
+                break;
+            case MeasureSpec.EXACTLY:
+                mScreenHeight = size;
+                break;
+        }
+        return size;
+    }
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
 
         int childCount = getChildCount();
-
-        MarginLayoutParams layoutParams = (MarginLayoutParams)getLayoutParams();
-        layoutParams.height = mScreenHeight * childCount;
-        setLayoutParams(layoutParams);
+        int maxViewWidth = (mViewWidth - 60) / 3;
         for (int i = 0; i < childCount; i++) {
             View child = getChildAt(i);
-            if (child.getVisibility() != GONE) {
-                child.layout(l, mScreenHeight * i, r, mScreenHeight * (i + 1));
+            if (child.getVisibility() == GONE) {
+                break;
+            }
+            if (i < firstViewPosition || firstViewPosition + 4 < i) {
+                child.layout(0, mScreenHeight/2, 0, mScreenHeight/2);
+            }
+            if (firstViewPosition == i) {
+                child.layout(0, mScreenHeight / 3, maxViewWidth / 3, mScreenHeight * 2 / 3);
+            }
+            if (firstViewPosition + 1 == i) {
+                if (child.getVisibility() != GONE) {
+                    child.layout(maxViewWidth / 3 + 10, mScreenHeight / 6, maxViewWidth + 10, mScreenHeight * 5 / 6);
+                }
+            }
+            if (firstViewPosition + 2 == i) {
+                if (child.getVisibility() != GONE) {
+                    child.layout(mViewWidth / 2 -  maxViewWidth / 2, 0, mViewWidth / 2 + maxViewWidth / 2, mScreenHeight);
+                }
+            }
+            if (firstViewPosition + 3 == i) {
+                if (child.getVisibility() != GONE) {
+                    child.layout(mViewWidth / 2 + maxViewWidth / 2 + 20,  mScreenHeight / 6, mViewWidth / 2 + maxViewWidth * 7/ 6 + 20, mScreenHeight * 5 / 6);
+                }
+            }
+            if (firstViewPosition + 4 == i) {
+                if (child.getVisibility() != GONE) {
+                    child.layout(mViewWidth - maxViewWidth / 3, mScreenHeight / 3, mViewWidth, mScreenHeight * 2 / 3);
+                }
             }
         }
     }

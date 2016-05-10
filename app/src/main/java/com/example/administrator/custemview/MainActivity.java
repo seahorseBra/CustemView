@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         findViewById(R.id.main_activity_dropdown).setOnClickListener(this);
         findViewById(R.id.main_activity_animation).setOnClickListener(this);
         findViewById(R.id.main_activity_scroller).setOnClickListener(this);
+        findViewById(R.id.main_activity_horizontal_scroller).setOnClickListener(this);
         m = (ImageView) findViewById(R.id.svg_image);
         m.setOnClickListener(this);
 //        tv.setDate(R.mipmap.ic_launcher, "啊喂噶围观");
@@ -207,6 +209,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                 break;
             case R.id.main_activity_scroller:
                 goActivity(CustomScroller.class);
+                break;
+            case R.id.main_activity_horizontal_scroller:
+                goActivity(HorizontalScrollerActivity.class);
                 break;
 
 
