@@ -26,7 +26,8 @@
         <activity
             android:name=".CustomScroller"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".HorizontalScrollerActivity"></activity>
+        <activity android:name=".HorizontalScrollerActivity" />
+        <activity android:name=".DragHelperActivity"></activity>
     </application>
 
 </manifest>

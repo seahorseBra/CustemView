@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <!--  <LinearLayout
+        android:background="#f00"
+        android:layout_width="200dp"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:text="菜单栏"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:background="#55005500"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="主界面"
+            android:layout_centerInParent="true"
+            android:gravity="center"/>
+    </RelativeLayout>-->
+
+    <view.ViewGroupTestA
+        android:background="#f66"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <view.ViewGroupTestB
+            android:background="#9f9"
+            android:layout_width="200dp"
+            android:layout_height="400dp">
+            <view.EventInterceptTestView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="#99f"/>
+        </view.ViewGroupTestB>
+    </view.ViewGroupTestA>
+</FrameLayout>

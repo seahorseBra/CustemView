@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         findViewById(R.id.main_activity_animation).setOnClickListener(this);
         findViewById(R.id.main_activity_scroller).setOnClickListener(this);
         findViewById(R.id.main_activity_horizontal_scroller).setOnClickListener(this);
+        findViewById(R.id.main_activity_qq).setOnClickListener(this);
         m = (ImageView) findViewById(R.id.svg_image);
         m.setOnClickListener(this);
 //        tv.setDate(R.mipmap.ic_launcher, "啊喂噶围观");
@@ -212,6 +213,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                 break;
             case R.id.main_activity_horizontal_scroller:
                 goActivity(HorizontalScrollerActivity.class);
+                break;
+            case R.id.main_activity_qq:
+                goActivity(DragHelperActivity.class);
                 break;
 
 

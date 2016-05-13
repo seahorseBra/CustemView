@@ -50,8 +50,8 @@ public class StackGroupView extends ViewGroup {
                 break;
             case MotionEvent.ACTION_MOVE:
                 int dx = mLastX - x;
-                if (dx >) {
-                }
+//                if (dx > ) {
+//                }
                 break;
             case MotionEvent.ACTION_UP:
 
