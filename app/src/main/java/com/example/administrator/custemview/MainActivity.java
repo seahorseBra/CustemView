@@ -1,6 +1,7 @@
 package com.example.administrator.custemview;
 
 import android.content.Intent;
+import android.graphics.drawable.Animatable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -10,6 +11,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -30,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
 
     private static final String TAG = "MainActivity";
     private TextView mText;
+    private ImageView m;
     /* @Bind(R.id.tv)
     AlmanacItemView tv;
     @Bind(R.id.et)
@@ -45,6 +49,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         findViewById(R.id.main_activity_imghandle).setOnClickListener(this);
         findViewById(R.id.main_activity_dropdown).setOnClickListener(this);
         findViewById(R.id.main_activity_animation).setOnClickListener(this);
+        findViewById(R.id.main_activity_scroller).setOnClickListener(this);
+        findViewById(R.id.main_activity_horizontal_scroller).setOnClickListener(this);
+        findViewById(R.id.main_activity_qq).setOnClickListener(this);
+        m = (ImageView) findViewById(R.id.svg_image);
+        m.setOnClickListener(this);
 //        tv.setDate(R.mipmap.ic_launcher, "啊喂噶围观");
 //        witch(et);
 
@@ -196,6 +205,20 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
             case R.id.main_activity_animation:
                 goActivity(AnimationActivity.class);
                 break;
+            case R.id.svg_image:
+                ((Animatable)m.getDrawable()).start();
+                break;
+            case R.id.main_activity_scroller:
+                goActivity(CustomScroller.class);
+                break;
+            case R.id.main_activity_horizontal_scroller:
+                goActivity(HorizontalScrollerActivity.class);
+                break;
+            case R.id.main_activity_qq:
+                goActivity(DragHelperActivity.class);
+                break;
+
+
         }
     }
 

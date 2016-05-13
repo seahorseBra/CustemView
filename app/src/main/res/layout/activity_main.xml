@@ -33,6 +33,30 @@
         android:background="@color/colorPrimaryDark"
         android:text="动画"
         android:textColor="@color/colorAccent"/>
+    <Button
+        android:id="@+id/main_activity_scroller"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:text="滑动"
+        android:textColor="@color/colorAccent"/>
+    <Button
+        android:id="@+id/main_activity_horizontal_scroller"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:text="水平滑动"
+        android:textColor="@color/colorAccent"/>
+
+    <Button
+        android:id="@+id/main_activity_qq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:text="仿QQ（ViewDragHelper）"
+        android:textColor="@color/colorAccent"/>
+
+
     <view.CustomCheckBox
         android:layout_margin="10dp"
         android:layout_width="30dp"
@@ -45,5 +69,11 @@
     <CheckBox
         android:layout_width="30dp"
         android:layout_height="30dp" />
+    <ImageView
+        android:id="@+id/svg_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/svg_anim"/>
+
 
 </LinearLayout>
