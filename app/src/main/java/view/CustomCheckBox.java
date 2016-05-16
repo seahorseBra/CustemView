@@ -27,11 +27,12 @@ import com.example.administrator.custemview.R;
 public class CustomCheckBox extends RelativeLayout {
 
 
-    private final ImageView mImage;
+    private ImageView mImage;
     public CustomCheckBox(final Context context, AttributeSet attrs) {
         super(context, attrs);
         LayoutInflater.from(context).inflate(R.layout.custem_checkbox, this);
         mImage = (ImageView) findViewById(R.id.check);
+
         findViewById(R.id.root).setOnClickListener(new OnClickListener() {
             @TargetApi(Build.VERSION_CODES.HONEYCOMB)
             @Override

@@ -2,11 +2,13 @@ package view;
 
 import android.content.Context;
 import android.support.v4.view.ViewCompat;
+import android.support.v4.view.ViewConfigurationCompat;
 import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
@@ -29,13 +31,11 @@ public class DragHelperViewGroup extends FrameLayout {
 
         @Override
         public int clampViewPositionHorizontal(View child, int left, int dx) {
-
             return left;
         }
 
         @Override
         public int clampViewPositionVertical(View child, int top, int dy) {
-
             return 0;
         }
 
@@ -55,6 +55,7 @@ public class DragHelperViewGroup extends FrameLayout {
     private int mWidth;
     private int mLastX;
     private int mLastY;
+    private int mTouchSlop;
 
 
     public DragHelperViewGroup(Context context) {
@@ -68,6 +69,9 @@ public class DragHelperViewGroup extends FrameLayout {
     public DragHelperViewGroup(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         viewDragHelper = ViewDragHelper.create(this, callback);
+
+        ViewConfiguration configuration = ViewConfiguration.get(context);
+        mTouchSlop = ViewConfigurationCompat.getScaledPagingTouchSlop(configuration);
 
     }
 
@@ -86,7 +90,7 @@ public class DragHelperViewGroup extends FrameLayout {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-      /*  Log.d(TAG, "onInterceptTouchEvent() called with: " + "ev = [" + ev + "]");
+        Log.d(TAG, "onInterceptTouchEvent() called with: " + "ev = [" + ev + "]");
         int x = (int) ev.getX();
         int y = (int) ev.getY();
         int action = ev.getAction();
@@ -94,12 +98,11 @@ public class DragHelperViewGroup extends FrameLayout {
             case MotionEvent.ACTION_DOWN:
                 mLastX = x;
                 mLastY = y;
-                needDragLeft = true;
                 break;
             case MotionEvent.ACTION_MOVE:
-                int dx = x - mLastX;
-                int dy = y - mLastY;
-                if (x > mLastX) {
+                int dx = Math.abs(x - mLastX);
+                int dy = Math.abs(y - mLastY);
+                if (dx > mTouchSlop && dx * 0.5f > dy && x > mLastX) {
                     needDragLeft = viewDragHelper.shouldInterceptTouchEvent(ev);
                     needDragLeft = true;
                 } else {
@@ -109,23 +112,18 @@ public class DragHelperViewGroup extends FrameLayout {
             case MotionEvent.ACTION_UP:
                 break;
         }
-        return needDragLeft;*/
-        return needDragLeft = viewDragHelper.shouldInterceptTouchEvent(ev);
+        return needDragLeft;
 
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-       /* Log.d(TAG, "onTouchEvent() called with: " + "event = [" + event + "]");
         if (needDragLeft) {
             viewDragHelper.processTouchEvent(event);
+            return true;
         }
-        return needDragLeft;*/
 
-
-            viewDragHelper.processTouchEvent(event);
-
-        return true;
+        return super.onTouchEvent(event);
     }
 
     @Override

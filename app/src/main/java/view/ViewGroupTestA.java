@@ -2,9 +2,11 @@ package view;
 
 import android.content.Context;
 import android.content.IntentFilter;
+import android.support.v4.view.ViewConfigurationCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.ViewConfiguration;
 import android.widget.FrameLayout;
 
 /**
@@ -16,6 +18,7 @@ public class ViewGroupTestA extends FrameLayout {
     private int mLastX;
     private int mLastY;
     private boolean needIntercept = false;
+    private int mTouchSlop;
 
     public ViewGroupTestA(Context context) {
         this(context, null);
@@ -27,22 +30,24 @@ public class ViewGroupTestA extends FrameLayout {
 
     public ViewGroupTestA(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        ViewConfiguration configuration = ViewConfiguration.get(context);
+        mTouchSlop = ViewConfigurationCompat.getScaledPagingTouchSlop(configuration);
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        Log.d(TAG, "A onInterceptTouchEvent() called with: " + "ev = [" + ev + "]");
+
         int x = (int) ev.getX();
         int y = (int) ev.getY();
+        needIntercept = false;
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                mLastX = x;
-                mLastY = y;
+
                 break;
             case MotionEvent.ACTION_MOVE:
                 int dx = Math.abs(x - mLastX);
                 int dy = Math.abs(y - mLastY);
-                if (dx > dy) {
+                if (dx > mTouchSlop && dx * 0.5f > dy) {
                     needIntercept = true;
                 } else {
                     needIntercept = false;
@@ -51,16 +56,20 @@ public class ViewGroupTestA extends FrameLayout {
             case MotionEvent.ACTION_UP:
                 break;
         }
+//        return super.onInterceptTouchEvent(ev);
+        Log.d(TAG, "A onInterceptTouchEvent() called with: " + "ev = "+ needIntercept +"[" + ev + "]");
         return needIntercept;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Log.d(TAG, "A onTouchEvent() called with: " + "event = [" + event + "]");
+        Log.d(TAG, "A onTouchEvent() called with: " + "event =  "+ needIntercept +"[" + event + "]");
         if (needIntercept) {
-
+            needIntercept = false;
+//            requestDisallowInterceptTouchEvent(true);
+            return true;
         }
-        return needIntercept;
+        return super.onTouchEvent(event);
     }
 
     @Override
