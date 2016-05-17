@@ -13,7 +13,7 @@ import butterknife.ButterKnife;
 /**
  * Created by zchao on 2016/3/30.
  */
-public class ImageHandleActivity extends AppCompatActivity {
+public class ImageHandleActivity extends BaseActivity {
 
     @Bind(R.id.account)
     EditText account;

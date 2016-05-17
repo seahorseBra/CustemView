@@ -27,7 +27,10 @@ import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 
-public class AnimationActivity extends AppCompatActivity {
+/**
+ * 动画
+ */
+public class AnimationActivity extends BaseActivity {
 
     private static final String TAG = "AnimationActivity";
     private ImageView mImage;

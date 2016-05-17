@@ -29,7 +29,7 @@ import butterknife.ButterKnife;
 import javaBean.Print;
 import javaBean.Student;
 
-public class MainActivity extends AppCompatActivity implements OnClickListener{
+public class MainActivity extends BaseActivity{
 
     private static final String TAG = "MainActivity";
     private TextView mText;
@@ -196,7 +196,13 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
     }
 
     @Override
+    protected void onSetting() {
+        goActivity(SettingActivity.class);
+    }
+
+    @Override
     public void onClick(View v) {
+        super.onClick(v);
         switch (v.getId()) {
             case R.id.main_activity_imghandle:
                 goActivity(ImageHandleActivity.class);
@@ -230,9 +236,5 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         }
     }
 
-    private void goActivity(Class cls){
-        Intent intent = new Intent();
-        intent.setClass(this, cls);
-        startActivity(intent);
-    }
+
 }

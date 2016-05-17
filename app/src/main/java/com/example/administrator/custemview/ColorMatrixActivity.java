@@ -4,7 +4,10 @@ import android.graphics.ColorMatrix;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class ColorMatrixActivity extends AppCompatActivity {
+/**
+ * 颜色矩阵练习
+ */
+public class ColorMatrixActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

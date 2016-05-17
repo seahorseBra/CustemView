@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="44dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
+    <TextView
+        android:id="@+id/item_phone_info_detail_name"
+        android:gravity="center"
+        android:textColor="#333"
+        android:text="信息"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/item_phone_info_detail_info"
+        android:gravity="center"
+        android:textColor="#aeaeae"
+        android:text="信息"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+    <View android:layout_alignParentBottom="true"
+        style="@style/device_line"></View>
+</RelativeLayout>

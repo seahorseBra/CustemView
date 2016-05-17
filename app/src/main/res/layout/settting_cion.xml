@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:background="#999999">
+
+    <View style="@style/device_line"/>
+
+    <RelativeLayout
+        android:id="@+id/root_feedback"
+        android:background="#fff"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="44dp">
+        <TextView
+            style="@style/setting_text"
+            android:text="反馈"/>
+
+        <ImageView
+            style="@style/setting_img"/>
+
+        <View
+            android:layout_alignParentBottom="true"
+            style="@style/device_line"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/root_about"
+        android:background="#fff"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="44dp">
+        <TextView
+            android:id="@+id/setting_phone_msg"
+            style="@style/setting_text"
+            android:text="关于"/>
+
+        <ImageView
+            style="@style/setting_img"/>
+
+    </RelativeLayout>
+
+    <View style="@style/device_line"/>
+</LinearLayout>

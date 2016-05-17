@@ -13,7 +13,7 @@ import adapter.ListCustemAdapter;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class DropDownActivity extends AppCompatActivity {
+public class DropDownActivity extends BaseActivity {
 
     private static final String TAG = "DropDownActivity";
     @Bind(R.id.list_rv)

@@ -1,4 +1,4 @@
-package com.example.administrator.custemview;
+package view;
 
 import android.content.Context;
 import android.content.res.ColorStateList;

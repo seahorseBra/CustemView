@@ -4,8 +4,14 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Handler;
+import android.provider.CalendarContract;
 import android.util.AttributeSet;
 import android.view.View;
+
+import java.sql.Time;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by zchao on 2016/5/16.
@@ -18,6 +24,18 @@ public class ClockView extends View {
     private Paint mText;
     private Paint mDegree;
     private int radius;
+    private float minutedegree, hourdegree, seconddegree;
+    private Calendar mCalendar;
+
+    private Handler handler = new Handler();
+    private Runnable runnable = new Runnable(){
+        @Override
+        public void run() {
+            mCalendar.setTimeInMillis(System.currentTimeMillis());
+            initeTime();
+            invalidate();
+        }
+    };
 
     public ClockView(Context context) {
         this(context, null);
@@ -39,6 +57,24 @@ public class ClockView extends View {
         mText.setStrokeWidth(1);
         mText.setTextSize(20);
         mText.setAntiAlias(true);
+
+        mCalendar = Calendar.getInstance();
+
+        initeTime();
+
+
+    }
+
+    private void initeTime() {
+        int hour = mCalendar.get(Calendar.HOUR_OF_DAY);
+        int minute = mCalendar.get(Calendar.MINUTE);
+        int second = mCalendar.get(Calendar.SECOND);
+
+        seconddegree = second * 360 / 60;
+        minutedegree = minute * 360 / 60;
+
+        handler.postDelayed(runnable, 1000);
+
     }
 
 
@@ -55,6 +91,7 @@ public class ClockView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        mDegree.setStyle(Paint.Style.STROKE);
         canvas.drawCircle(mwidth/2, mheight/2, radius, mDegree);
 
         canvas.save();
@@ -73,16 +110,17 @@ public class ClockView extends View {
         canvas.restore();
         canvas.save();
 
-        canvas.rotate(45, mwidth/2, mheight/2);
+        canvas.rotate(minutedegree, mwidth/2, mheight/2);
         mDegree.setStrokeWidth(6);
         canvas.drawLine(mwidth/2, mheight/2+10, mwidth/2, mheight/2-60, mDegree);
         canvas.restore();
         canvas.save();
 
-        canvas.rotate(135, mwidth/2, mheight/2);
+        canvas.rotate(seconddegree, mwidth/2, mheight/2);
         mDegree.setStrokeWidth(3);
         canvas.drawLine(mwidth/2, mheight/2+15, mwidth/2, mheight/2-80, mDegree);
-//        canvas.restore();
+        canvas.restore();
+        canvas.save();
 
         mDegree.setStyle(Paint.Style.FILL);
         canvas.drawCircle(mwidth/2, mheight/2, 8, mDegree);
