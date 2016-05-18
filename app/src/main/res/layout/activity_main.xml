@@ -73,27 +73,33 @@
         android:background="@color/colorPrimaryDark"
         android:text="颜色矩阵"
         android:textColor="@color/colorAccent"/>
-    </view.BarrageViewGroup>
 
-    <view.CustomCheckBox
-        android:layout_margin="10dp"
-        android:layout_width="30dp"
-        android:layout_height="30dp"></view.CustomCheckBox>
-    <view.CustomCheckBox
-        android:layout_margin="10dp"
-        android:layout_width="30dp"
-        android:layout_height="30dp"></view.CustomCheckBox>
 
-    <CheckBox
-        android:layout_width="30dp"
-        android:layout_height="30dp" />
+        <view.CustomCheckBox
+            android:layout_margin="10dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"></view.CustomCheckBox>
+        <view.CustomCheckBox
+            android:layout_margin="10dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"></view.CustomCheckBox>
+
+        <CheckBox
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
 
 
         <ImageView
             android:id="@+id/svg_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:src="@drawable/svg_anim"/>
 
+        <view.ClockView
+            android:id="@+id/clock"
+            android:transitionName="clock"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+    </view.BarrageViewGroup>
 
 </LinearLayout>

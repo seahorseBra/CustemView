@@ -1,11 +1,11 @@
 package com.example.administrator.custemview;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
-import android.media.Image;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -15,7 +15,6 @@ import android.widget.TextView;
  * Created by zchao on 2016/5/17.
  */
 public class BaseActivity extends FragmentActivity implements View.OnClickListener{
-
     private FrameLayout mContent;
     protected ImageView mBack;
     protected ImageView mSetting;
@@ -33,12 +32,19 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
         mBack.setOnClickListener(this);
         mSetting.setOnClickListener(this);
         mTitle.setOnClickListener(this);
+
     }
 
     @Override
     public void setContentView(int layoutResID) {
         getLayoutInflater().inflate(layoutResID, mContent);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -55,11 +61,15 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
     }
 
     protected void onSetting() {
-
     }
 
-    protected void fastSetClickBehave(int idRes){
-        findViewById(idRes).setOnClickListener(this);
+    protected void fastSetClickBehave(int... idRes){
+        if (idRes == null) {
+            return;
+        }
+        for (int i = 0; i < idRes.length; i++) {
+            findViewById(idRes[i]).setOnClickListener(this);
+        }
     }
     protected void onBack() {
         finish();
@@ -69,9 +79,21 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
         mTitle.setText(title);
     }
 
-    protected void goActivity(Class cls){
+    protected void goActivity(@Nullable Class cls){
         Intent intent = new Intent();
         intent.setClass(this, cls);
         startActivity(intent);
+    }
+
+    /**
+     * 带转场动画的启动
+     * @param cls
+     * @param bundle
+     */
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    protected void goActivity(@Nullable Class cls, Bundle bundle){
+        Intent intent = new Intent();
+        intent.setClass(this, cls);
+        startActivity(intent, bundle);
     }
 }

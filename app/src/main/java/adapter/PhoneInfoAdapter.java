@@ -1,6 +1,7 @@
 package adapter;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +20,7 @@ import java.util.List;
 public class PhoneInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
     private List<PhoneDetailInfoActivity.PhoneInfo> info = new ArrayList();
-    private String product = "未知设备";
+    private String product = Build.BRAND;
     private final LayoutInflater inflater;
 
     public PhoneInfoAdapter(Context context) {
@@ -33,35 +34,36 @@ public class PhoneInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//        if (viewType == 0) {
-//            return new HeadViewHolder(inflater.inflate(R.layout.phone_detail_head, parent, false));
-//        } else if (viewType == 1) {
+        if (viewType == 0) {
+            return new HeadViewHolder(inflater.inflate(R.layout.phone_detail_head, parent, false));
+        } else if (viewType == 1) {
             return new DetailHolder(inflater.inflate(R.layout.item_phone_info_detail, parent, false));
-//        }
-//        return null;
+        }
+        return null;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-//        if (getItemViewType(position) == 0) {
-//            ((HeadViewHolder)holder).mProduct.setText(product);
-//        }else {
-            ((DetailHolder) holder).mName.setText(info.get(position).name);
-            ((DetailHolder) holder).mInfo.setText(info.get(position).info);
-//        }
+        if (getItemViewType(position) == 0) {
+            ((HeadViewHolder)holder).mProduct.setText(product);
+        }else {
+            ((DetailHolder) holder).mName.setText(info.get(position - 1).name);
+            ((DetailHolder) holder).mInfo.setText(info.get(position - 1).info);
+        }
     }
 
     @Override
     public int getItemCount() {
-        return info.size();
+        return info.size() + 1;
     }
 
     @Override
     public int getItemViewType(int position) {
-//        if (position == 0) {
-//            return 0;
-//        }else
-        return 1;
+        if (position == 0) {
+            return 0;
+        } else {
+            return 1;
+        }
     }
 
     class DetailHolder extends RecyclerView.ViewHolder {

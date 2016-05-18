@@ -1,7 +1,9 @@
 package com.example.administrator.custemview;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.drawable.Animatable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -9,6 +11,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.HorizontalScrollView;
@@ -28,12 +31,14 @@ import java.util.Map;
 import butterknife.ButterKnife;
 import javaBean.Print;
 import javaBean.Student;
+import view.ClockView;
 
 public class MainActivity extends BaseActivity{
 
     private static final String TAG = "MainActivity";
     private TextView mText;
     private ImageView m;
+    private ClockView mClock;
     /* @Bind(R.id.tv)
     AlmanacItemView tv;
     @Bind(R.id.et)
@@ -46,14 +51,18 @@ public class MainActivity extends BaseActivity{
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
-        findViewById(R.id.main_activity_imghandle).setOnClickListener(this);
-        findViewById(R.id.main_activity_dropdown).setOnClickListener(this);
-        findViewById(R.id.main_activity_animation).setOnClickListener(this);
-        findViewById(R.id.main_activity_scroller).setOnClickListener(this);
-        findViewById(R.id.main_activity_horizontal_scroller).setOnClickListener(this);
-        findViewById(R.id.main_activity_qq).setOnClickListener(this);
-        findViewById(R.id.main_activity_clock).setOnClickListener(this);
-        findViewById(R.id.main_activity_colormattrix).setOnClickListener(this);
+        fastSetClickBehave(R.id.main_activity_imghandle,
+                R.id.main_activity_dropdown,
+                R.id.main_activity_animation,
+                R.id.main_activity_scroller,
+                R.id.main_activity_horizontal_scroller,
+                R.id.main_activity_qq,
+                R.id.main_activity_clock,
+                R.id.main_activity_colormattrix,
+                R.id.svg_image,
+                R.id.clock
+        );
+        mClock = (ClockView) findViewById(R.id.clock);
         m = (ImageView) findViewById(R.id.svg_image);
         m.setOnClickListener(this);
 //        tv.setDate(R.mipmap.ic_launcher, "啊喂噶围观");
@@ -211,7 +220,11 @@ public class MainActivity extends BaseActivity{
                 goActivity(DropDownActivity.class);
                 break;
             case R.id.main_activity_animation:
-                goActivity(AnimationActivity.class);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    goActivity(AnimationActivity.class, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+                } else {
+                    goActivity(AnimationActivity.class);
+                }
                 break;
             case R.id.svg_image:
                 ((Animatable)m.getDrawable()).start();
@@ -229,9 +242,13 @@ public class MainActivity extends BaseActivity{
                 goActivity(ClockActivity.class);
                 break;
             case R.id.main_activity_colormattrix:
-                goActivity(ClockActivity.class);
+                goActivity(ColorMatrixActivity.class);
                 break;
-
+            case R.id.clock:
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        goActivity(ClockActivity.class, ActivityOptions.makeSceneTransitionAnimation(this, mClock, "clock").toBundle());
+                    }
+                break;
 
         }
     }

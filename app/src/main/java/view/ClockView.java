@@ -72,6 +72,7 @@ public class ClockView extends View {
 
         seconddegree = second * 360 / 60;
         minutedegree = minute * 360 / 60;
+        minutedegree = hour * 360 / 12;
 
         handler.postDelayed(runnable, 1000);
 
@@ -110,15 +111,21 @@ public class ClockView extends View {
         canvas.restore();
         canvas.save();
 
+        canvas.rotate(hourdegree, mwidth/2, mheight/2);
+        mDegree.setStrokeWidth(7);
+        canvas.drawLine(mwidth/2, mheight/2+6, mwidth/2, mheight/2-50, mDegree);
+        canvas.restore();
+        canvas.save();
+
         canvas.rotate(minutedegree, mwidth/2, mheight/2);
-        mDegree.setStrokeWidth(6);
-        canvas.drawLine(mwidth/2, mheight/2+10, mwidth/2, mheight/2-60, mDegree);
+        mDegree.setStrokeWidth(5);
+        canvas.drawLine(mwidth/2, mheight/2+10, mwidth/2, mheight/2-70, mDegree);
         canvas.restore();
         canvas.save();
 
         canvas.rotate(seconddegree, mwidth/2, mheight/2);
-        mDegree.setStrokeWidth(3);
-        canvas.drawLine(mwidth/2, mheight/2+15, mwidth/2, mheight/2-80, mDegree);
+        mDegree.setStrokeWidth(2);
+        canvas.drawLine(mwidth/2, mheight/2+15, mwidth/2, mheight/2-100, mDegree);
         canvas.restore();
         canvas.save();
 

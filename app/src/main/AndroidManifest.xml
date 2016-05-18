@@ -34,6 +34,7 @@
         <activity android:name=".ColorMatrixActivity" />
         <activity android:name=".SettingActivity" />
         <activity android:name=".PhoneDetailInfoActivity"></activity>
+
     </application>
 
 </manifest>
