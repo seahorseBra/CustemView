@@ -60,7 +60,8 @@ public class MainActivity extends BaseActivity{
                 R.id.main_activity_clock,
                 R.id.main_activity_colormattrix,
                 R.id.svg_image,
-                R.id.clock
+                R.id.clock,
+                R.id.main_activity_login
         );
         mClock = (ClockView) findViewById(R.id.clock);
         m = (ImageView) findViewById(R.id.svg_image);
@@ -249,7 +250,9 @@ public class MainActivity extends BaseActivity{
                         goActivity(ClockActivity.class, ActivityOptions.makeSceneTransitionAnimation(this, mClock, "clock").toBundle());
                     }
                 break;
-
+            case R.id.main_activity_login:
+                goActivity(LogingActivity.class);
+                break;
         }
     }
 

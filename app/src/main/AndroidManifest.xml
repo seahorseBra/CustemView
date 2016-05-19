@@ -33,8 +33,8 @@
             android:launchMode="singleInstance" />
         <activity android:name=".ColorMatrixActivity" />
         <activity android:name=".SettingActivity" />
-        <activity android:name=".PhoneDetailInfoActivity"></activity>
-
+        <activity android:name=".PhoneDetailInfoActivity" />
+        <activity android:name=".LogingActivity"></activity>
     </application>
 
 </manifest>
