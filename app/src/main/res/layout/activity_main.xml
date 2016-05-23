@@ -81,6 +81,14 @@
             android:background="@color/colorPrimaryDark"
             android:text="登录"
             android:textColor="@color/colorAccent"/>
+        <Button
+            android:id="@+id/main_activity_service"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:text="服务"
+            android:textColor="@color/colorAccent"/>
+
         <view.CustomCheckBox
             android:layout_margin="10dp"
             android:layout_width="30dp"

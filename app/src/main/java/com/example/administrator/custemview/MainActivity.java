@@ -31,6 +31,7 @@ import java.util.Map;
 import butterknife.ButterKnife;
 import javaBean.Print;
 import javaBean.Student;
+import model.ApiDal;
 import view.ClockView;
 
 public class MainActivity extends BaseActivity{
@@ -61,11 +62,15 @@ public class MainActivity extends BaseActivity{
                 R.id.main_activity_colormattrix,
                 R.id.svg_image,
                 R.id.clock,
-                R.id.main_activity_login
+                R.id.main_activity_login,
+                R.id.main_activity_service
         );
         mClock = (ClockView) findViewById(R.id.clock);
         m = (ImageView) findViewById(R.id.svg_image);
         m.setOnClickListener(this);
+
+
+//        ApiDal.newInstance().getGitHub("seahorseBra");
 //        tv.setDate(R.mipmap.ic_launcher, "啊喂噶围观");
 //        witch(et);
 
@@ -252,6 +257,10 @@ public class MainActivity extends BaseActivity{
                 break;
             case R.id.main_activity_login:
                 goActivity(LogingActivity.class);
+                break;
+
+            case R.id.main_activity_service:
+                goActivity(ServiceTestActivity.class);
                 break;
         }
     }

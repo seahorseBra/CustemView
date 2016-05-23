@@ -34,7 +34,13 @@
         <activity android:name=".ColorMatrixActivity" />
         <activity android:name=".SettingActivity" />
         <activity android:name=".PhoneDetailInfoActivity" />
-        <activity android:name=".LogingActivity"></activity>
+        <activity android:name=".LogingActivity" />
+        <activity android:name=".ServiceTestActivity" />
+
+        <service
+            android:name="service.TestService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

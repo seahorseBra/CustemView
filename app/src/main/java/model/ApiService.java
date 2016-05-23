@@ -1,13 +1,15 @@
 package model;
 
-import retrofit.Call;
+import java.util.List;
+
 import retrofit.http.GET;
-import retrofit.http.Query;
+import retrofit.http.Path;
 
 /**
  * Created by zchao on 2016/5/19.
  */
 public interface ApiService {
-    @GET("users/{username}/repos")
-    Call<GetIpInfoResponse> getIpInfo(@Query("username") String username);
+    @GET("/users/{username}/repos")
+    List<GetIpInfoResponse> listRepos(@Path("username") String user);
+
 }

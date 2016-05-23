@@ -12,6 +12,8 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import java.util.NoSuchElementException;
+
 /**
  * Created by zchao on 2016/5/13.
  */
@@ -71,7 +73,7 @@ public class DragHelperViewGroup extends FrameLayout {
         viewDragHelper = ViewDragHelper.create(this, callback);
 
         ViewConfiguration configuration = ViewConfiguration.get(context);
-        mTouchSlop = ViewConfigurationCompat.getScaledPagingTouchSlop(configuration);
+        mTouchSlop = ViewConfigurationCompat.getScaledPagingTouchSlop(configuration)/3;
 
     }
 
@@ -90,40 +92,14 @@ public class DragHelperViewGroup extends FrameLayout {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        Log.d(TAG, "onInterceptTouchEvent() called with: " + "ev = [" + ev + "]");
-        int x = (int) ev.getX();
-        int y = (int) ev.getY();
-        int action = ev.getAction();
-        switch (action) {
-            case MotionEvent.ACTION_DOWN:
-                mLastX = x;
-                mLastY = y;
-                break;
-            case MotionEvent.ACTION_MOVE:
-                int dx = Math.abs(x - mLastX);
-                int dy = Math.abs(y - mLastY);
-                if (dx > mTouchSlop && dx * 0.5f > dy && x > mLastX) {
-                    needDragLeft = viewDragHelper.shouldInterceptTouchEvent(ev);
-                    needDragLeft = true;
-                } else {
-                    needDragLeft = false;
-                }
-                break;
-            case MotionEvent.ACTION_UP:
-                break;
-        }
-        return needDragLeft;
-
+        return viewDragHelper.shouldInterceptTouchEvent(ev);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (needDragLeft) {
-            viewDragHelper.processTouchEvent(event);
-            return true;
-        }
 
-        return super.onTouchEvent(event);
+        viewDragHelper.processTouchEvent(event);
+        return true;
     }
 
     @Override
