@@ -1,4 +1,4 @@
-package model;
+package javaBean;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -6,167 +6,150 @@ import com.google.gson.annotations.SerializedName;
  * Created by zchao on 2016/5/19.
  */
 public class GetIpInfoResponse {
-
-    /**
-     * id : 57366565
-     * name : AndroidTool
-     * full_name : seahorseBra/AndroidTool
-     * owner : {"login":"seahorseBra","id":15086873,"avatar_url":"https://avatars.githubusercontent.com/u/15086873?v=3","gravatar_id":"","url":"https://api.github.com/users/seahorseBra","html_url":"https://github.com/seahorseBra","followers_url":"https://api.github.com/users/seahorseBra/followers","following_url":"https://api.github.com/users/seahorseBra/following{/other_user}","gists_url":"https://api.github.com/users/seahorseBra/gists{/gist_id}","starred_url":"https://api.github.com/users/seahorseBra/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/seahorseBra/subscriptions","organizations_url":"https://api.github.com/users/seahorseBra/orgs","repos_url":"https://api.github.com/users/seahorseBra/repos","events_url":"https://api.github.com/users/seahorseBra/events{/privacy}","received_events_url":"https://api.github.com/users/seahorseBra/received_events","type":"User","site_admin":false}
-     * private : false
-     * html_url : https://github.com/seahorseBra/AndroidTool
-     * description :
-     * fork : false
-     * url : https://api.github.com/repos/seahorseBra/AndroidTool
-     * forks_url : https://api.github.com/repos/seahorseBra/AndroidTool/forks
-     * keys_url : https://api.github.com/repos/seahorseBra/AndroidTool/keys{/key_id}
-     * collaborators_url : https://api.github.com/repos/seahorseBra/AndroidTool/collaborators{/collaborator}
-     * teams_url : https://api.github.com/repos/seahorseBra/AndroidTool/teams
-     * hooks_url : https://api.github.com/repos/seahorseBra/AndroidTool/hooks
-     * issue_events_url : https://api.github.com/repos/seahorseBra/AndroidTool/issues/events{/number}
-     * events_url : https://api.github.com/repos/seahorseBra/AndroidTool/events
-     * assignees_url : https://api.github.com/repos/seahorseBra/AndroidTool/assignees{/user}
-     * branches_url : https://api.github.com/repos/seahorseBra/AndroidTool/branches{/branch}
-     * tags_url : https://api.github.com/repos/seahorseBra/AndroidTool/tags
-     * blobs_url : https://api.github.com/repos/seahorseBra/AndroidTool/git/blobs{/sha}
-     * git_tags_url : https://api.github.com/repos/seahorseBra/AndroidTool/git/tags{/sha}
-     * git_refs_url : https://api.github.com/repos/seahorseBra/AndroidTool/git/refs{/sha}
-     * trees_url : https://api.github.com/repos/seahorseBra/AndroidTool/git/trees{/sha}
-     * statuses_url : https://api.github.com/repos/seahorseBra/AndroidTool/statuses/{sha}
-     * languages_url : https://api.github.com/repos/seahorseBra/AndroidTool/languages
-     * stargazers_url : https://api.github.com/repos/seahorseBra/AndroidTool/stargazers
-     * contributors_url : https://api.github.com/repos/seahorseBra/AndroidTool/contributors
-     * subscribers_url : https://api.github.com/repos/seahorseBra/AndroidTool/subscribers
-     * subscription_url : https://api.github.com/repos/seahorseBra/AndroidTool/subscription
-     * commits_url : https://api.github.com/repos/seahorseBra/AndroidTool/commits{/sha}
-     * git_commits_url : https://api.github.com/repos/seahorseBra/AndroidTool/git/commits{/sha}
-     * comments_url : https://api.github.com/repos/seahorseBra/AndroidTool/comments{/number}
-     * issue_comment_url : https://api.github.com/repos/seahorseBra/AndroidTool/issues/comments{/number}
-     * contents_url : https://api.github.com/repos/seahorseBra/AndroidTool/contents/{+path}
-     * compare_url : https://api.github.com/repos/seahorseBra/AndroidTool/compare/{base}...{head}
-     * merges_url : https://api.github.com/repos/seahorseBra/AndroidTool/merges
-     * archive_url : https://api.github.com/repos/seahorseBra/AndroidTool/{archive_format}{/ref}
-     * downloads_url : https://api.github.com/repos/seahorseBra/AndroidTool/downloads
-     * issues_url : https://api.github.com/repos/seahorseBra/AndroidTool/issues{/number}
-     * pulls_url : https://api.github.com/repos/seahorseBra/AndroidTool/pulls{/number}
-     * milestones_url : https://api.github.com/repos/seahorseBra/AndroidTool/milestones{/number}
-     * notifications_url : https://api.github.com/repos/seahorseBra/AndroidTool/notifications{?since,all,participating}
-     * labels_url : https://api.github.com/repos/seahorseBra/AndroidTool/labels{/name}
-     * releases_url : https://api.github.com/repos/seahorseBra/AndroidTool/releases{/id}
-     * deployments_url : https://api.github.com/repos/seahorseBra/AndroidTool/deployments
-     * created_at : 2016-04-29T07:57:10Z
-     * updated_at : 2016-04-29T07:58:01Z
-     * pushed_at : 2016-04-29T07:57:58Z
-     * git_url : git://github.com/seahorseBra/AndroidTool.git
-     * ssh_url : git@github.com:seahorseBra/AndroidTool.git
-     * clone_url : https://github.com/seahorseBra/AndroidTool.git
-     * svn_url : https://github.com/seahorseBra/AndroidTool
-     * homepage : null
-     * size : 273
-     * stargazers_count : 0
-     * watchers_count : 0
-     * language : Java
-     * has_issues : true
-     * has_downloads : true
-     * has_wiki : true
-     * has_pages : false
-     * forks_count : 0
-     * mirror_url : null
-     * open_issues_count : 0
-     * forks : 0
-     * open_issues : 0
-     * watchers : 0
-     * default_branch : master
-     */
-
+    @SerializedName("id")
     private int id;
+    @SerializedName("name")
     private String name;
+    @SerializedName("full_name")
     private String full_name;
-    /**
-     * login : seahorseBra
-     * id : 15086873
-     * avatar_url : https://avatars.githubusercontent.com/u/15086873?v=3
-     * gravatar_id :
-     * url : https://api.github.com/users/seahorseBra
-     * html_url : https://github.com/seahorseBra
-     * followers_url : https://api.github.com/users/seahorseBra/followers
-     * following_url : https://api.github.com/users/seahorseBra/following{/other_user}
-     * gists_url : https://api.github.com/users/seahorseBra/gists{/gist_id}
-     * starred_url : https://api.github.com/users/seahorseBra/starred{/owner}{/repo}
-     * subscriptions_url : https://api.github.com/users/seahorseBra/subscriptions
-     * organizations_url : https://api.github.com/users/seahorseBra/orgs
-     * repos_url : https://api.github.com/users/seahorseBra/repos
-     * events_url : https://api.github.com/users/seahorseBra/events{/privacy}
-     * received_events_url : https://api.github.com/users/seahorseBra/received_events
-     * type : User
-     * site_admin : false
-     */
-
-    private OwnerBean owner;
     @SerializedName("private")
     private boolean privateX;
+    @SerializedName("html_url")
     private String html_url;
+    @SerializedName("description")
     private String description;
+    @SerializedName("fork")
     private boolean fork;
+    @SerializedName("url")
     private String url;
+    @SerializedName("forks_url")
     private String forks_url;
+    @SerializedName("keys_url")
     private String keys_url;
+    @SerializedName("collaborators_url")
     private String collaborators_url;
+    @SerializedName("teams_url")
     private String teams_url;
+    @SerializedName("hooks_url")
     private String hooks_url;
+    @SerializedName("issue_events_url")
     private String issue_events_url;
+    @SerializedName("events_url")
     private String events_url;
+    @SerializedName("assignees_url")
     private String assignees_url;
+    @SerializedName("branches_url")
     private String branches_url;
+    @SerializedName("tags_url")
     private String tags_url;
+    @SerializedName("blobs_url")
     private String blobs_url;
+    @SerializedName("git_tags_url")
     private String git_tags_url;
+    @SerializedName("git_refs_url")
     private String git_refs_url;
+    @SerializedName("trees_url")
     private String trees_url;
+    @SerializedName("statuses_url")
     private String statuses_url;
+    @SerializedName("languages_url")
     private String languages_url;
+    @SerializedName("stargazers_url")
     private String stargazers_url;
+    @SerializedName("contributors_url")
     private String contributors_url;
+    @SerializedName("subscribers_url")
     private String subscribers_url;
+    @SerializedName("subscription_url")
     private String subscription_url;
+    @SerializedName("commits_url")
     private String commits_url;
+    @SerializedName("git_commits_url")
     private String git_commits_url;
+    @SerializedName("comments_url")
     private String comments_url;
+    @SerializedName("issue_comment_url")
     private String issue_comment_url;
+    @SerializedName("contents_url")
     private String contents_url;
+    @SerializedName("compare_url")
     private String compare_url;
+    @SerializedName("merges_url")
     private String merges_url;
+    @SerializedName("archive_url")
     private String archive_url;
+    @SerializedName("downloads_url")
     private String downloads_url;
+    @SerializedName("issues_url")
     private String issues_url;
+    @SerializedName("pulls_url")
     private String pulls_url;
+    @SerializedName("milestones_url")
     private String milestones_url;
+    @SerializedName("notifications_url")
     private String notifications_url;
+    @SerializedName("labels_url")
     private String labels_url;
+    @SerializedName("releases_url")
     private String releases_url;
+    @SerializedName("deployments_url")
     private String deployments_url;
+    @SerializedName("created_at")
     private String created_at;
+    @SerializedName("updated_at")
     private String updated_at;
+    @SerializedName("pushed_at")
     private String pushed_at;
+    @SerializedName("git_url")
     private String git_url;
+    @SerializedName("ssh_url")
     private String ssh_url;
+    @SerializedName("clone_url")
     private String clone_url;
+    @SerializedName("svn_url")
     private String svn_url;
+    @SerializedName("homepage")
     private Object homepage;
+    @SerializedName("size")
     private int size;
+    @SerializedName("stargazers_count")
     private int stargazers_count;
+    @SerializedName("watchers_count")
     private int watchers_count;
+    @SerializedName("language")
     private String language;
+    @SerializedName("has_issues")
     private boolean has_issues;
+    @SerializedName("has_downloads")
     private boolean has_downloads;
+    @SerializedName("has_wiki")
     private boolean has_wiki;
+    @SerializedName("has_pages")
     private boolean has_pages;
+    @SerializedName("forks_count")
     private int forks_count;
+    @SerializedName("mirror_url")
     private Object mirror_url;
+    @SerializedName("open_issues_count")
     private int open_issues_count;
+    @SerializedName("forks")
     private int forks;
+    @SerializedName("open_issues")
     private int open_issues;
+    @SerializedName("watchers")
     private int watchers;
+    @SerializedName("default_branch")
     private String default_branch;
+    @SerializedName("owner")
+    private Owner owner;
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
+    }
+
+    public Owner getOwner() {
+        return owner;
+    }
 
     public int getId() {
         return id;
@@ -190,14 +173,6 @@ public class GetIpInfoResponse {
 
     public void setFull_name(String full_name) {
         this.full_name = full_name;
-    }
-
-    public OwnerBean getOwner() {
-        return owner;
-    }
-
-    public void setOwner(OwnerBean owner) {
-        this.owner = owner;
     }
 
     public boolean isPrivateX() {
@@ -710,161 +685,5 @@ public class GetIpInfoResponse {
 
     public void setDefault_branch(String default_branch) {
         this.default_branch = default_branch;
-    }
-
-    public static class OwnerBean {
-        private String login;
-        private int id;
-        private String avatar_url;
-        private String gravatar_id;
-        private String url;
-        private String html_url;
-        private String followers_url;
-        private String following_url;
-        private String gists_url;
-        private String starred_url;
-        private String subscriptions_url;
-        private String organizations_url;
-        private String repos_url;
-        private String events_url;
-        private String received_events_url;
-        private String type;
-        private boolean site_admin;
-
-        public String getLogin() {
-            return login;
-        }
-
-        public void setLogin(String login) {
-            this.login = login;
-        }
-
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public String getAvatar_url() {
-            return avatar_url;
-        }
-
-        public void setAvatar_url(String avatar_url) {
-            this.avatar_url = avatar_url;
-        }
-
-        public String getGravatar_id() {
-            return gravatar_id;
-        }
-
-        public void setGravatar_id(String gravatar_id) {
-            this.gravatar_id = gravatar_id;
-        }
-
-        public String getUrl() {
-            return url;
-        }
-
-        public void setUrl(String url) {
-            this.url = url;
-        }
-
-        public String getHtml_url() {
-            return html_url;
-        }
-
-        public void setHtml_url(String html_url) {
-            this.html_url = html_url;
-        }
-
-        public String getFollowers_url() {
-            return followers_url;
-        }
-
-        public void setFollowers_url(String followers_url) {
-            this.followers_url = followers_url;
-        }
-
-        public String getFollowing_url() {
-            return following_url;
-        }
-
-        public void setFollowing_url(String following_url) {
-            this.following_url = following_url;
-        }
-
-        public String getGists_url() {
-            return gists_url;
-        }
-
-        public void setGists_url(String gists_url) {
-            this.gists_url = gists_url;
-        }
-
-        public String getStarred_url() {
-            return starred_url;
-        }
-
-        public void setStarred_url(String starred_url) {
-            this.starred_url = starred_url;
-        }
-
-        public String getSubscriptions_url() {
-            return subscriptions_url;
-        }
-
-        public void setSubscriptions_url(String subscriptions_url) {
-            this.subscriptions_url = subscriptions_url;
-        }
-
-        public String getOrganizations_url() {
-            return organizations_url;
-        }
-
-        public void setOrganizations_url(String organizations_url) {
-            this.organizations_url = organizations_url;
-        }
-
-        public String getRepos_url() {
-            return repos_url;
-        }
-
-        public void setRepos_url(String repos_url) {
-            this.repos_url = repos_url;
-        }
-
-        public String getEvents_url() {
-            return events_url;
-        }
-
-        public void setEvents_url(String events_url) {
-            this.events_url = events_url;
-        }
-
-        public String getReceived_events_url() {
-            return received_events_url;
-        }
-
-        public void setReceived_events_url(String received_events_url) {
-            this.received_events_url = received_events_url;
-        }
-
-        public String getType() {
-            return type;
-        }
-
-        public void setType(String type) {
-            this.type = type;
-        }
-
-        public boolean isSite_admin() {
-            return site_admin;
-        }
-
-        public void setSite_admin(boolean site_admin) {
-            this.site_admin = site_admin;
-        }
     }
 }

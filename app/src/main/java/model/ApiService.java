@@ -2,6 +2,8 @@ package model;
 
 import java.util.List;
 
+import javaBean.GetIpInfoResponse;
+import retrofit.Callback;
 import retrofit.http.GET;
 import retrofit.http.Path;
 
@@ -10,6 +12,6 @@ import retrofit.http.Path;
  */
 public interface ApiService {
     @GET("/users/{username}/repos")
-    List<GetIpInfoResponse> listRepos(@Path("username") String user);
+    public void listRepos(@Path("username") String user, Callback<List<GetIpInfoResponse>> callback);
 
 }

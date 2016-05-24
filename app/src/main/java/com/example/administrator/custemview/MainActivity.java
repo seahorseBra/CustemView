@@ -28,7 +28,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import allinterface.ApiDateCallback;
 import butterknife.ButterKnife;
+import javaBean.GetIpInfoResponse;
 import javaBean.Print;
 import javaBean.Student;
 import model.ApiDal;
@@ -70,7 +72,18 @@ public class MainActivity extends BaseActivity{
         m.setOnClickListener(this);
 
 
-//        ApiDal.newInstance().getGitHub("seahorseBra");
+        ApiDal.newInstance().getGitHub("seahorseBra", new ApiDateCallback() {
+            @Override
+            public void onDateRecieved(Object o, Throwable e, boolean isSuccess) {
+                if (isSuccess) {
+                    List<GetIpInfoResponse> obj = (List<GetIpInfoResponse>) o;
+                    for (int i = 0; i < obj.size(); i++) {
+                        Log.d(TAG, "onDateRecieved() called with: " + "o = [" + obj.get(i).getFull_name() + "], e = [" + e + "], isSuccess = [" + isSuccess + "]");
+
+                    }
+                }
+            }
+        });
 //        tv.setDate(R.mipmap.ic_launcher, "啊喂噶围观");
 //        witch(et);
 
