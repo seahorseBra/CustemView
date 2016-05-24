@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Environment;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -25,6 +26,7 @@ import java.util.concurrent.Executors;
  */
 public class DiskCache {
 
+    private static final String TAG = "DiskCache";
     private File baseFile;
     private String appVer;
     private Executor mDiskExecutor;
@@ -56,6 +58,7 @@ public class DiskCache {
             }
             mInstance = new DiskCache(file, appVer);
         }
+        Log.d(TAG, "getInstance() called with: " + "context = [" + "" + "]");
         return mInstance;
 
     }
@@ -74,7 +77,7 @@ public class DiskCache {
 
     public File getCacheFile(String key, String pre) {
         File file = new File(baseFile, pre + "/" + strToMD5(key));
-        if (file != null && !file.getParentFile().exists()) {
+        if (!file.getParentFile().exists()) {
             file.getParentFile().mkdirs();
         }
         return file;
@@ -122,8 +125,12 @@ public class DiskCache {
                         e.printStackTrace();
                     }finally {
                         try {
-                            bos.close();
-                            fos.close();
+                            if (bos != null) {
+                                bos.close();
+                            }
+                            if (fos != null) {
+                                fos.close();
+                            }
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -159,8 +166,12 @@ public class DiskCache {
             return null;
         }finally {
             try {
-                bis.close();
-                fis.close();
+                if (bis != null) {
+                    bis.close();
+                }
+                if (fis != null) {
+                    fis.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
