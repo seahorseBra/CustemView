@@ -14,6 +14,12 @@ public final class CacheObj<T> {
         this.appVer = appVer;
     }
 
+    public boolean isOutOfDate(long cacheTime){
+        return Math.abs(System.currentTimeMillis() - cacheTime) >= cacheTime;
+    }
+
+
+
     public T getObj() {
         return obj;
     }

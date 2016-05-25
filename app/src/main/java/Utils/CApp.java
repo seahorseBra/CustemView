@@ -19,5 +19,4 @@ public class CApp extends Application{
         AppContext.inite(context);
         ApiDal.newInstance().initeApiDal(getApplicationContext());
     }
-
 }

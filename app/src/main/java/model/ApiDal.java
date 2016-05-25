@@ -94,7 +94,7 @@ public class ApiDal {
                 List<GetIpInfoResponse> model;
                 Type type = new TypeToken<CacheObj<List<GetIpInfoResponse>>>(){}.getType();
                 CacheObj<List<GetIpInfoResponse>> cacheObj = mDiskCache.getCacheObj(cacheKey, type);
-                if (cacheObj != null) {
+                if (cacheObj != null && !cacheObj.isOutOfDate(CacheTime.CACHE_TIME)) {
                     model = cacheObj.getObj();
                     if (model != null) {
                         postResultToListener(callback, model, null, true);

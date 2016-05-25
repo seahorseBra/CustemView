@@ -21,6 +21,9 @@ import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import okio.BufferedSource;
+import okio.Okio;
+
 /**
  * Created by zchao on 2016/5/24.
  */
@@ -75,9 +78,9 @@ public class DiskCache {
 
     }
 
-    public File getCacheFile(String key, String pre) {
+    public File getCacheFile(String pre, String key) {
         File file = new File(baseFile, pre + "/" + strToMD5(key));
-        if (!file.getParentFile().exists()) {
+        if (file != null || !file.getParentFile().exists()) {
             file.getParentFile().mkdirs();
         }
         return file;
@@ -89,7 +92,7 @@ public class DiskCache {
      * @param str
      * @return
      */
-    public String strToMD5(String str) {
+    public static String strToMD5(String str) {
         byte[] md5s;
         try {
             md5s =  MessageDigest.getInstance("MD5").digest(str.getBytes());
@@ -113,69 +116,40 @@ public class DiskCache {
                 CacheObj<Object> cacheObj = new CacheObj<>(object, System.currentTimeMillis(), appVer);
                 String jsonStr = gson.toJson(cacheObj);
                 File mCacheFile = getCacheFile(key);
-                BufferedOutputStream bos = null;
-                FileOutputStream fos = null;
                 if (mCacheFile != null) {
                     try {
-                        fos = new FileOutputStream(mCacheFile);
-                        byte[] bytes = new byte[1024];
-                        bos = new BufferedOutputStream(fos);
-                        bos.write(bytes, 0, jsonStr.length());
-                    } catch (java.io.IOException e) {
+
+                        Okio.buffer(Okio.sink(mCacheFile)).writeUtf8(jsonStr).close();
+
+                    } catch (IOException e) {
                         e.printStackTrace();
-                    }finally {
-                        try {
-                            if (bos != null) {
-                                bos.close();
-                            }
-                            if (fos != null) {
-                                fos.close();
-                            }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
                     }
                 }
             }
-
-
         });
     }
-    public synchronized <T>CacheObj<T> getCacheObj(String key, Type type){
+    public synchronized <T>CacheObj<T> getCacheObj(String key, Type type) {
         File file = getCacheFile(key);
         if (file == null || !file.exists()) {
             return null;
         }
 
-        FileInputStream fis = null;
-        BufferedInputStream bis = null;
-        String s = "";
+        BufferedSource cacheSource = null;
         try {
-            fis = new FileInputStream(file);
-            bis = new BufferedInputStream(fis);
-            byte[] temp = new byte[1024];
-            int count = 0;
-            if ((count = bis.read(temp)) != -1) {
-                 s = new String(temp, 0, count);
-            }
-            return gson.fromJson(s, type);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+            cacheSource = Okio.buffer(Okio.source(file));
+            String cStr = cacheSource.readUtf8();
+
+            return gson.fromJson(cStr, type);
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
-        }finally {
-            try {
-                if (bis != null) {
-                    bis.close();
+        } finally {
+            if (cacheSource != null)
+                try {
+                    cacheSource.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-                if (fis != null) {
-                    fis.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
-        return null;
     }
 }
