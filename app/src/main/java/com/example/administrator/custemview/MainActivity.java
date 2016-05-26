@@ -5,19 +5,15 @@ import android.content.Intent;
 import android.graphics.drawable.Animatable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.Window;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.zchao.testlib.TestLib;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -273,7 +269,10 @@ public class MainActivity extends BaseActivity{
                 break;
 
             case R.id.main_activity_service:
-                goActivity(ServiceTestActivity.class);
+//                goActivity(TestLib.class);
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, MyDaydreamService.class);
+                startService(intent);
                 break;
         }
     }

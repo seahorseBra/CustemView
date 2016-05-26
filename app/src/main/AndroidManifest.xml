@@ -2,10 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.administrator.custemview">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-<application
+    <application
         android:name="Utils.CApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,7 +22,7 @@
         <activity
             android:name=".ImageHandleActivity"
             android:launchMode="singleInstance"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
         <activity
             android:name=".DropDownActivity"
             android:label="@string/title_activity_drop_dowm" />
@@ -44,7 +44,17 @@
         <service
             android:name="service.TestService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+        <!-- This service is only used on devices with API v17+ -->
+        <service
+            android:name=".MyDaydreamService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.service.dreams.DreamService" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

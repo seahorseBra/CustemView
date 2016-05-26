@@ -2,13 +2,18 @@ package view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.facebook.drawee.view.SimpleDraweeView;
 
 /**
  * Created by zchao on 2016/5/17.
  */
 public class BarrageViewGroup extends ViewGroup {
+    private static final String TAG = "BarrageViewGroup";
     private int horizontalInterval = 10;
     private int verticalInterval = 5;
     private int width;
@@ -94,4 +99,5 @@ public class BarrageViewGroup extends ViewGroup {
             startX += (measuredWidth + horizontalInterval);
         }
     }
+
 }

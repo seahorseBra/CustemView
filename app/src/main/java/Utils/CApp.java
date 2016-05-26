@@ -3,6 +3,8 @@ package Utils;
 import android.app.Application;
 import android.content.Context;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+
 import model.ApiDal;
 
 /**
@@ -16,7 +18,12 @@ public class CApp extends Application{
         super.onCreate();
         context = getApplicationContext();
 
+        appinite();
+    }
+
+    private void appinite() {
         AppContext.inite(context);
         ApiDal.newInstance().initeApiDal(getApplicationContext());
+        Fresco.initialize(context);
     }
 }

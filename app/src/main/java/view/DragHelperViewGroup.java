@@ -3,6 +3,7 @@ package view;
 import android.content.Context;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewConfigurationCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -97,7 +98,6 @@ public class DragHelperViewGroup extends FrameLayout {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-
         viewDragHelper.processTouchEvent(event);
         return true;
     }
