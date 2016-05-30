@@ -61,7 +61,8 @@ public class MainActivity extends BaseActivity{
                 R.id.svg_image,
                 R.id.clock,
                 R.id.main_activity_login,
-                R.id.main_activity_service
+                R.id.main_activity_service,
+                R.id.main_activity_weather
         );
         mClock = (ClockView) findViewById(R.id.clock);
         m = (ImageView) findViewById(R.id.svg_image);
@@ -273,6 +274,9 @@ public class MainActivity extends BaseActivity{
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, MyDaydreamService.class);
                 startService(intent);
+                break;
+            case R.id.main_activity_weather:
+                goActivity(WeatherActivity.class);
                 break;
         }
     }

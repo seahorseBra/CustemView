@@ -22,7 +22,7 @@
         <activity
             android:name=".ImageHandleActivity"
             android:launchMode="singleInstance"
-            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".DropDownActivity"
             android:label="@string/title_activity_drop_dowm" />
@@ -55,6 +55,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
+
+        <activity android:name=".WeatherActivity"></activity>
     </application>
 
 </manifest>

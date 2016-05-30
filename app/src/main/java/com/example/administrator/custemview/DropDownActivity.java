@@ -1,6 +1,7 @@
 package com.example.administrator.custemview;
 
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,7 +28,6 @@ public class DropDownActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drop_dowm);
         ButterKnife.bind(this);
-
         final ListCustemAdapter listCustemAdapter = new ListCustemAdapter(this);
         linearLayoutManager = new LinearLayoutManager(this);
         mListRv.setLayoutManager(linearLayoutManager);
