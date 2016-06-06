@@ -1,6 +1,7 @@
 package Utils;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
@@ -17,5 +18,6 @@ public class AppContext {
         }
         AppContext.context = context;
     }
+
 
 }
