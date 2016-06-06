@@ -56,7 +56,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".WeatherActivity"></activity>
+        <activity android:name=".WeatherActivity" />
+        <activity android:name=".WeatherActivityNew"></activity>
     </application>
 
 </manifest>

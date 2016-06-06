@@ -1,5 +1,7 @@
 package Utils;
 
+import android.content.Context;
+
 /**
  * Created by zchao on 2016/5/19.
  */
@@ -12,5 +14,12 @@ public class Utils {
             return true;
         }
         return false;
+    }
+
+
+    public static int dp2Px(float dp) {
+        final float scale = CApp.context.getResources()
+                .getDisplayMetrics().density;
+        return (int) (dp * scale + 0.5f);
     }
 }

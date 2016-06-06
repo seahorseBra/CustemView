@@ -276,7 +276,7 @@ public class MainActivity extends BaseActivity{
                 startService(intent);
                 break;
             case R.id.main_activity_weather:
-                goActivity(WeatherActivity.class);
+                goActivity(WeatherActivityNew.class);
                 break;
         }
     }

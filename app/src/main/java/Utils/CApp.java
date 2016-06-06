@@ -12,7 +12,7 @@ import model.ApiDal;
  * Created by zchao on 2016/5/4.
  */
 public class CApp extends Application{
-    public Context context;
+    public static Context context;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -26,4 +26,5 @@ public class CApp extends Application{
         ApiDal.newInstance().initeApiDal(getApplicationContext());
         Fresco.initialize(context);
     }
+
 }
