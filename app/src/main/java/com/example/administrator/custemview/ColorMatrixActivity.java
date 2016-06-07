@@ -14,6 +14,5 @@ public class ColorMatrixActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_color_matrix);
 
-        ColorMatrix matrix = new ColorMatrix();
     }
 }
