@@ -10,10 +10,15 @@ import android.graphics.Paint;
 import android.os.Build;
 import android.support.v4.view.ViewConfigurationCompat;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.OverScroller;
 
 
@@ -51,6 +56,14 @@ public class FutureWeatherHour extends View {
     protected int lastY;
     protected int mTouchSlop;
     protected int sizeX;
+    private boolean isInDrag = false;
+
+    private Bitmap bitmap = null;
+
+    private VelocityTracker mVelocityTracker;
+    private int MIN_VELOCITY = 100;
+    private int MAX_VELOCITY = 200;
+    private int mPointerId;
 
     public FutureWeatherHour(Context context) {
         this(context, null);
@@ -63,19 +76,24 @@ public class FutureWeatherHour extends View {
     public FutureWeatherHour(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
-
         final ViewConfiguration configuration = ViewConfiguration.get(context);
         mTouchSlop = ViewConfigurationCompat.getScaledPagingTouchSlop(configuration);
+        mScroller = new OverScroller(context, new BounceInterpolator());
 
         initePaint(context);
         for (int i = 0; i < LIST_SIZE; i++) {
             list.add(new HourWeather(20, 1, 35));
         }
 
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        sizeX = metrics.widthPixels - getPaddingLeft() - getPaddingRight();
+        itemWidth = sizeX / visiableCount;
+        realWidth = itemWidth * list.size() - itemWidth / 2;
+
+        bitmap = getWeatherBitmap();
     }
 
     protected void initePaint(Context context) {
-        mScroller = new OverScroller(context);
 
         timePaint = new Paint();
         iconPaint = new Paint();
@@ -102,11 +120,7 @@ public class FutureWeatherHour extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        sizeX = MeasureSpec.getSize(widthMeasureSpec) - getPaddingLeft() - getPaddingRight();
         int sizeY = MeasureSpec.getSize(heightMeasureSpec) - getPaddingBottom() - getPaddingTop();
-
-        itemWidth = sizeX / visiableCount;
-        realWidth = itemWidth * list.size();
         realHeight = Math.max(sizeY, minHeight);
         setMeasuredDimension(realWidth, realHeight);
     }
@@ -119,40 +133,63 @@ public class FutureWeatherHour extends View {
         int y = (int) event.getY();
         switch (action) {
             case MotionEvent.ACTION_DOWN:
+                if (!mScroller.isFinished()) {
+                    mScroller.abortAnimation();
+                }
+                acquireVelocityTracker(event);
+
+                mPointerId = event.getPointerId(0);
+                getParent().requestDisallowInterceptTouchEvent(false);
                 lastX = (int)x;
                 lastY = (int)y;
                 break;
             case MotionEvent.ACTION_MOVE:
-                if (!mScroller.isFinished()) {
-                    mScroller.abortAnimation();
-                }
                 int dx =  lastX - x;
                 int dy =  lastY - y;
-                
-                if (Math.abs(dx) > mTouchSlop && Math.abs(dx) *0.5> Math.abs(dy)) {
+                if (Math.abs(dy) > mTouchSlop && Math.abs(dx) * 0.5f < Math.abs(dy)) {
+                    lastX = x;
+                    lastY = y;
+                    return false;
+                }
+
+                if (!isInDrag) {
+                    if (Math.abs(dx) > mTouchSlop && Math.abs(dx) * 0.5f > Math.abs(dy)) {
+                        isInDrag = true;
+                    }
+                }
+                if (isInDrag) {
                     getParent().requestDisallowInterceptTouchEvent(true);
 
-                    if (getScrollX() < 0) {
+                    if (getScrollX() < -1000) {
                         dx = 0;
                     }
-                    if (getScrollX() > (realWidth - sizeX)) {
+                    if (getScrollX() > (realWidth - sizeX + 1000)) {
                         dx = 0;
                     }
                     scrollBy(dx, 0);
                     lastX = x;
+                    lastY = y;
                 }
                 break;
+            case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
+//                final VelocityTracker verTracker = mVelocityTracker;
+//                verTracker.computeCurrentVelocity(1000, MAX_VELOCITY);
+//                final float velocityX = verTracker.getXVelocity(mPointerId);
+
                 if (getScrollX() < 0 ) {
                     mScroller.startScroll(getScrollX(), 0, -getScrollX(), 0, 500);
                 }
                 if (getScrollX() > realWidth - sizeX) {
                     mScroller.startScroll(getScrollX(), 0, -(getScrollX()-(realWidth - sizeX)), 0, 500);
                 }
+                isInDrag = false;
                 getParent().requestDisallowInterceptTouchEvent(false);
+                releaseVelocityTracker();
+                postInvalidate();
                 break;
         }
-        postInvalidate();
+
         return true;
     }
 
@@ -164,19 +201,21 @@ public class FutureWeatherHour extends View {
             int weather = hourWeather.getWeather();
             String time = String.valueOf(hourWeather.getTime() + i);
             String temp = String.valueOf(hourWeather.getTemp()) + "°";
-            Bitmap weatherBitmap = getWeatherBitmap(weather);
+            Bitmap weatherBitmap = bitmap;
             int bitmapW = weatherBitmap.getWidth();
             int bitmapH = weatherBitmap.getHeight();
 
-            canvas.drawText(time, (startX + i * itemWidth - timePaint.measureText(time)/2), timeTextSize, timePaint);
-            canvas.drawBitmap(weatherBitmap, startX + i * itemWidth - bitmapW/2, realHeight / 2 - bitmapH / 2, iconPaint);
-            canvas.drawLine(0, realHeight/2, realWidth, realHeight/2, linePaint);
-            canvas.drawText(temp, (startX + i * itemWidth - tempPaint.measureText(temp)/2), realHeight, tempPaint);
+            if (startX + (i + 1) * itemWidth > getScrollX() && startX + (i - 1) * itemWidth < sizeX + getScrollX() ) {
+                canvas.drawText(time, (startX + i * itemWidth - timePaint.measureText(time)/2), timeTextSize, timePaint);
+                canvas.drawBitmap(weatherBitmap, startX + i * itemWidth - bitmapW/2, realHeight / 2 - bitmapH / 2, iconPaint);
+                canvas.drawText(temp, (startX + i * itemWidth - tempPaint.measureText(temp)/2), realHeight, tempPaint);
+            }
         }
     }
 
     @Override
     public void computeScroll() {
+        Log.d(TAG, "computeScroll() called with: " + "");
         super.computeScroll();
         if (mScroller.computeScrollOffset()) {
             scrollTo(mScroller.getCurrX(), 0);
@@ -184,8 +223,25 @@ public class FutureWeatherHour extends View {
         }
     }
 
-    protected Bitmap getWeatherBitmap(int weather) {
+    protected Bitmap getWeatherBitmap() {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.nd0);
         return Bitmap.createScaledBitmap(bitmap, 80, 80, false);
+    }
+
+    private void acquireVelocityTracker(final MotionEvent event) {
+        if (null == mVelocityTracker) {
+            mVelocityTracker = VelocityTracker.obtain();
+        } else {
+            mVelocityTracker.clear();
+        }
+        mVelocityTracker.addMovement(event);
+    }
+
+    private void releaseVelocityTracker() {
+        if(null != mVelocityTracker) {
+            mVelocityTracker.clear();
+            mVelocityTracker.recycle();
+            mVelocityTracker = null;
+        }
     }
 }
