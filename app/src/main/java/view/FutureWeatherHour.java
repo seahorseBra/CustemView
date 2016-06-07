@@ -16,9 +16,7 @@ import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
-import android.view.animation.AccelerateInterpolator;
 import android.view.animation.BounceInterpolator;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.OverScroller;
 
 
@@ -57,7 +55,7 @@ public class FutureWeatherHour extends View {
     protected int mTouchSlop;
     protected int sizeX;
     private boolean isInDrag = false;
-
+private int DAMP_DEFAULT = 100;
     private Bitmap bitmap = null;
 
     private VelocityTracker mVelocityTracker;
@@ -160,11 +158,13 @@ public class FutureWeatherHour extends View {
                 if (isInDrag) {
                     getParent().requestDisallowInterceptTouchEvent(true);
 
-                    if (getScrollX() < -1000) {
-                        dx = 0;
+                    if (getScrollX() < 0) {
+                        dx = -Math.min(((DAMP_DEFAULT--)/10), Math.abs(dx)) ;
+                        if (dx >= 0)dx = 0;
                     }
-                    if (getScrollX() > (realWidth - sizeX + 1000)) {
-                        dx = 0;
+                    if (getScrollX() > (realWidth - sizeX)) {
+                        dx = Math.min(((DAMP_DEFAULT--)/10), Math.abs(dx)) ;
+                        if (dx <= 0)dx = 0;
                     }
                     scrollBy(dx, 0);
                     lastX = x;
@@ -173,6 +173,7 @@ public class FutureWeatherHour extends View {
                 break;
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
+                DAMP_DEFAULT = 100;
 //                final VelocityTracker verTracker = mVelocityTracker;
 //                verTracker.computeCurrentVelocity(1000, MAX_VELOCITY);
 //                final float velocityX = verTracker.getXVelocity(mPointerId);
