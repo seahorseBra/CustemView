@@ -58,10 +58,10 @@ public class DampView extends View {
                     overScroller.abortAnimation();
                 }
                 int dx = (lastX - x);
-                if (dx < 0) {
+                if (getScrollX() < 0) {
                     dx = 0;
                 }
-                if (dx > realWidth - (size - getPaddingLeft() - getPaddingRight())) {
+                if (getScrollX() > realWidth - (size - getPaddingLeft() - getPaddingRight())) {
                     dx = 0;
                 }
                 
