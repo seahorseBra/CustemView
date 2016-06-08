@@ -27,7 +27,10 @@
                 android:layout_height="200dp"
                 android:background="#99f" />
 
-
+            <view.SnowView
+                android:background="#99f"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
 
             <TextView
                 android:layout_width="match_parent"

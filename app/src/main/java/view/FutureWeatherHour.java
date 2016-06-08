@@ -55,7 +55,7 @@ public class FutureWeatherHour extends View {
     protected int mTouchSlop;
     protected int sizeX;
     private boolean isInDrag = false;
-private int DAMP_DEFAULT = 100;
+    private int DAMP_DEFAULT = 100;
     private Bitmap bitmap = null;
 
     private VelocityTracker mVelocityTracker;
@@ -138,12 +138,12 @@ private int DAMP_DEFAULT = 100;
 
                 mPointerId = event.getPointerId(0);
                 getParent().requestDisallowInterceptTouchEvent(false);
-                lastX = (int)x;
-                lastY = (int)y;
+                lastX = (int) x;
+                lastY = (int) y;
                 break;
             case MotionEvent.ACTION_MOVE:
-                int dx =  lastX - x;
-                int dy =  lastY - y;
+                int dx = lastX - x;
+                int dy = lastY - y;
                 if (Math.abs(dy) > mTouchSlop && Math.abs(dx) * 0.5f < Math.abs(dy)) {
                     lastX = x;
                     lastY = y;
@@ -158,13 +158,13 @@ private int DAMP_DEFAULT = 100;
                 if (isInDrag) {
                     getParent().requestDisallowInterceptTouchEvent(true);
 
-                    if (getScrollX() < 0) {
-                        dx = -Math.min(((DAMP_DEFAULT--)/10), Math.abs(dx)) ;
-                        if (dx >= 0)dx = 0;
+                    if (getScrollX() < 0 && dx < 0) {
+                        dx = -Math.min(((DAMP_DEFAULT--) / 10), Math.abs(dx));
+                        if (dx >= 0) dx = 0;
                     }
-                    if (getScrollX() > (realWidth - sizeX)) {
-                        dx = Math.min(((DAMP_DEFAULT--)/10), Math.abs(dx)) ;
-                        if (dx <= 0)dx = 0;
+                    if (getScrollX() > (realWidth - sizeX) && dx > 0) {
+                        dx = Math.min(((DAMP_DEFAULT--) / 10), Math.abs(dx));
+                        if (dx <= 0) dx = 0;
                     }
                     scrollBy(dx, 0);
                     lastX = x;
@@ -177,17 +177,18 @@ private int DAMP_DEFAULT = 100;
 //                final VelocityTracker verTracker = mVelocityTracker;
 //                verTracker.computeCurrentVelocity(1000, MAX_VELOCITY);
 //                final float velocityX = verTracker.getXVelocity(mPointerId);
-
-                if (getScrollX() < 0 ) {
+//mScroller.fling();
+                if (getScrollX() < 0) {
                     mScroller.startScroll(getScrollX(), 0, -getScrollX(), 0, 500);
+                    postInvalidate();
                 }
                 if (getScrollX() > realWidth - sizeX) {
-                    mScroller.startScroll(getScrollX(), 0, -(getScrollX()-(realWidth - sizeX)), 0, 500);
+                    mScroller.startScroll(getScrollX(), 0, -(getScrollX() - (realWidth - sizeX)), 0, 500);
+                    postInvalidate();
                 }
                 isInDrag = false;
                 getParent().requestDisallowInterceptTouchEvent(false);
                 releaseVelocityTracker();
-                postInvalidate();
                 break;
         }
 
@@ -206,10 +207,10 @@ private int DAMP_DEFAULT = 100;
             int bitmapW = weatherBitmap.getWidth();
             int bitmapH = weatherBitmap.getHeight();
 
-            if (startX + (i + 1) * itemWidth > getScrollX() && startX + (i - 1) * itemWidth < sizeX + getScrollX() ) {
-                canvas.drawText(time, (startX + i * itemWidth - timePaint.measureText(time)/2), timeTextSize, timePaint);
-                canvas.drawBitmap(weatherBitmap, startX + i * itemWidth - bitmapW/2, realHeight / 2 - bitmapH / 2, iconPaint);
-                canvas.drawText(temp, (startX + i * itemWidth - tempPaint.measureText(temp)/2), realHeight, tempPaint);
+            if (startX + (i + 1) * itemWidth > getScrollX() && startX + (i - 1) * itemWidth < sizeX + getScrollX()) {
+                canvas.drawText(time, (startX + i * itemWidth - timePaint.measureText(time) / 2), timeTextSize, timePaint);
+                canvas.drawBitmap(weatherBitmap, startX + i * itemWidth - bitmapW / 2, realHeight / 2 - bitmapH / 2, iconPaint);
+                canvas.drawText(temp, (startX + i * itemWidth - tempPaint.measureText(temp) / 2), realHeight, tempPaint);
             }
         }
     }
@@ -239,7 +240,7 @@ private int DAMP_DEFAULT = 100;
     }
 
     private void releaseVelocityTracker() {
-        if(null != mVelocityTracker) {
+        if (null != mVelocityTracker) {
             mVelocityTracker.clear();
             mVelocityTracker.recycle();
             mVelocityTracker = null;
