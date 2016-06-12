@@ -246,4 +246,5 @@ public class FutureWeatherHour extends View {
             mVelocityTracker = null;
         }
     }
+
 }

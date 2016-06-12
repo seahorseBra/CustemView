@@ -23,6 +23,7 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         super.setContentView(R.layout.base_activity);
         mContent = (FrameLayout) findViewById(R.id.content);
         mBack = (ImageView) findViewById(R.id.back);
