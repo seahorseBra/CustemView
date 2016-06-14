@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.os.Build;
 import android.support.v4.view.ViewConfigurationCompat;
 import android.util.AttributeSet;
@@ -19,6 +20,7 @@ import android.view.ViewConfiguration;
 import android.view.animation.BounceInterpolator;
 import android.widget.OverScroller;
 
+
 import com.example.administrator.custemview.R;
 
 import java.util.ArrayList;
@@ -29,7 +31,7 @@ import javaBean.HourWeather;
 /**
  * Created by zchao on 2016/6/6.
  */
-public class FutureWeatherHour extends View {
+public class FutureWeatherDay extends View {
     protected static final int LIST_SIZE = 36;
     protected static final String TAG = "FutureWeatherHour";
     protected Context context;
@@ -38,7 +40,7 @@ public class FutureWeatherHour extends View {
     protected int tempTextSize = Utils.dp2Px(14);
     protected int visiableCount = 6;
     protected int textColor = 0x55ff0000;
-    protected int minHeight = 200;
+    protected int minHeight = 400;
     protected int realWidth;
     protected int realHeight;
     protected int weatherWidth;
@@ -62,15 +64,15 @@ public class FutureWeatherHour extends View {
     private int MAX_VELOCITY = 200;
     private int mPointerId;
 
-    public FutureWeatherHour(Context context) {
+    public FutureWeatherDay(Context context) {
         this(context, null);
     }
 
-    public FutureWeatherHour(Context context, AttributeSet attrs) {
+    public FutureWeatherDay(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public FutureWeatherHour(Context context, AttributeSet attrs, int defStyleAttr) {
+    public FutureWeatherDay(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
         final ViewConfiguration configuration = ViewConfiguration.get(context);
@@ -207,9 +209,17 @@ public class FutureWeatherHour extends View {
             int bitmapH = weatherBitmap.getHeight();
 
             if (startX + (i + 1) * itemWidth > getScrollX() && startX + (i - 1) * itemWidth < sizeX + getScrollX()) {
-                canvas.drawText(time, (startX + i * itemWidth - timePaint.measureText(time) / 2), timeTextSize, timePaint);
-                canvas.drawBitmap(weatherBitmap, startX + i * itemWidth - bitmapW / 2, realHeight / 2 - bitmapH / 2, iconPaint);
-                canvas.drawText(temp, (startX + i * itemWidth - tempPaint.measureText(temp) / 2), realHeight, tempPaint);
+                canvas.drawText(time, (startX + i * itemWidth - timePaint.measureText(time) / 2), timeTextSize, timePaint);     //周
+                canvas.drawText(time, (startX + i * itemWidth - timePaint.measureText(time) / 2), timeTextSize, timePaint);     //日期
+                canvas.drawBitmap(weatherBitmap, startX + i * itemWidth - bitmapW / 2, realHeight / 2 - bitmapH / 2, iconPaint);//天气图标
+                canvas.drawText(temp, (startX + i * itemWidth - tempPaint.measureText(temp) / 2), realHeight, tempPaint);       //天气
+
+                Path path = new Path();
+                path.moveTo(startX + i * itemWidth, );
+                canvas.drawPath();
+                canvas.drawText(temp, (startX + i * itemWidth - tempPaint.measureText(temp) / 2), realHeight, tempPaint);       //天气
+
+                canvas.drawCircle();
             }
         }
     }

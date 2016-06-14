@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center_vertical"
     android:orientation="vertical"
+    android:background="#99f"
     tools:context="com.example.administrator.custemview.WeatherActivityNew">
 
     <ScrollView
@@ -22,13 +23,34 @@
                 android:gravity="center"
                 android:text="1" />
 
-            <view.FutureWeatherHour
-                android:layout_width="wrap_content"
-                android:layout_height="200dp"
-                android:background="#99f" />
 
-            <view.SnowView
-                android:background="#99f"
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:layout_height="wrap_content">
+                <view.FutureWeatherHour
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:layout_height="wrap_content">
+                <view.FutureWeatherDay
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"/>
+            </FrameLayout>
+
+            <view.SunRiseView
+                android:id="@+id/sunrise"
+                android:background="@drawable/bg_img"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
+            <view.WeatherImageView
                 android:layout_width="match_parent"
                 android:layout_height="200dp" />
 

@@ -2,19 +2,20 @@ package view;
 
 
 
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.RadialGradient;
+import android.graphics.Shader;
 
 import Utils.RandomGenerator;
 
 /**
  * 雪花的类, 移动, 移出屏幕会重新设置位置.
  */
-public class SnowFlake {
+public class WeatherFlake {
     // 雪花的角度
-    private static final float ANGE_RANGE = 0.1f; // 角度范围
+    private static final float ANGE_RANGE = 0.1f; // 角度范围r
     private static final float HALF_ANGLE_RANGE = ANGE_RANGE / 2f; // 一般的角度
     private static final float HALF_PI = (float) Math.PI / 2f; // 半PI
     private static final float ANGLE_SEED = 25f; // 角度随机种子
@@ -34,18 +35,16 @@ public class SnowFlake {
     private final float mFlakeSize; // 雪花的大小
     private final Paint mPaint; // 画笔
 
-    private Bitmap bitmap = null;
-    private SnowFlake(RandomGenerator random, Point position, float angle, float increment, float flakeSize, Paint paint, Bitmap bitmap) {
+    private WeatherFlake(RandomGenerator random, Point position, float angle, float increment, float flakeSize, Paint paint) {
         mRandom = random;
         mPosition = position;
         mIncrement = increment;
         mFlakeSize = flakeSize;
         mPaint = paint;
         mAngle = angle;
-        this.bitmap = bitmap;
     }
 
-    public static SnowFlake create(int width, int height, Paint paint, Bitmap bitmap) {
+    public static WeatherFlake create(int width, int height, Paint paint) {
         RandomGenerator random = new RandomGenerator();
         int x = random.getRandom(width);
         int y = random.getRandom(height);
@@ -53,7 +52,7 @@ public class SnowFlake {
         float angle = random.getRandom(ANGLE_SEED) / ANGLE_SEED * ANGE_RANGE + HALF_PI - HALF_ANGLE_RANGE;
         float increment = random.getRandom(INCREMENT_LOWER, INCREMENT_UPPER);
         float flakeSize = random.getRandom(FLAKE_SIZE_LOWER, FLAKE_SIZE_UPPER);
-        return new SnowFlake(random, position, angle, increment, flakeSize, paint, bitmap);
+        return new WeatherFlake(random, position, angle, increment, flakeSize, paint);
     }
 
     // 绘制雪花
@@ -61,8 +60,10 @@ public class SnowFlake {
         int width = canvas.getWidth();
         int height = canvas.getHeight();
         move(width, height);
-        canvas.drawBitmap(bitmap, mPosition.x, mPosition.y, mPaint);
-//        canvas.drawCircle(mPosition.x, mPosition.y, mFlakeSize, mPaint);
+        mPaint.setShader(new RadialGradient(mPosition.x, mPosition.y, mFlakeSize, 0x55ffffff, 0x11ffffff, Shader.TileMode.CLAMP));
+
+//        canvas.drawBitmap(bitmap, mPosition.x, mPosition.y, mPaint);
+        canvas.drawCircle(mPosition.x, mPosition.y, mFlakeSize, mPaint);
     }
 
     // 移动雪花

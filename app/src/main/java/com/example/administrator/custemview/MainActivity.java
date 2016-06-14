@@ -69,7 +69,7 @@ public class MainActivity extends BaseActivity{
         m.setOnClickListener(this);
 
 
-        ApiDal.newInstance().getGitHub("seahorseBra", new ApiDateCallback() {
+       /* ApiDal.newInstance().getGitHub("seahorseBra", new ApiDateCallback() {
             @Override
             public void onDateRecieved(Object o, Throwable e, boolean isSuccess) {
                 if (isSuccess) {
@@ -80,7 +80,7 @@ public class MainActivity extends BaseActivity{
                     }
                 }
             }
-        });
+        });*/
 //        tv.setDate(R.mipmap.ic_launcher, "啊喂噶围观");
 //        witch(et);
 

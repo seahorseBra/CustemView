@@ -3,37 +3,33 @@ package view;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.MaskFilter;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.example.administrator.custemview.R;
-
 /**
- * 雪花视图, DELAY时间重绘, 绘制NUM_SNOWFLAKES个雪花
+ * 天气状态视图，传入天气类型，根据类型加载不同的天气图, DELAY时间重绘, 绘制NUM_SNOWFLAKES个雪花
+ * 目前暂定三种天气：0：晴天
+ *                   1：雨
+ *                   2：雪
  */
-public class SnowView extends View {
-
-    private static final int NUM_SNOWFLAKES = 5; // 雪花数量
+public class WeatherImageView extends View {
+    private int weatherType = 0;
+    private static final int NUM_SNOWFLAKES = 8; // 雪花数量
     private static final int DELAY = 5; // 延迟
-    private SnowFlake[] mSnowFlakes; // 雪花
-    private Bitmap bitmap = null;
-    public SnowView(Context context) {
+    private WeatherFlake[] mSnowFlakes; //
+
+    public WeatherImageView(Context context) {
         this(context, null);
     }
 
-    public SnowView(Context context, AttributeSet attrs) {
+    public WeatherImageView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public SnowView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public WeatherImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.snow);
     }
 
     @Override
@@ -48,18 +44,26 @@ public class SnowView extends View {
         Paint paint = new Paint(); // 抗锯齿
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.FILL); // 填充;
-        mSnowFlakes = new SnowFlake[NUM_SNOWFLAKES];
+        mSnowFlakes = new WeatherFlake[NUM_SNOWFLAKES];
         //mSnowFlakes所有的雪花都生成放到这里面
         for (int i = 0; i < NUM_SNOWFLAKES; ++i) {
-            mSnowFlakes[i] = SnowFlake.create(width, height, paint, bitmap);
+            mSnowFlakes[i] = WeatherFlake.create(width, height, paint);
         }
+    }
+
+    public void setWeatherType(int weatherType) {
+        this.weatherType = weatherType;
+    }
+
+    public int getWeatherType() {
+        return weatherType;
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         //for返回SnowFlake
-        for (SnowFlake s : mSnowFlakes) {
+        for (WeatherFlake s : mSnowFlakes) {
             //然后进行绘制
             s.draw(canvas);
         }
