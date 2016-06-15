@@ -25,21 +25,22 @@
     </RelativeLayout>
 
     <ScrollView
+        android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
+        <view.ShadowLinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <view.TestView
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:background="#22222222"
-                android:gravity="center"
-                android:text="1" />
-
+                android:text="二哥后ihawe；      哦乖哈围观奥iwegaoweg" />
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -63,7 +64,6 @@
 
             <view.SunRiseView
                 android:id="@+id/sunrise"
-                android:background="@drawable/bg_img"
                 android:layout_width="match_parent"
                 android:layout_height="200dp" />
 
@@ -88,7 +88,7 @@
                 android:layout_height="200dp"
                 android:gravity="center"
                 android:text="1" />
-        </LinearLayout>
+        </view.ShadowLinearLayout>
     </ScrollView>
 
 
