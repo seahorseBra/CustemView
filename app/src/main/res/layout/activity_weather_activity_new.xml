@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_vertical"
-    android:orientation="vertical"
-    android:background="#99f"
     tools:context="com.example.administrator.custemview.WeatherActivityNew">
+
+    <RelativeLayout
+        android:id="@+id/background"
+        android:background="#2ea9df"
+        android:cropToPadding="false"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/weather_back_iv"
+            android:layout_width="match_parent"
+            android:layout_height="145dp" />
+
+        <ImageView
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/bg_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -20,6 +36,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
+                android:background="#22222222"
                 android:gravity="center"
                 android:text="1" />
 
@@ -73,4 +90,6 @@
                 android:text="1" />
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+
+
+</FrameLayout>

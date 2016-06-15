@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.os.Build;
 import android.support.v4.view.ViewConfigurationCompat;
 import android.util.AttributeSet;
@@ -197,6 +198,8 @@ public class FutureWeatherHour extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+
+
         for (int i = 0; i < LIST_SIZE; i++) {
             HourWeather hourWeather = list.get(i);
             int weather = hourWeather.getWeather();

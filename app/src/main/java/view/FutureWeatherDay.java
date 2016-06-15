@@ -215,11 +215,11 @@ public class FutureWeatherDay extends View {
                 canvas.drawText(temp, (startX + i * itemWidth - tempPaint.measureText(temp) / 2), realHeight, tempPaint);       //天气
 
                 Path path = new Path();
-                path.moveTo(startX + i * itemWidth, );
-                canvas.drawPath();
-                canvas.drawText(temp, (startX + i * itemWidth - tempPaint.measureText(temp) / 2), realHeight, tempPaint);       //天气
-
-                canvas.drawCircle();
+//                path.moveTo(startX + i * itemWidth, );
+//                canvas.drawPath();
+//                canvas.drawText(temp, (startX + i * itemWidth - tempPaint.measureText(temp) / 2), realHeight, tempPaint);       //天气
+//
+//                canvas.drawCircle();
             }
         }
     }
