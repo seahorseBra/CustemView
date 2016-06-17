@@ -62,7 +62,8 @@ public class MainActivity extends BaseActivity{
                 R.id.clock,
                 R.id.main_activity_login,
                 R.id.main_activity_service,
-                R.id.main_activity_weather
+                R.id.main_activity_weather,
+                R.id.main_activity_mask
         );
         mClock = (ClockView) findViewById(R.id.clock);
         m = (ImageView) findViewById(R.id.svg_image);
@@ -277,6 +278,9 @@ public class MainActivity extends BaseActivity{
                 break;
             case R.id.main_activity_weather:
                 goActivity(WeatherActivityNew.class);
+                break;
+            case R.id.main_activity_mask:
+                goActivity(MaskActivity.class);
                 break;
         }
     }

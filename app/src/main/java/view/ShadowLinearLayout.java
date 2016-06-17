@@ -1,5 +1,6 @@
 package view;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -7,6 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
@@ -31,6 +33,7 @@ public class ShadowLinearLayout extends LinearLayout {
         this(context, attrs, 0);
     }
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public ShadowLinearLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.shadow);
@@ -55,8 +58,7 @@ public class ShadowLinearLayout extends LinearLayout {
     protected void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
 
-        Bitmap bitmap1 = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-//        paint.setXfermode(porterDuffXfermode);
-        canvas.drawBitmap(bitmap1, 0, 0, paint);
+        paint.setXfermode(porterDuffXfermode);
+        canvas.drawBitmap(bitmap, 0, 0, paint);
     }
 }
