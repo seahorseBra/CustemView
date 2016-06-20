@@ -4,6 +4,7 @@ package view;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
@@ -18,7 +19,7 @@ public class WeatherImageView extends View {
     private int weatherType = 0;
     private static final int NUM_SNOWFLAKES = 8; // 雪花数量
     private static final int DELAY = 5; // 延迟
-    private WeatherFlake[] mSnowFlakes; //
+    private WeatherInterface[] mSnowFlakes; //
 
     public WeatherImageView(Context context) {
         this(context, null);
@@ -43,11 +44,12 @@ public class WeatherImageView extends View {
     private void initSnow(int width, int height) {
         Paint paint = new Paint(); // 抗锯齿
         paint.setAntiAlias(true);
-        paint.setStyle(Paint.Style.FILL); // 填充;
-        mSnowFlakes = new WeatherFlake[NUM_SNOWFLAKES];
+        paint.setStyle(Paint.Style.STROKE); // 填充;
+        paint.setColor(Color.WHITE);
+        mSnowFlakes = new WeatherInterface[NUM_SNOWFLAKES];
         //mSnowFlakes所有的雪花都生成放到这里面
         for (int i = 0; i < NUM_SNOWFLAKES; ++i) {
-            mSnowFlakes[i] = WeatherFlake.create(width, height, paint);
+            mSnowFlakes[i] = RainFlake.create(width, height, paint, 50);
         }
     }
 
@@ -63,9 +65,9 @@ public class WeatherImageView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         //for返回SnowFlake
-        for (WeatherFlake s : mSnowFlakes) {
+        for (WeatherInterface s : mSnowFlakes) {
             //然后进行绘制
-            s.draw(canvas);
+            ((RainFlake)s).draw(canvas);
         }
         // 隔一段时间重绘一次, 动画效果
         getHandler().postDelayed(runnable, DELAY);

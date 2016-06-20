@@ -3,6 +3,7 @@ package view;
 
 
 import android.graphics.Canvas;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.RadialGradient;
@@ -13,7 +14,7 @@ import Utils.RandomGenerator;
 /**
  * 雪花的类, 移动, 移出屏幕会重新设置位置.
  */
-public class WeatherFlake {
+public class WeatherFlake implements WeatherInterface{
     // 雪花的角度
     private static final float ANGE_RANGE = 0.1f; // 角度范围r
     private static final float HALF_ANGLE_RANGE = ANGE_RANGE / 2f; // 一般的角度
@@ -34,7 +35,8 @@ public class WeatherFlake {
     private final float mIncrement; // 雪花的速度
     private final float mFlakeSize; // 雪花的大小
     private final Paint mPaint; // 画笔
-
+    private int[] color = {0x00ffffff,0x88ffffff,0x00ffffff};
+    private float[] position = {0,0.5f,1};
     private WeatherFlake(RandomGenerator random, Point position, float angle, float increment, float flakeSize, Paint paint) {
         mRandom = random;
         mPosition = position;
@@ -59,9 +61,12 @@ public class WeatherFlake {
     public void draw(Canvas canvas) {
         int width = canvas.getWidth();
         int height = canvas.getHeight();
-        move(width, height);
+//        move(width, height);
         mPaint.setShader(new RadialGradient(mPosition.x, mPosition.y, mFlakeSize, 0x55ffffff, 0x11ffffff, Shader.TileMode.CLAMP));
+//        mPaint.setShader(new LinearGradient(0,0,1,1,color,position, Shader.TileMode.CLAMP));
+//        mPaint.setStrokeWidth(5);
 
+//        canvas.drawLine(mPosition.x, mPosition.y,mPosition.x+50,mPosition.y+1000,mPaint);
 //        canvas.drawBitmap(bitmap, mPosition.x, mPosition.y, mPaint);
         canvas.drawCircle(mPosition.x, mPosition.y, mFlakeSize, mPaint);
     }
