@@ -78,9 +78,8 @@ public class TestView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
+//        canvas.saveLayerAlpha()
         canvas.drawBitmap(bitmap1, 0, 0, paint);
-        canvas.drawCircle(bitmap1.getWidth()/2, bitmap1.getHeight()/2, bitmap1.getHeight()/2, paint);
 //        paint.setXfermode(porterDuffXfermode);
 //        canvas.drawBitmap(bitmap, 0, 0, paint);
 //        paint.setXfermode(null);
