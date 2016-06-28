@@ -10,10 +10,12 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import view.SunRiseView;
+import view.WeatherImageView;
 
 public class WeatherActivityNew extends FragmentActivity {
 
     private SunRiseView mSunrise;
+    private int type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +40,18 @@ public class WeatherActivityNew extends FragmentActivity {
         }
         setContentView(R.layout.activity_weather_activity_new);
         mSunrise = (SunRiseView) findViewById(R.id.sunrise);
-
         mSunrise.startAnimation();
+
+        final WeatherImageView weatherBg = (WeatherImageView) findViewById(R.id.weather_image_bg);
+        weatherBg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (type>=3) {
+                    type = 0;
+                }
+                weatherBg.setWeatherType(type++);
+            }
+        });
+
     }
 }

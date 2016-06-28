@@ -68,7 +68,9 @@
                 android:layout_height="200dp" />
 
             <view.WeatherImageView
+                android:id="@+id/weather_image_bg"
                 android:layout_width="match_parent"
+                android:clickable="true"
                 android:layout_height="200dp" />
 
             <TextView

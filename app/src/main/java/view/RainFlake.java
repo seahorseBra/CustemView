@@ -1,11 +1,17 @@
 package view;
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.RadialGradient;
 import android.graphics.Shader;
+
+import com.example.administrator.custemview.R;
 
 import Utils.RandomGenerator;
 
@@ -13,34 +19,25 @@ import Utils.RandomGenerator;
  * Created by mavin on 2016/6/20.
  */
 public class RainFlake implements WeatherInterface{
-    protected RandomGenerator random;
     protected Paint paint;
-    protected int lenght;
     protected Point posintion;
-    protected Shader shader;
-    private int color[] = {0x00ffffff, 0xffffffff, 0x00ffffff};
-    private float pos[] = {0, 0.5f, 1};
-    public RainFlake(RandomGenerator random, Paint paint, int lenght, Point posintion) {
-        this.random = random;
+    private Bitmap bitmap;
+    public RainFlake(Paint paint, Point posintion, Bitmap bitmap) {
         this.paint = paint;
-        this.lenght = lenght;
         this.posintion = posintion;
-        shader = new LinearGradient(0,0,20,20,color,pos, Shader.TileMode.CLAMP);
+        this.bitmap = bitmap;
     }
 
-    public static RainFlake create(int width, int height, Paint paint, int length) {
+    public static RainFlake create(int width, int height, Paint paint, Resources res) {
         RandomGenerator random = new RandomGenerator();
         Point point = new Point(random.getRandom(width), random.getRandom(height));
-        return new RainFlake(random, paint, length, point);
+        final Bitmap bitmap = BitmapFactory.decodeResource(res, R.drawable.rain_pice);
+        return new RainFlake(paint, point, bitmap);
     }
 
     protected void draw(Canvas canvas) {
-        paint.setShader(shader);
-        canvas.drawLine(posintion.x, posintion.y, posintion.x + lenght /2, (float) (posintion.y +Math.cos(Math.PI/6) * lenght), paint);
+        canvas.drawBitmap(bitmap, posintion.x, posintion.y, paint);
     }
 
-    private void move(int width, int height) {
-        posintion.x = random.getRandom(width);
-        posintion.y = random.getRandom(height);
-    }
+
 }

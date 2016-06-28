@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RadialGradient;
+import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -16,10 +18,13 @@ import android.view.View;
  *                   2：雪
  */
 public class WeatherImageView extends View {
-    private int weatherType = 0;
-    private static final int NUM_SNOWFLAKES = 8; // 雪花数量
+    private int weatherType;
+    private static final int NUM_SNOWFLAKES = 12; // 雪花数量
     private static final int DELAY = 5; // 延迟
     private WeatherInterface[] mSnowFlakes; //
+    private int width;
+    private int height;
+    private Paint paint;
 
     public WeatherImageView(Context context) {
         this(context, null);
@@ -31,30 +36,43 @@ public class WeatherImageView extends View {
 
     public WeatherImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+
     }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         if (w != oldw || h != oldh) {
-            initSnow(w, h);
+            width = w;
+            height = h;
+            initSnow();
         }
     }
 
-    private void initSnow(int width, int height) {
-        Paint paint = new Paint(); // 抗锯齿
-        paint.setAntiAlias(true);
-        paint.setStyle(Paint.Style.STROKE); // 填充;
-        paint.setColor(Color.WHITE);
+    private void initSnow() {
         mSnowFlakes = new WeatherInterface[NUM_SNOWFLAKES];
-        //mSnowFlakes所有的雪花都生成放到这里面
-        for (int i = 0; i < NUM_SNOWFLAKES; ++i) {
-            mSnowFlakes[i] = RainFlake.create(width, height, paint, 50);
+        paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setColor(Color.WHITE);
+        if (weatherType == 0) {
+           paint.setShader(new RadialGradient(50, 50, 400, 0x55ffffff, 0x00ffffff, Shader.TileMode.CLAMP));
+        }
+        if (weatherType == 1) {
+            for (int i = 0; i < NUM_SNOWFLAKES; ++i) {
+                mSnowFlakes[i] = RainFlake.create(width, height, paint, getResources());
+            }
+        }
+        if (weatherType == 2) {
+            for (int i = 0; i < NUM_SNOWFLAKES; ++i) {
+                mSnowFlakes[i] = SnowFlack.create(width, height, paint);
+            }
         }
     }
+
 
     public void setWeatherType(int weatherType) {
         this.weatherType = weatherType;
+        initSnow();
     }
 
     public int getWeatherType() {
@@ -64,20 +82,26 @@ public class WeatherImageView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        //for返回SnowFlake
-        for (WeatherInterface s : mSnowFlakes) {
-            //然后进行绘制
-            ((RainFlake)s).draw(canvas);
+        if (weatherType == 0) {
+            canvas.drawCircle(50,50,400, paint);
         }
-        // 隔一段时间重绘一次, 动画效果
-        getHandler().postDelayed(runnable, DELAY);
+        if (weatherType == 1) {
+            for (WeatherInterface s : mSnowFlakes) {
+                ((RainFlake)s).draw(canvas);
+            }
+        }
+        if (weatherType == 2) {
+            for (WeatherInterface s : mSnowFlakes) {
+                ((SnowFlack)s).draw(canvas);
+            }
+        }
+
     }
 
-    // 重绘线程
+
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            //自动刷新
             invalidate();
         }
     };

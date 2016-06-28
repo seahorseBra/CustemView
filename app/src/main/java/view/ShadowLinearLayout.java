@@ -58,7 +58,7 @@ public class ShadowLinearLayout extends LinearLayout {
     protected void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
 
-        paint.setXfermode(porterDuffXfermode);
-        canvas.drawBitmap(bitmap, 0, 0, paint);
+//        paint.setXfermode(porterDuffXfermode);
+//        canvas.drawBitmap(bitmap, 0, 0, paint);
     }
 }
