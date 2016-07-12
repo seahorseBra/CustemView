@@ -1,15 +1,10 @@
 package com.example.administrator.custemview;
 
 import android.os.Bundle;
-import android.os.IBinder;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import Utils.DropDowmScollHelper;
 import adapter.ListCustemAdapter;
 import butterknife.Bind;
 import butterknife.ButterKnife;

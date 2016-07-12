@@ -4,16 +4,12 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Point;
-import android.graphics.RadialGradient;
-import android.graphics.Shader;
 
 import com.example.administrator.custemview.R;
 
-import Utils.RandomGenerator;
+import utils.RandomGenerator;
 
 /**
  * Created by mavin on 2016/6/20.

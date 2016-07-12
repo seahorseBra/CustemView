@@ -1,12 +1,11 @@
 package com.example.administrator.custemview;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import Utils.Utils;
+import utils.Utils;
 import allinterface.UserView;
 import javaBean.User;
 import model.UserModelImpl;

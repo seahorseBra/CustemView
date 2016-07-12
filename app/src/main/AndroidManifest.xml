@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name="Utils.CApp"
+        android:name="utils.CApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -60,7 +60,9 @@
         <activity
             android:name=".WeatherActivityNew"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".MaskActivity"></activity>
+        <activity android:name=".MaskActivity" />
+        <activity android:name=".SQLTestActivity" />
+        <activity android:name=".OpenGLActivity"></activity>
     </application>
 
 </manifest>

@@ -8,7 +8,7 @@ import android.graphics.Point;
 import android.graphics.RadialGradient;
 import android.graphics.Shader;
 
-import Utils.RandomGenerator;
+import utils.RandomGenerator;
 
 /**
  * 雪花的类, 移动, 移出屏幕会重新设置位置.

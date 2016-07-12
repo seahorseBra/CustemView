@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.os.Build;
 import android.support.v4.view.ViewConfigurationCompat;
 import android.util.AttributeSet;
@@ -24,7 +23,7 @@ import com.example.administrator.custemview.R;
 
 import java.util.ArrayList;
 
-import Utils.Utils;
+import utils.Utils;
 import javaBean.HourWeather;
 
 /**

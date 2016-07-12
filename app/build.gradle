@@ -4,6 +4,8 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
 
+
+
     defaultConfig {
         applicationId "com.example.administrator.custemview"
         minSdkVersion 16
@@ -24,7 +26,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.myConfig
             applicationIdSuffix ".len"
@@ -46,8 +48,8 @@ android {
             minSdkVersion 9
             applicationId 'com.example.administrator.custemview.publish'
             targetSdkVersion 21
-            versionCode 5
-            versionName '4.4.1'
+            versionCode 6
+            versionName '4.4.2'
         }
     }
 }
@@ -60,7 +62,6 @@ dependencies {
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'com.squareup.okio:okio:1.8.0'
     compile 'com.facebook.fresco:fresco:0.10.0'
-    compile project(':testLib')
     compile 'com.android.support:recyclerview-v7:23.2.1'
     compile 'com.android.support:appcompat-v7:23.2.1'
 }

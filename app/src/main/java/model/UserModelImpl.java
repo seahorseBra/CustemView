@@ -1,6 +1,6 @@
 package model;
 
-import Utils.Utils;
+import utils.Utils;
 import allinterface.Callback;
 import allinterface.UserModel;
 import javaBean.User;

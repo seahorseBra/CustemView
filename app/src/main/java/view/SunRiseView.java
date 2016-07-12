@@ -10,12 +10,11 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.text.TextPaint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 import com.example.administrator.custemview.R;
 
-import Utils.Utils;
+import utils.Utils;
 
 /**
  * Created by zchao on 2016/6/12.

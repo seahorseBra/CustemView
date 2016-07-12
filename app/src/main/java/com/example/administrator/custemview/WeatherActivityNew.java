@@ -1,14 +1,33 @@
 package com.example.administrator.custemview;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
+import javaBean.HourWeather;
+import view.FutureWeatherHour2;
 import view.SunRiseView;
 import view.WeatherImageView;
 
@@ -16,6 +35,10 @@ public class WeatherActivityNew extends FragmentActivity {
 
     private SunRiseView mSunrise;
     private int type;
+    private FutureWeatherHour2 weather;
+    private Button mButton;
+    private FrameLayout mRoot;
+    private ImageView mImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +63,9 @@ public class WeatherActivityNew extends FragmentActivity {
         }
         setContentView(R.layout.activity_weather_activity_new);
         mSunrise = (SunRiseView) findViewById(R.id.sunrise);
+        mButton = (Button) findViewById(R.id.shortcut);
+        mRoot = (FrameLayout) findViewById(R.id.root);
+        mImage = (ImageView) findViewById(R.id.image);
         mSunrise.startAnimation();
 
         final WeatherImageView weatherBg = (WeatherImageView) findViewById(R.id.weather_image_bg);
@@ -52,6 +78,63 @@ public class WeatherActivityNew extends FragmentActivity {
                 weatherBg.setWeatherType(type++);
             }
         });
+
+
+        weather = (FutureWeatherHour2) findViewById(R.id.future_weather);
+
+        weather.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<HourWeather> hourWeathers = new ArrayList<>();
+                for (int i = 0; i < 8; i++) {
+                    hourWeathers.add(new HourWeather(2, 4, 99));
+                }
+                weather.setList(hourWeathers);
+            }
+        });
+
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shortCut();
+            }
+        });
+
+
+    }
+
+    private void shortCut() {
+        final View decorView = getWindow().getDecorView();
+
+        Rect rect = new Rect();
+        decorView.getWindowVisibleDisplayFrame(rect);
+        Bitmap bitmap = Bitmap.createBitmap(1080, 1920, Bitmap.Config.RGB_565);
+        decorView.draw(new Canvas(bitmap));
+        /*
+        Bitmap bitmap = null;
+        decorView.setDrawingCacheEnabled(true);
+        decorView.destroyDrawingCache();
+        decorView.buildDrawingCache();
+        bitmap = decorView.getDrawingCache();
+        decorView.setDrawingCacheEnabled(false);*/
+            mImage.setImageBitmap(bitmap);
+    }
+
+    @Override
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+        View view = getWindow().getDecorView();
+        WindowManager.LayoutParams lp = (WindowManager.LayoutParams) view.getLayoutParams();
+        lp.width = (metrics.widthPixels * 4) / 5;
+        lp.height = (metrics.heightPixels * 4) / 5;
+        lp.gravity  = Gravity.CENTER;
+
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        getWindow().getWindowManager().updateViewLayout(view, lp);
+
 
     }
 }

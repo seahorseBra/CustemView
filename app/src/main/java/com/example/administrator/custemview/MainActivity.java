@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.zchao.testlib.TestLib;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -24,12 +23,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import allinterface.ApiDateCallback;
 import butterknife.ButterKnife;
-import javaBean.GetIpInfoResponse;
 import javaBean.Print;
 import javaBean.Student;
-import model.ApiDal;
 import view.ClockView;
 
 public class MainActivity extends BaseActivity{
@@ -63,7 +59,9 @@ public class MainActivity extends BaseActivity{
                 R.id.main_activity_login,
                 R.id.main_activity_service,
                 R.id.main_activity_weather,
-                R.id.main_activity_mask
+                R.id.main_activity_mask,
+                R.id.main_activity_sql,
+                R.id.main_activity_opengl
         );
         mClock = (ClockView) findViewById(R.id.clock);
         m = (ImageView) findViewById(R.id.svg_image);
@@ -281,6 +279,12 @@ public class MainActivity extends BaseActivity{
                 break;
             case R.id.main_activity_mask:
                 goActivity(MaskActivity.class);
+                break;
+            case R.id.main_activity_sql:
+                goActivity(SQLTestActivity.class);
+                break;
+            case R.id.main_activity_opengl:
+                goActivity(OpenGLActivity.class);
                 break;
         }
     }

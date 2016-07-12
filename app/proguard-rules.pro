@@ -24,15 +24,7 @@
 #-keep public class * extends android.app.backup.BackupAgentHelper
 #-keep public class * extends android.preference.Preference
 
-#butterknife
--dontwarn butterknife.internal.**
--keep class **$$ViewInjector { *; }
--keepnames class * { @butterknife.InjectView *;}
 
-#retrofit
--keep class com.squareup.okhttp.*
--dontwarn retrofit.**
--keep class retrofit.** { *; }
 
  # mode 混淆
 
@@ -50,25 +42,7 @@
 
 -keepattributes *Annotation*
 
-# v4 包的混淆
 
-
--dontwarn android.support.v4.**
-
--keep interface android.support.v4.app.** { *; }
-
--keep class android.support.v4.** { *; }
-
--keep public class * extends android.support.v4.**
-
--keep public class * extends android.app.Fragment
-
-
-# 保持自定义控件类不被混淆
-
--keep public class * extends com.zhibaicc.android.adapter.PackageAdapter
-
--keepattributes InnerClasses*
 
 -keepclasseswithmembers class * {
 
@@ -88,11 +62,60 @@
 
 }
 
--keep public class * implements java.io.Serializable {
 
+
+
+
+
+
+-keep public class * extends android.app.Activity
+-keep public class * extends com.youloft.nad.YLNAModule
+-keep public class * extends com.youloft.nad.LenovoSDK
+-keep public class * extends com.youloft.nad.INativeAdData
+-keep public class * extends android.app.Application
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.BroadcastReceiver
+-keep public class * extends android.content.ContentProvider
+-keep public class * extends android.app.backup.BackupAgentHelper
+-keep public class * extends android.preference.Preference
+
+#support
+-dontwarn android.support.v4.**
+-keep class android.support.v4.** { *; }
+-keep interface android.support.v4.app.** { *; }
+-keep public class * extends android.support.v4.**
+-keep public class * extends android.app.Fragment
+
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+-keep public class * implements java.io.Serializable {
+        public *;
+}
+-keep public class * implements java.io.Parcelable {
         public *;
 }
 
--keep facebook.*
--keep
+#okhttp
+-dontwarn okio.*
+#butterknife
+-dontwarn butterknife.internal.**
+-keep class **$$ViewInjector { *; }
+-keepnames class * { @butterknife.InjectView *;}
+
+#retrofit
+-keep class com.squareup.okhttp.*
+-dontwarn retrofit.**
+-keep class retrofit.** { *; }
+
+#GSON
+-keep class com.google.gson.IJsonObject{*;}
+-keep class com.google.gson.stream.**{*;}
+-keep class * implements com.google.gson.IJsonObject{*;}
+
+
+-dontwarn com.facebook.**
+-keep class com.facebook.**
 

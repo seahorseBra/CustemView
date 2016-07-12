@@ -25,7 +25,7 @@ import com.example.administrator.custemview.R;
 
 import java.util.ArrayList;
 
-import Utils.Utils;
+import utils.Utils;
 import javaBean.HourWeather;
 
 /**
