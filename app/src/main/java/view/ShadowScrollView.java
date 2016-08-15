@@ -2,27 +2,23 @@ package view;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.widget.ScrollView;
 
-import com.example.administrator.custemview.R;
-
 /**
- * Created by mavin on 2016/6/15.
+ * Created by zchao on 2016/6/15.
  */
 public class ShadowScrollView extends ScrollView {
-
-    private Bitmap bitmap;
+    private OnScrollTobottomListener onScrollTobottomListener;
     private Paint paint;
-    private PorterDuffXfermode porterDuffXfermode;
-    private int totleWidth;
-    private int totleHeight;
+    private Bitmap bitmap;
 
     public ShadowScrollView(Context context) {
         this(context, null);
@@ -34,32 +30,56 @@ public class ShadowScrollView extends ScrollView {
 
     public ShadowScrollView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.shadow);
-        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        porterDuffXfermode = new PorterDuffXfermode(PorterDuff.Mode.ADD);
+
+    }
+
+    public void setOnScrollTobottomListener(OnScrollTobottomListener onScrollTobottomListener) {
+        this.onScrollTobottomListener = onScrollTobottomListener;
 
     }
 
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        totleWidth = w;
-        totleHeight = h;
-    }
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        totleWidth = MeasureSpec.getSize(widthMeasureSpec);
+    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+        if(t + getHeight() >=  computeVerticalScrollRange()){
+            //ScrollView滑动到底部了
+            if (onScrollTobottomListener != null) {
+                onScrollTobottomListener.onScrollToBottom(true);
+            }
+        }
     }
 
     @Override
     protected void dispatchDraw(Canvas canvas) {
+        if (paint == null) {
+            paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+            paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT));
+        }
+        canvas.saveLayer(0, getScrollY(), getWidth(), getScrollY() + getHeight(), null, Canvas.ALL_SAVE_FLAG);
         super.dispatchDraw(canvas);
+        createMaskBitmap();
+        if (bitmap != null && !bitmap.isRecycled()) {
+            canvas.drawBitmap(bitmap, 0, getScrollY(), paint);
+        }
+        canvas.restore();
 
-        Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, totleWidth, 100, false);
-        bitmap = scaledBitmap;
-        paint.setXfermode(porterDuffXfermode);
-        canvas.drawBitmap(scaledBitmap, 0, getScrollY(), paint);
+
+    }
+
+    private void createMaskBitmap() {
+        if (bitmap == null || bitmap.isRecycled()) {
+            try {
+                bitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(bitmap);
+                GradientDrawable gd = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, new int[]{Color.WHITE, Color.TRANSPARENT});
+                gd.setBounds(0, 0, getWidth(), Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, getResources().getDisplayMetrics())));
+                gd.draw(canvas);
+            } catch (Throwable e) {
+
+            }
+        }
+    }
+
+    public interface OnScrollTobottomListener {
+        public void onScrollToBottom(boolean scrollToBottom);
     }
 }

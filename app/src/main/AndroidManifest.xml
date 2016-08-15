@@ -5,6 +5,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+
+
     <application
         android:name="utils.CApp"
         android:allowBackup="true"
@@ -62,7 +66,9 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity android:name=".MaskActivity" />
         <activity android:name=".SQLTestActivity" />
-        <activity android:name=".OpenGLActivity"></activity>
+        <activity android:name=".OpenGLActivity" />
+        <activity android:name=".JNIActivity" />
+        <activity android:name=".BluetoothActivity"></activity>
     </application>
 
 </manifest>

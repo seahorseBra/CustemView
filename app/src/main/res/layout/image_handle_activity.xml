@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:background="#6B9CCC"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
@@ -13,24 +15,72 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/account"
-        android:layout_weight="1">
+        android:background="#2B9CCC">
 
         <TextView
             android:id="@+id/img_nores"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:textSize="11sp"
+            android:text="图片大小"
             android:textAlignment="textEnd"
-            android:text="图片大小" />
+            android:textSize="11sp" />
 
-        <ImageView
-            android:id="@+id/image"
+        <view.ShadowScrollView
+            android:layout_marginTop="40dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clickable="true" />
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/image_ss"
+                    android:text="测试1"
+                    android:background="#2b9fff"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+
+                <TextView
+                    android:text="测试1"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
+                <view.ShadowImageView
+                    android:id="@+id/image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="30dp"
+                    android:src="@drawable/sd_icon"
+                    app:shadowColor="#5f000000"
+                    app:shadowDx="5"
+                    app:shadowDy="10" />
+                <view.ShadowImage
+                    android:id="@+id/image_s"
+                    app:res="@drawable/sd_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:text="测试"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
+                <TextView
+                    android:text="测试"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
+
+            </LinearLayout>
+        </view.ShadowScrollView>
     </RelativeLayout>
 
     <LinearLayout
@@ -42,33 +92,33 @@
             android:id="@+id/select_img"
             android:layout_width="0dp"
             android:layout_height="48dp"
-            android:text="选择图片"
             android:layout_marginBottom="2dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="2dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="选择图片" />
 
         <Button
             android:id="@+id/start_compress"
             android:layout_width="0dp"
             android:layout_height="48dp"
-            android:text="开始压缩"
             android:layout_marginBottom="2dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="2dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="开始压缩" />
 
         <Button
             android:id="@+id/save_img"
             android:layout_width="0dp"
             android:layout_height="48dp"
-            android:text="保存"
             android:layout_marginBottom="2dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="2dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="保存" />
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

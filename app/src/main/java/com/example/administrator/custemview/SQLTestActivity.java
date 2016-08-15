@@ -1,5 +1,7 @@
 package com.example.administrator.custemview;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
@@ -13,6 +15,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import javaBean.FlowInfo;
 import utils.FlowDBManager;
+import utils.SQLHelper;
 
 public class SQLTestActivity extends AppCompatActivity {
 
@@ -43,6 +46,7 @@ public class SQLTestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sqltest);
         ButterKnife.bind(this);
         dbManager = new FlowDBManager(this);
+
     }
 
     @OnClick(R.id.insert)
@@ -50,7 +54,7 @@ public class SQLTestActivity extends AppCompatActivity {
         dbManager.insert(key.getText().toString(),
                 Integer.parseInt(seq.getText().toString().isEmpty()?"1":seq.getText().toString()),
                 Integer.parseInt(page.getText().toString().isEmpty()?"1":page.getText().toString()),
-                System.currentTimeMillis(),
+                System.currentTimeMillis()/1000,
                 100,
                 contentT.getText().toString());
     }

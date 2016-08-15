@@ -8,4 +8,17 @@
         <attr name="maxLine" format="integer"/>
         <attr name="interval" format="dimension"/>
     </declare-styleable>
+
+    <declare-styleable name="ShadowImageView">
+        <attr name="shadowDx" format="float"/>
+        <attr name="shadowDy" format="float"/>
+        <attr name="shadowColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="ShadowImage">
+        <attr name="shadowDX" format="integer" />
+        <attr name="shadowDY" format="integer" />
+        <attr name="shadowTint" format="color" />
+        <attr name="res" format="integer"/>
+    </declare-styleable>
 </resources>

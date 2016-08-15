@@ -22,6 +22,7 @@ public class FlowDBManager {
     public FlowDBManager(Context context) {
        this.context = context;
         this.sqlHelper = new SQLHelper(context);
+
     }
 
     /**
@@ -178,9 +179,9 @@ public class FlowDBManager {
     public List<FlowInfo> query(int page, boolean isSort) {
         openDb();
         List<FlowInfo> all = new ArrayList<>();
-        String sql = "SELECT * FROM " + SQLHelper.TABLE_NAME + " WHERE flag=100 AND page=?";
-        String sql1 = "SELECT * FROM " + SQLHelper.TABLE_NAME + " WHERE flag=100 AND page=? ORDER BY seq";
-        String args[] = new String[]{String.valueOf(page)};
+        String sql = "SELECT * FROM " + SQLHelper.TABLE_NAME + " WHERE flag=? AND page=?";
+        String sql1 = "SELECT * FROM " + SQLHelper.TABLE_NAME + " WHERE flag=? AND page=? AND save_time>=? ORDER BY seq";
+        String args[] = new String[]{String.valueOf(100), String.valueOf(page), String.valueOf(System.currentTimeMillis()/1000 - 60)};
         Cursor result = this.db.rawQuery(isSort ? sql1 : sql, args);
         if(result.getCount() == 0)return null;
         for (result.moveToFirst(); !result.isAfterLast(); result.moveToNext()) {

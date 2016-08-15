@@ -61,7 +61,9 @@ public class MainActivity extends BaseActivity{
                 R.id.main_activity_weather,
                 R.id.main_activity_mask,
                 R.id.main_activity_sql,
-                R.id.main_activity_opengl
+                R.id.main_activity_opengl,
+                R.id.main_activity_jni,
+                R.id.main_activity_bluetooth
         );
         mClock = (ClockView) findViewById(R.id.clock);
         m = (ImageView) findViewById(R.id.svg_image);
@@ -285,6 +287,12 @@ public class MainActivity extends BaseActivity{
                 break;
             case R.id.main_activity_opengl:
                 goActivity(OpenGLActivity.class);
+                break;
+            case R.id.main_activity_jni:
+                goActivity(JNIActivity.class);
+                break;
+            case R.id.main_activity_bluetooth:
+                goActivity(BluetoothActivity.class);
                 break;
         }
     }
