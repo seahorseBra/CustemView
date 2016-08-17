@@ -63,7 +63,8 @@ public class MainActivity extends BaseActivity{
                 R.id.main_activity_sql,
                 R.id.main_activity_opengl,
                 R.id.main_activity_jni,
-                R.id.main_activity_bluetooth
+                R.id.main_activity_bluetooth,
+                R.id.main_activity_vedio
         );
         mClock = (ClockView) findViewById(R.id.clock);
         m = (ImageView) findViewById(R.id.svg_image);
@@ -293,6 +294,9 @@ public class MainActivity extends BaseActivity{
                 break;
             case R.id.main_activity_bluetooth:
                 goActivity(BluetoothActivity.class);
+                break;
+            case R.id.main_activity_vedio:
+                goActivity(ScreenrecordActivity.class);
                 break;
         }
     }

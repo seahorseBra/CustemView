@@ -125,6 +125,7 @@
             android:background="@color/colorPrimaryDark"
             android:text="OpenGL"
             android:textColor="@color/colorAccent" />
+
         <Button
             android:id="@+id/main_activity_jni"
             android:layout_width="wrap_content"
@@ -132,12 +133,21 @@
             android:background="@color/colorPrimaryDark"
             android:text="JNI"
             android:textColor="@color/colorAccent" />
+
         <Button
             android:id="@+id/main_activity_bluetooth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimaryDark"
             android:text="BT"
+            android:textColor="@color/colorAccent" />
+
+        <Button
+            android:id="@+id/main_activity_vedio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:text="屏幕录制"
             android:textColor="@color/colorAccent" />
 
         <view.CustomCheckBox

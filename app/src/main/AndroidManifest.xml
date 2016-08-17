@@ -69,6 +69,7 @@
         <activity android:name=".OpenGLActivity" />
         <activity android:name=".JNIActivity" />
         <activity android:name=".BluetoothActivity"></activity>
+        <activity android:name=".ScreenrecordActivity"/>
     </application>
 
 </manifest>
