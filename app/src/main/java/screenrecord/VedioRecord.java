@@ -45,6 +45,7 @@ public class VedioRecord extends Thread {
         }
     }
 
+
     @Override
 
     public void run() {
@@ -57,7 +58,7 @@ public class VedioRecord extends Thread {
             mAudioEncode = MediaCodec.createEncoderByType(MediaFormat.MIMETYPE_AUDIO_MPEG);
             mAudioEncode.configure(format, null, null, MediaCodec.CONFIGURE_FLAG_ENCODE);
 
-            mAudioRecord = AudioRecord.getMinBufferSize(SIMPLE_RATE, CHANNAL_COUNT, )
+//            mAudioRecord = AudioRecord.getMinBufferSize(SIMPLE_RATE, CHANNAL_COUNT, )
             mAudioEncode.start();
         } catch (IOException e) {
             e.printStackTrace();

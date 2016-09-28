@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -64,12 +65,16 @@ public class MainActivity extends BaseActivity{
                 R.id.main_activity_opengl,
                 R.id.main_activity_jni,
                 R.id.main_activity_bluetooth,
-                R.id.main_activity_vedio
+                R.id.main_activity_vedio,
+                R.id.main_activity_fragment
         );
         mClock = (ClockView) findViewById(R.id.clock);
         m = (ImageView) findViewById(R.id.svg_image);
         m.setOnClickListener(this);
 
+        SimpleDateFormat format = new SimpleDateFormat("MMM.EEEE");
+        final String format1 = format.format(new java.util.Date());
+        Log.d(TAG, "onCreate() called with: " + "format1 = [" + format1.toUpperCase() + "]");
 
        /* ApiDal.newInstance().getGitHub("seahorseBra", new ApiDateCallback() {
             @Override
@@ -297,6 +302,9 @@ public class MainActivity extends BaseActivity{
                 break;
             case R.id.main_activity_vedio:
                 goActivity(ScreenrecordActivity.class);
+                break;
+            case R.id.main_activity_fragment:
+                goActivity(FragmentActivity.class);
                 break;
         }
     }

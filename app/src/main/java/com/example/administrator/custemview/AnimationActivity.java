@@ -2,7 +2,9 @@ package com.example.administrator.custemview;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.animation.IntEvaluator;
 import android.animation.ObjectAnimator;
+import android.animation.TimeInterpolator;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
@@ -10,6 +12,7 @@ import android.graphics.PointF;
 import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.CharacterPickerDialog;
@@ -20,6 +23,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
@@ -27,6 +31,7 @@ import android.view.animation.AnimationSet;
 import android.view.animation.CycleInterpolator;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
@@ -39,6 +44,7 @@ public class AnimationActivity extends BaseActivity {
     private static final String TAG = "AnimationActivity";
     private ImageView mImage;
     private ImageView mCenterIV;
+    private ImageView mSnowImg;
 
     @Override
     protected void onStart() {
@@ -47,16 +53,32 @@ public class AnimationActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setEnterTransition(new Slide());
-            getWindow().setExitTransition(new Slide());
-        }
+//        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            getWindow().setEnterTransition(new Slide());
+//            getWindow().setExitTransition(new Slide());
+//        }
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_animation);
         mImage = (ImageView)findViewById(R.id.activity_animation_iv);
         mCenterIV = (ImageView) findViewById(R.id.center_line);
+        mSnowImg = (ImageView) findViewById(R.id.img_3d_animation);
 
+        ScaleAnimation scaleAnimation = new ScaleAnimation(1.0f, 0f, 1.0f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0f);
+        scaleAnimation.setDuration(500);
+        ScaleAnimation scaleAnimation1 = new ScaleAnimation(0f, 1.0f, 1.0f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0f);
+        scaleAnimation1.setDuration(500);
+        final AnimationSet set = new AnimationSet(true);
+        set.addAnimation(scaleAnimation);
+        set.addAnimation(scaleAnimation1);
+        mSnowImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSnowImg.startAnimation(set);
+                set.hasEnded();
+            }
+        });
 
         mImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,11 +98,18 @@ public class AnimationActivity extends BaseActivity {
     public void transViewAnimator(final View view){
         view.setClickable(false);
         final float y1 = view.getY();
+        final float x1 = view.getX();
 //        Log.d(TAG, "transViewAnimator() called with: " + "y1 = [" + y1 + "]");
         ValueAnimator anim = new ValueAnimator();
         anim.setDuration(5000);
-        anim.setObjectValues(new PointF(0, y1));
-        anim.setInterpolator(new LinearInterpolator());
+        anim.setObjectValues(new PointF(x1, y1));
+        anim.setInterpolator(new AccelerateInterpolator(2));
+//        anim.setInterpolator(new TimeInterpolator() {
+//            @Override
+//            public float getInterpolation(float input) {
+//                return (float)Math.pow(input, 4);
+//            }
+//        });
         anim.setEvaluator(new TypeEvaluator<PointF>() {
             @Override
             public PointF evaluate(float fraction, PointF startValue, PointF endValue) {

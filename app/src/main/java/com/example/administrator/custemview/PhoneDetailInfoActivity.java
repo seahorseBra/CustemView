@@ -1,6 +1,5 @@
 package com.example.administrator.custemview;
 
-import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -37,11 +36,11 @@ public class PhoneDetailInfoActivity extends BaseActivity {
         fillInfo();
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+
     private void fillInfo() {
          List<PhoneInfo> info = new ArrayList();
         info.add(new PhoneInfo("主板（BOARD）", Build.BOARD));
-        info.add(new PhoneInfo("指令集（SUPPORTED_ABIS）", Build.SUPPORTED_ABIS.toString()));
+//        info.add(new PhoneInfo("指令集（SUPPORTED_ABIS）", Build.SUPPORTED_ABIS.toString()));
         info.add(new PhoneInfo("设备参数（DEVICE）", Build.DEVICE));
         info.add(new PhoneInfo("屏幕参数（DISPLAY）", Build.DISPLAY));
         info.add(new PhoneInfo("唯一编号（FINGERPRINT）", Build.FINGERPRINT));

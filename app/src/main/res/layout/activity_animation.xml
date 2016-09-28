@@ -18,6 +18,13 @@
         android:layout_width="match_parent"
         android:layout_height="0.7dp" />
 
+    <ImageView
+        android:id="@+id/img_3d_animation"
+        android:src="@drawable/snow"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <view.MoveView
         android:layout_width="30dp"
         android:layout_height="30dp"

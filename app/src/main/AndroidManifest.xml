@@ -4,10 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <application
         android:name="utils.CApp"
@@ -68,8 +66,9 @@
         <activity android:name=".SQLTestActivity" />
         <activity android:name=".OpenGLActivity" />
         <activity android:name=".JNIActivity" />
-        <activity android:name=".BluetoothActivity"></activity>
-        <activity android:name=".ScreenrecordActivity"/>
+        <activity android:name=".BluetoothActivity" />
+        <activity android:name=".ScreenrecordActivity" />
+        <activity android:name=".FragmentActivity"></activity>
     </application>
 
 </manifest>
