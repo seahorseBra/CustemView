@@ -66,7 +66,8 @@ public class MainActivity extends BaseActivity{
                 R.id.main_activity_jni,
                 R.id.main_activity_bluetooth,
                 R.id.main_activity_vedio,
-                R.id.main_activity_fragment
+                R.id.main_activity_fragment,
+                R.id.main_activity_rx_java
         );
         mClock = (ClockView) findViewById(R.id.clock);
         m = (ImageView) findViewById(R.id.svg_image);
@@ -277,10 +278,10 @@ public class MainActivity extends BaseActivity{
                 break;
 
             case R.id.main_activity_service:
-//                goActivity(TestLib.class);
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this, MyDaydreamService.class);
-                startService(intent);
+                goActivity(ServiceTestActivity.class);
+//                Intent intent = new Intent();
+//                intent.setClass(MainActivity.this, MyDaydreamService.class);
+//                startService(intent);
                 break;
             case R.id.main_activity_weather:
                 goActivity(WeatherActivityNew.class);
@@ -305,6 +306,9 @@ public class MainActivity extends BaseActivity{
                 break;
             case R.id.main_activity_fragment:
                 goActivity(FragmentActivity.class);
+                break;
+            case R.id.main_activity_rx_java:
+                goActivity(RxJavaTestActivity.class);
                 break;
         }
     }

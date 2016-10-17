@@ -68,7 +68,8 @@
         <activity android:name=".JNIActivity" />
         <activity android:name=".BluetoothActivity" />
         <activity android:name=".ScreenrecordActivity" />
-        <activity android:name=".FragmentActivity"></activity>
+        <activity android:name=".FragmentActivity" />
+        <activity android:name=".RxJavaTestActivity"></activity>
     </application>
 
 </manifest>
