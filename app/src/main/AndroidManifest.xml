@@ -69,7 +69,13 @@
         <activity android:name=".BluetoothActivity" />
         <activity android:name=".ScreenrecordActivity" />
         <activity android:name=".FragmentActivity" />
-        <activity android:name=".RxJavaTestActivity"></activity>
+        <activity android:name=".RxJavaTestActivity" />
+        <activity android:name=".OkHttpTestActivity" />
+        <activity android:name=".FileSystem" />
+        <activity
+            android:name=".FileManagerActivity"
+            android:label="@string/title_activity_file_manager"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

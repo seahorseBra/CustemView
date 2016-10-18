@@ -165,6 +165,20 @@
             android:background="@color/colorPrimaryDark"
             android:text="RXJAVA"
             android:textColor="@color/colorAccent" />
+        <Button
+            android:id="@+id/main_activity_okhttp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:text="OKHTTP"
+            android:textColor="@color/colorAccent" />
+        <Button
+            android:id="@+id/main_activity_file_system"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:text="FILE"
+            android:textColor="@color/colorAccent" />
         <view.CustomCheckBox
             android:layout_width="30dp"
             android:layout_height="30dp"

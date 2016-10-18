@@ -67,7 +67,9 @@ public class MainActivity extends BaseActivity{
                 R.id.main_activity_bluetooth,
                 R.id.main_activity_vedio,
                 R.id.main_activity_fragment,
-                R.id.main_activity_rx_java
+                R.id.main_activity_rx_java,
+                R.id.main_activity_okhttp,
+                R.id.main_activity_file_system
         );
         mClock = (ClockView) findViewById(R.id.clock);
         m = (ImageView) findViewById(R.id.svg_image);
@@ -309,6 +311,12 @@ public class MainActivity extends BaseActivity{
                 break;
             case R.id.main_activity_rx_java:
                 goActivity(RxJavaTestActivity.class);
+                break;
+            case R.id.main_activity_okhttp:
+                goActivity(OkHttpTestActivity.class);
+                break;
+            case R.id.main_activity_file_system:
+                goActivity(FileSystem.class);
                 break;
         }
     }
