@@ -1,10 +1,8 @@
 package adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
-import java.util.IllegalFormatCodePointException;
 import java.util.List;
 
 /**
@@ -28,7 +26,7 @@ public abstract class HeaderAndFooterAdapter<T, V extends BaseViewHolder> extend
     }
 
     @Override
-    protected abstract V createView(Context context);
+    protected abstract V createView(ViewGroup parent);
 
     protected abstract V createHeader (Context context);
 

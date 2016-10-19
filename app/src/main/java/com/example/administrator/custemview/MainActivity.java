@@ -316,7 +316,7 @@ public class MainActivity extends BaseActivity{
                 goActivity(OkHttpTestActivity.class);
                 break;
             case R.id.main_activity_file_system:
-                goActivity(FileSystem.class);
+                goActivity(FileManagerActivity.class);
                 break;
         }
     }

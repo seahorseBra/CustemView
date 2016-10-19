@@ -2,6 +2,7 @@ package adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -15,40 +16,39 @@ import java.util.List;
 public abstract class BaseAdapter<T, V extends BaseViewHolder> extends RecyclerView.Adapter<V> {
     protected Context context;
     protected List<T> list;
-    protected OnItemClickLisenter clickLisenter;
-    protected OnItemLongClickLisenter longClickLisenter;
-
+    protected OnItemClickListener clickListener;
+    protected OnItemLongClickListener longClickListener;
+    private int resID;
     public BaseAdapter(Context context, List<T> list) {
         this.context = context;
         this.list = list;
     }
 
-    protected abstract V createView(Context context);
-
+    protected abstract V createView(ViewGroup parent);
 
     @Override
     public V onCreateViewHolder(ViewGroup parent, int viewType) {
-        V view = createView(context);
+        V view = createView(parent);
         return view;
     }
 
     @Override
     public void onBindViewHolder(V holder, final int position) {
         View itemView = holder.itemView;
-        if (clickLisenter != null) {
+        if (clickListener != null) {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    clickLisenter.onItemClick(position);
+                    clickListener.onItemClick(position);
                 }
             });
         }
 
-        if (longClickLisenter != null) {
+        if (longClickListener != null) {
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    longClickLisenter.onItemLongClick(position);
+                    longClickListener.onItemLongClick(position);
                     return true;
                 }
             });
@@ -73,6 +73,7 @@ public abstract class BaseAdapter<T, V extends BaseViewHolder> extends RecyclerV
         if (list != null) {
             list.add(t);
         }
+        notifyDataSetChanged();
     }
 
     public void addDatas(List<T> list) {
@@ -81,25 +82,27 @@ public abstract class BaseAdapter<T, V extends BaseViewHolder> extends RecyclerV
         } else {
             list.addAll(list);
         }
+        notifyDataSetChanged();
     }
 
     public void setData(List<T> list) {
         this.list = list;
+        notifyDataSetChanged();
     }
 
-    public void setClickLisenter(OnItemClickLisenter clickLisenter) {
-        this.clickLisenter = clickLisenter;
+    public void setClickListener(OnItemClickListener clickListener) {
+        this.clickListener = clickListener;
     }
 
-    public void setLongClickLisenter(OnItemLongClickLisenter longClickLisenter) {
-        this.longClickLisenter = longClickLisenter;
+    public void setLongClickListener(OnItemLongClickListener longClickListener) {
+        this.longClickListener = longClickListener;
     }
 
-    public interface OnItemClickLisenter {
-        void onItemClick(int postion);
+    public interface OnItemClickListener {
+        void onItemClick(int position);
     }
 
-    public interface OnItemLongClickLisenter {
+    public interface OnItemLongClickListener {
         void onItemLongClick(int position);
     }
 
