@@ -69,7 +69,8 @@ public class MainActivity extends BaseActivity{
                 R.id.main_activity_fragment,
                 R.id.main_activity_rx_java,
                 R.id.main_activity_okhttp,
-                R.id.main_activity_file_system
+                R.id.main_activity_file_system,
+                R.id.main_activity_calendar
         );
         mClock = (ClockView) findViewById(R.id.clock);
         m = (ImageView) findViewById(R.id.svg_image);
@@ -317,6 +318,9 @@ public class MainActivity extends BaseActivity{
                 break;
             case R.id.main_activity_file_system:
                 goActivity(FileManagerActivity.class);
+                break;
+            case R.id.main_activity_calendar:
+                goActivity(CalendarAcitvity.class);
                 break;
         }
     }

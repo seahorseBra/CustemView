@@ -6,9 +6,15 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context="com.example.administrator.custemview.FileManagerActivity">
+    <TextView
+        android:text="什么颜色"
+        android:textAppearance="@style/Notification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:targetApi="lollipop" />
 
-    <android.support.v7.widget.RecyclerView
+  <!--  <android.support.v7.widget.RecyclerView
         android:id="@+id/file_system_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"/>-->
 </RelativeLayout>
