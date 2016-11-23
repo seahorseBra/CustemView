@@ -21,4 +21,9 @@
         <attr name="shadowTint" format="color" />
         <attr name="res" format="integer"/>
     </declare-styleable>
+
+    <declare-styleable name="RoundBgView">
+        <attr name="BorderRadius" format="dimension"></attr>
+        <attr name="LineColor" format="color"></attr>
+    </declare-styleable>
 </resources>

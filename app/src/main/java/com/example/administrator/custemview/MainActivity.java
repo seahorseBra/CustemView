@@ -2,6 +2,7 @@ package com.example.administrator.custemview;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.Animatable;
 import android.os.Build;
 import android.os.Bundle;
@@ -70,7 +71,10 @@ public class MainActivity extends BaseActivity{
                 R.id.main_activity_rx_java,
                 R.id.main_activity_okhttp,
                 R.id.main_activity_file_system,
-                R.id.main_activity_calendar
+                R.id.main_activity_calendar,
+                R.id.main_activity_recoder_animator,
+                R.id.main_activity_executor,
+                R.id.main_activity_screen_shot
         );
         mClock = (ClockView) findViewById(R.id.clock);
         m = (ImageView) findViewById(R.id.svg_image);
@@ -321,6 +325,16 @@ public class MainActivity extends BaseActivity{
                 break;
             case R.id.main_activity_calendar:
                 goActivity(CalendarAcitvity.class);
+                break;
+            case R.id.main_activity_recoder_animator:
+                goActivity(RecoderAnimationDemo.class);
+                break;
+            case R.id.main_activity_executor:
+                goActivity(ExecutorTestActivity.class);
+                break;
+            case R.id.main_activity_screen_shot:
+
+                startService(new Intent(this,ScreenShotService.class));
                 break;
         }
     }

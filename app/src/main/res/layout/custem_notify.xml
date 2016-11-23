@@ -7,8 +7,14 @@
         android:id="@+id/text"
         android:text="下啊嗡啊问"
         android:gravity="center"
-        android:textAppearance="@style/Notification"
+        android:textColor="#f99"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:targetApi="lollipop" />
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/text2"
+        android:text="下啊嗡啊问"
+        android:gravity="center"
+        android:textColor="#f99"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_recoder_animation_demo"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.administrator.custemview.RecoderAnimationDemo">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+                <view.CaleanderGroup
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+                    <TextView
+                    android:tag="0"
+                    android:text="0000"
+                    android:textColor="#000"
+                    android:gravity="center"
+                    android:textSize="40dp"
+                    android:background="#99ff0000"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+                    <TextView
+                    android:tag="1"
+                    android:text="1111"
+                    android:textColor="#000"
+                    android:gravity="center"
+                    android:textSize="40dp"
+                    android:background="#9900ff00"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+                    <TextView
+                    android:tag="2"
+                    android:text="2222"
+                    android:textColor="#000"
+                    android:gravity="center"
+                    android:textSize="40dp"
+                    android:background="#990000ff"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </view.CaleanderGroup>
+            <view.PointerViewTest
+                android:src="@drawable/flower"
+                android:layout_width="match_parent"
+                android:background="#99f"
+                android:layout_height="400dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:background="#9f9"
+                android:layout_height="400dp" />
+        </LinearLayout>
+</RelativeLayout>

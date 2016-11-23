@@ -45,7 +45,7 @@ android {
 
         }
         publish {
-            minSdkVersion 9
+            minSdkVersion 11
             applicationId 'com.example.administrator.custemview.publish'
             targetSdkVersion 21
             versionCode 6
