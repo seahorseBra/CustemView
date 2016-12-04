@@ -125,6 +125,7 @@
             android:background="@color/colorPrimaryDark"
             android:text="OpenGL"
             android:textColor="@color/colorAccent" />
+
         <Button
             android:id="@+id/main_activity_jni"
             android:layout_width="wrap_content"
@@ -132,6 +133,7 @@
             android:background="@color/colorPrimaryDark"
             android:text="JNI"
             android:textColor="@color/colorAccent" />
+
         <Button
             android:id="@+id/main_activity_bluetooth"
             android:layout_width="wrap_content"
@@ -140,32 +142,31 @@
             android:text="BT"
             android:textColor="@color/colorAccent" />
 
-        <view.CustomCheckBox
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_margin="10dp"></view.CustomCheckBox>
+        <Button
+            android:id="@+id/main_activity_singinston"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:text="单例"
+            android:textColor="@color/colorAccent" />
 
-        <view.CustomCheckBox
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_margin="10dp"></view.CustomCheckBox>
+        <Button
+            android:id="@+id/main_activity_view_drag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:text="ViewDrag"
+            android:textColor="@color/colorAccent" />
 
-        <CheckBox
-            android:layout_width="30dp"
-            android:layout_height="30dp" />
+        <Button
+            android:id="@+id/main_activity_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:text="ViewDrag"
+            android:textColor="@color/colorAccent" />
 
 
-        <ImageView
-            android:id="@+id/svg_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/svg_anim" />
-
-        <view.ClockView
-            android:id="@+id/clock"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:transitionName="clock" />
     </view.BarrageViewGroup>
 
 </LinearLayout>

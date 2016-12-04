@@ -4,10 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <application
         android:name="utils.CApp"
@@ -68,7 +66,15 @@
         <activity android:name=".SQLTestActivity" />
         <activity android:name=".OpenGLActivity" />
         <activity android:name=".JNIActivity" />
-        <activity android:name=".BluetoothActivity"></activity>
+        <activity android:name=".BluetoothActivity" />
+        <activity android:name=".SingletonActivity" />
+        <activity android:name=".ViewDragTestActivity" >
+            <intent-filter>
+                <action android:name="com.example.administrator.custemview.VIEW_DRAG"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".NotificationActivity"></activity>
     </application>
 
 </manifest>

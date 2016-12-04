@@ -26,14 +26,12 @@ import java.util.Map;
 import butterknife.ButterKnife;
 import javaBean.Print;
 import javaBean.Student;
+import singleton.SingletonTest;
 import view.ClockView;
 
 public class MainActivity extends BaseActivity{
 
     private static final String TAG = "MainActivity";
-    private TextView mText;
-    private ImageView m;
-    private ClockView mClock;
     /* @Bind(R.id.tv)
     AlmanacItemView tv;
     @Bind(R.id.et)
@@ -54,8 +52,6 @@ public class MainActivity extends BaseActivity{
                 R.id.main_activity_qq,
                 R.id.main_activity_clock,
                 R.id.main_activity_colormattrix,
-                R.id.svg_image,
-                R.id.clock,
                 R.id.main_activity_login,
                 R.id.main_activity_service,
                 R.id.main_activity_weather,
@@ -63,11 +59,11 @@ public class MainActivity extends BaseActivity{
                 R.id.main_activity_sql,
                 R.id.main_activity_opengl,
                 R.id.main_activity_jni,
-                R.id.main_activity_bluetooth
+                R.id.main_activity_bluetooth,
+                R.id.main_activity_singinston,
+                R.id.main_activity_view_drag,
+                R.id.main_activity_notification
         );
-        mClock = (ClockView) findViewById(R.id.clock);
-        m = (ImageView) findViewById(R.id.svg_image);
-        m.setOnClickListener(this);
 
 
        /* ApiDal.newInstance().getGitHub("seahorseBra", new ApiDateCallback() {
@@ -243,9 +239,6 @@ public class MainActivity extends BaseActivity{
                     goActivity(AnimationActivity.class);
                 }
                 break;
-            case R.id.svg_image:
-                ((Animatable)m.getDrawable()).start();
-                break;
             case R.id.main_activity_scroller:
                 goActivity(CustomScroller.class);
                 break;
@@ -260,11 +253,6 @@ public class MainActivity extends BaseActivity{
                 break;
             case R.id.main_activity_colormattrix:
                 goActivity(ColorMatrixActivity.class);
-                break;
-            case R.id.clock:
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        goActivity(ClockActivity.class, ActivityOptions.makeSceneTransitionAnimation(this, mClock, "clock").toBundle());
-                    }
                 break;
             case R.id.main_activity_login:
                 goActivity(LogingActivity.class);
@@ -293,6 +281,15 @@ public class MainActivity extends BaseActivity{
                 break;
             case R.id.main_activity_bluetooth:
                 goActivity(BluetoothActivity.class);
+                break;
+            case R.id.main_activity_singinston:
+                goActivity(SingletonActivity.class);
+                break;
+            case R.id.main_activity_view_drag:
+                goActivity(ViewDragTestActivity.class);
+                break;
+            case R.id.main_activity_notification:
+                goActivity(NotificationActivity.class);
                 break;
         }
     }

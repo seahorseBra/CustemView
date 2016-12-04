@@ -22,7 +22,7 @@ public class CApp extends Application{
     }
 
     private void appinite() {
-        AppContext.inite(context);
+        utils.AppContext.inite(context);
         ApiDal.newInstance().initeApiDal(getApplicationContext());
         Fresco.initialize(context);
     }

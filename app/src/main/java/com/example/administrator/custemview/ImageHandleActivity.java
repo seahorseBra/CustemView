@@ -42,8 +42,6 @@ public class ImageHandleActivity extends BaseActivity {
     Button startCompress;
     @Bind(R.id.save_img)
     Button saveImg;
-    @Bind(R.id.image_s)
-    ShadowImage image_s;
     @Bind(R.id.image_ss)
     ImageView image_ss;
     private Bitmap bitmap;

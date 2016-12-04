@@ -2,6 +2,7 @@ package utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Parcel;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -35,7 +36,7 @@ public class ImageUtil {
         int heightForPiece = height / ySplitSize;
         for (int i = 0; i < ySplitSize; i++) {
             for (int j = 0; j < xSplitSize; j++) {
-                ImagePiece imagePiece = new ImagePiece();
+                ImagePiece imagePiece = new ImagePiece(Parcel.obtain());
                 imagePiece.indexX = j;
                 imagePiece.indexY = i;
                 imagePiece.bitmap = Bitmap.createBitmap(bitmap, j * weightForPiece, i * heightForPiece, weightForPiece, heightForPiece);

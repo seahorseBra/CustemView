@@ -2,7 +2,9 @@ package view;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.graphics.Canvas;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,7 @@ import android.widget.Scroller;
 public class MoveView extends View {
 
 
+    private static final String TAG = "MoveView";
     private int mLastX;
     private int mLastY;
     private Scroller mScroller;
@@ -77,5 +80,11 @@ public class MoveView extends View {
             invalidate();
         }
 
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        Log.d(TAG, "onDraw() called with: " + "canvas = [" + canvas + "]");
+        super.onDraw(canvas);
     }
 }

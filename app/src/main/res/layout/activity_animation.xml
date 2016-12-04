@@ -4,7 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.administrator.custemview.AnimationActivity">
-
+    <!--<view.MoveLayoutView-->
+        <!--android:layout_width="40dp"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:background="#f99"/>-->
+    <view.MoveView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="#f88"/>
     <ImageView
         android:id="@+id/activity_animation_iv"
         android:layout_width="40dp"
@@ -18,8 +25,6 @@
         android:layout_width="match_parent"
         android:layout_height="0.7dp" />
 
-    <view.MoveView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:background="#f00"/>
+
+
 </RelativeLayout>
