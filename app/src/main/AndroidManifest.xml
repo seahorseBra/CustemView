@@ -75,6 +75,37 @@
             </intent-filter>
         </activity>
         <activity android:name=".NotificationActivity"></activity>
+        <activity android:name=".ScreenrecordActivity" />
+        <activity android:name=".FragmentActivity" />
+        <activity android:name=".RxJavaTestActivity" />
+        <activity android:name=".OkHttpTestActivity" />
+        <activity android:name=".FileSystem" />
+        <activity
+            android:name=".FileManagerActivity"
+            android:label="@string/title_activity_file_manager"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".CalendarAcitvity" />
+        <activity android:name=".RecoderAnimationDemo" />
+        <activity android:name=".ExecutorTestActivity" />
+
+        <service
+            android:name=".ScreenShotService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".ScreenShotActivity"></activity>
+        <receiver android:name=".ScreenReciver">
+            <intent-filter>
+                <action android:name="com.custemView.action.SCREEN_SHOT"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".ScreenShotDimen">
+            <intent-filter>
+                <action android:name="android.intent.action.TIME_TICK"/>
+                <action android:name="android.intent.action.DATE_CHANGED"/>
+                <action android:name="android.intent.action.TIME_SET"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

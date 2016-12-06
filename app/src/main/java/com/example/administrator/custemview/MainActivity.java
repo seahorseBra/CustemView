@@ -2,6 +2,7 @@ package com.example.administrator.custemview;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.Animatable;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -62,9 +64,20 @@ public class MainActivity extends BaseActivity{
                 R.id.main_activity_bluetooth,
                 R.id.main_activity_singinston,
                 R.id.main_activity_view_drag,
-                R.id.main_activity_notification
+                R.id.main_activity_notification,
+                R.id.main_activity_fragment,
+                R.id.main_activity_rx_java,
+                R.id.main_activity_okhttp,
+                R.id.main_activity_file_system,
+                R.id.main_activity_calendar,
+                R.id.main_activity_recoder_animator,
+                R.id.main_activity_executor,
+                R.id.main_activity_screen_shot
         );
 
+        SimpleDateFormat format = new SimpleDateFormat("MMM.EEEE");
+        final String format1 = format.format(new java.util.Date());
+        Log.d(TAG, "onCreate() called with: " + "format1 = [" + format1.toUpperCase() + "]");
 
        /* ApiDal.newInstance().getGitHub("seahorseBra", new ApiDateCallback() {
             @Override
@@ -259,10 +272,10 @@ public class MainActivity extends BaseActivity{
                 break;
 
             case R.id.main_activity_service:
-//                goActivity(TestLib.class);
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this, MyDaydreamService.class);
-                startService(intent);
+                goActivity(ServiceTestActivity.class);
+//                Intent intent = new Intent();
+//                intent.setClass(MainActivity.this, MyDaydreamService.class);
+//                startService(intent);
                 break;
             case R.id.main_activity_weather:
                 goActivity(WeatherActivityNew.class);
@@ -290,6 +303,29 @@ public class MainActivity extends BaseActivity{
                 break;
             case R.id.main_activity_notification:
                 goActivity(NotificationActivity.class);
+            case R.id.main_activity_fragment:
+                goActivity(FragmentActivity.class);
+                break;
+            case R.id.main_activity_rx_java:
+                goActivity(RxJavaTestActivity.class);
+                break;
+            case R.id.main_activity_okhttp:
+                goActivity(OkHttpTestActivity.class);
+                break;
+            case R.id.main_activity_file_system:
+                goActivity(FileManagerActivity.class);
+                break;
+            case R.id.main_activity_calendar:
+                goActivity(CalendarAcitvity.class);
+                break;
+            case R.id.main_activity_recoder_animator:
+                goActivity(RecoderAnimationDemo.class);
+                break;
+            case R.id.main_activity_executor:
+                goActivity(ExecutorTestActivity.class);
+                break;
+            case R.id.main_activity_screen_shot:
+                startService(new Intent(this,ScreenShotService.class));
                 break;
         }
     }

@@ -1,5 +1,8 @@
 package com.example.administrator.custemview;
 
+import android.annotation.TargetApi;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -18,6 +21,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RemoteViews;
+import android.widget.TextView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -40,6 +45,7 @@ public class WeatherActivityNew extends FragmentActivity {
     private FrameLayout mRoot;
     private ImageView mImage;
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +73,19 @@ public class WeatherActivityNew extends FragmentActivity {
         mRoot = (FrameLayout) findViewById(R.id.root);
         mImage = (ImageView) findViewById(R.id.image);
         mSunrise.startAnimation();
+
+        RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.notify_test);
+        remoteViews.setTextColor(R.id.text, Color.BLACK);
+        remoteViews.setInt(R.id.text, "setBackgroundResource", R.drawable.notify_text_bg);
+
+        Notification.Builder builder = new Notification.Builder(this)
+                .setContent(remoteViews)
+                .setContentText("222")
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle("111");
+        Notification notification = builder.build();
+        NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        manager.notify(1111, notification);
 
         final WeatherImageView weatherBg = (WeatherImageView) findViewById(R.id.weather_image_bg);
         weatherBg.setOnClickListener(new View.OnClickListener() {

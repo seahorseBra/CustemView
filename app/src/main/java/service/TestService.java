@@ -3,70 +3,93 @@ package service;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
+import android.os.Environment;
 import android.os.IBinder;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
-public class TestService extends Service {
-    private static final String TAG = "TestService";
+import java.io.File;
+import java.util.ArrayList;
 
-    public TestService() {
-    }
+
+public class TestService extends Service {
+
+    private static final String TAG = "TestService";
+    public static ArrayList<File> musicList = new ArrayList<>();
 
     @Override
     public void onCreate() {
-        Log.d(TAG, "onCreate() called with: " + "");
+        Log.d(TAG, "onCreate() called");
         super.onCreate();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.d(TAG, "onStartCommand() called with: " + "intent = [" + intent + "], flags = [" + flags + "], startId = [" + startId + "]");
+        Log.d(TAG, "onStartCommand() called with: intent = [" + intent + "], flags = [" + flags + "], startId = [" + startId + "]");
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                searchMusic();
+            }
+        }).start();
         return super.onStartCommand(intent, flags, startId);
     }
 
+    /**
+     * 搜索所有的音乐文件
+     */
+    private void searchMusic() {
+        File externalCacheDir = Environment.getExternalStorageDirectory();
+        File kgmusic = new File(externalCacheDir, "kgmusic");
+        search(kgmusic);
+    }
+
+    /**
+     * 搜索MP3文件
+     * @param file
+     */
+    private void search(File file){
+        if (file == null) {
+            return;
+        }
+        if (file.canRead() && file.isDirectory()) {
+            File[] files = file.listFiles();
+            for (int i = 0; i < files.length; i++) {
+                search(files[i]);
+            }
+        }
+        if (file.canRead() && file.isFile() && file.getName().endsWith(".mp3")) {
+            musicList.add(file);
+        }
+    }
 
     @Override
     public void onDestroy() {
-        Log.d(TAG, "onDestroy() called with: " + "");
+        Log.d(TAG, "onDestroy() called");
         super.onDestroy();
     }
 
-    @Override
-    public boolean onUnbind(Intent intent) {
-        Log.d(TAG, "onUnbind() called with: " + "intent = [" + intent + "]");
-        return super.onUnbind(intent);
-    }
-
-    @Override
-    public void onRebind(Intent intent) {
-        Log.d(TAG, "onRebind() called with: " + "intent = [" + intent + "]");
-        super.onRebind(intent);
-    }
-
+    @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        // TODO: Return the communication channel to the service.
-        Log.d(TAG, "onBind() called with: " + "intent = [" + intent + "]");
-        return new B();
+        Log.d(TAG, "onBind() called with: intent = [" + intent + "]");
+        return new SimpleBinder();
     }
 
-    public class B extends Binder {
-        public TestService getService() {
-            return TestService.this;
-        }
+    public class SimpleBinder extends Binder {
 
         public int add(int a, int b) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Thread.sleep(3000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }).start();
-            return a + b;
+            return (a+b);
+        }
+
+        public ArrayList<File> getAllMusic() {
+            if (!musicList.isEmpty()) {
+                return musicList;
+            } else {
+                return null;
+            }
         }
     }
+
 }

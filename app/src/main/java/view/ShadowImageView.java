@@ -1,8 +1,10 @@
 package view;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -11,7 +13,12 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.renderscript.Allocation;
+import android.renderscript.RenderScript;
+import android.renderscript.ScriptIntrinsicBlur;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.example.administrator.custemview.R;
@@ -46,7 +53,7 @@ public class ShadowImageView extends ImageView {
     private void initeAttr(AttributeSet attrs) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ShadowImageView);
         shadowDx = typedArray.getFloat(R.styleable.ShadowImageView_shadowDx, 0);
-        shadowDy = typedArray.getFloat(R.styleable.ShadowImageView_shadowDy, 0);
+        shadowDy = typedArray.getFloat(R.styleable.ShadowImage_shadowDY, 0);
         shadowColor = typedArray.getColor(R.styleable.ShadowImageView_shadowColor, Color.BLACK);
     }
 
@@ -55,12 +62,19 @@ public class ShadowImageView extends ImageView {
 
     private void initShadow() {
         mShadowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+
         mShadowPaint.setShadowLayer(50, 0,20,0xff000000);
+
+        BlurMaskFilter maskFilter = new BlurMaskFilter(5, BlurMaskFilter.Blur.SOLID);
+        mShadowPaint.setMaskFilter(maskFilter);
+//        mShadowPaint.setColor();
+
         paint = new Paint();
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
+        disableHardwareRendering(this);
         int sl = canvas.saveLayer(0,0,getWidth(), getHeight(),null, Canvas.ALL_SAVE_FLAG);
         shadowDrawable = getDrawable().mutate();
 
@@ -73,6 +87,8 @@ public class ShadowImageView extends ImageView {
             }
         }
         canvas.restoreToCount(sl);
+
+        canvas.drawCircle(10, 10, 5,mShadowPaint);
         super.onDraw(canvas);
     }
 
@@ -287,5 +303,26 @@ public class ShadowImageView extends ImageView {
 
         bitmap.setPixels(pix, 0, w, 0, 0, w, h);
         return (bitmap);
+    }
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    private Bitmap blur(Bitmap bkg, float radius) {
+        Bitmap overlay = Bitmap.createBitmap(bkg.getWidth(), bkg.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(overlay);
+        canvas.drawBitmap(bkg, 0, 0, null);
+        RenderScript rs = RenderScript.create(context);
+        Allocation overlayAlloc = Allocation.createFromBitmap(rs, overlay);
+        ScriptIntrinsicBlur blur = ScriptIntrinsicBlur.create(rs, overlayAlloc.getElement());
+        blur.setInput(overlayAlloc);
+        blur.setRadius(radius);
+        blur.forEach(overlayAlloc);
+        overlayAlloc.copyTo(overlay);
+        return null;
+//        return new BitmapDrawable(getResources(), overlay);
+    }
+    public static void disableHardwareRendering(View v) {
+        if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
+            v.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        }
     }
 }

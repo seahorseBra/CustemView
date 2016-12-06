@@ -1,19 +1,28 @@
 package com.example.administrator.custemview;
 
+import android.annotation.TargetApi;
+import android.app.Notification;
 import android.content.Context;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
 import android.widget.ScrollView;
+
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 public class WeatherActivity extends AppCompatActivity {
 
+    private static final String TAG = "WeatherActivity";
     private RecyclerView mRv;
 
     @Override
@@ -25,6 +34,7 @@ public class WeatherActivity extends AppCompatActivity {
         LinearLayoutManager manager = new LinearLayoutManager(this);
         mRv.setLayoutManager(manager);
         mRv.setAdapter(new MyAdapter(this));
+
 
     }
 
