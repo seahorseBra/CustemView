@@ -5,7 +5,21 @@
     android:layout_height="match_parent"
     android:background="#6B9CCC"
     android:orientation="vertical">
-
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/reset"
+            android:text="复位"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/btn1"
+            android:text="矩阵调整"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
     <ImageView
         android:id="@+id/img"
         android:layout_width="wrap_content"
