@@ -1,8 +1,10 @@
 package com.example.administrator.custemview;
 
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Animatable;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,7 +34,7 @@ import view.ClockView;
 
 public class MainActivity extends BaseActivity{
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "MainActivity111";
     private TextView mText;
     private ImageView m;
     private ClockView mClock;
@@ -84,6 +86,9 @@ public class MainActivity extends BaseActivity{
         final String format1 = format.format(new java.util.Date());
         Log.d(TAG, "onCreate() called with: " + "format1 = [" + format1.toUpperCase() + "]");
 
+        String flavor = BuildConfig.FLAVOR;
+//        String flavor1 = getChannelName(this);
+        Log.d(TAG, "onCreate() called with: savedInstanceState = [" + flavor + "]" + getPackageName());
        /* ApiDal.newInstance().getGitHub("seahorseBra", new ApiDateCallback() {
             @Override
             public void onDateRecieved(Object o, Throwable e, boolean isSuccess) {
@@ -104,6 +109,30 @@ public class MainActivity extends BaseActivity{
 //        testGson2();
     }
 
+
+    public static String getChannelName(Context context) {
+        if (context == null) {
+            return null;
+        }
+        String channelName = null;
+        try {
+            PackageManager packageManager = context.getPackageManager();
+            if (packageManager != null) {
+                //注意此处为ApplicationInfo 而不是 ActivityInfo,因为友盟设置的meta-data是在application标签中，而不是某activity标签中，所以用ApplicationInfo
+                ApplicationInfo applicationInfo = packageManager.
+                        getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+                if (applicationInfo != null) {
+                    if (applicationInfo.metaData != null) {
+                        channelName = String.valueOf(applicationInfo.metaData.get("UMENG_CHANNEL"));
+                    }
+                }
+
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return channelName;
+    }
     private String witch(View view) {
         ((EditText) view).addTextChangedListener(new TextWatcher() {
             @Override
