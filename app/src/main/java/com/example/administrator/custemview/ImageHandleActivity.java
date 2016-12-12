@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.widget.Button;
@@ -33,6 +34,8 @@ public class ImageHandleActivity extends BaseActivity implements SeekBar.OnSeekB
     SeekBar mSaturationSeek;
     @Bind(R.id.btn1)
     Button mBtn;
+    @Bind(R.id.btn2)
+    Button mBtn2;
 
     private float lighten = 1, tinge = 0, saturation = 1;
     private Bitmap bitmap;
@@ -60,6 +63,21 @@ public class ImageHandleActivity extends BaseActivity implements SeekBar.OnSeekB
     public void reset(){
         bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.index);
         mImage.setImageBitmap(bitmap);
+    }
+    @OnClick(R.id.btn2)
+    public void translateShape(){
+        translateImage();
+    }
+
+    private void translateImage() {
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.index);
+        float[] mImageMatrix = new float[]{};
+
+        Matrix matrix = new Matrix();
+        matrix.setSkew(0.5f,0);
+        matrix.postScale(0.5f,0.5f);
+        Bitmap bitmap1 = handleBitmap(bitmap, matrix);
+        mImage.setImageBitmap(bitmap1);
     }
 
     @Override
@@ -119,5 +137,14 @@ public class ImageHandleActivity extends BaseActivity implements SeekBar.OnSeekB
         canvas.drawBitmap(bmp, 0 ,0, paint);
         return bitmap;
     }
+
+    public static Bitmap handleBitmap(Bitmap bmp, Matrix matrix){
+        Bitmap bitmap = Bitmap.createBitmap(bmp.getWidth(), bmp.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        canvas.drawBitmap(bmp, matrix,paint);
+        return bitmap;
+    }
+
 
 }
