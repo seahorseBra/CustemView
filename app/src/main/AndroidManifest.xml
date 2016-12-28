@@ -15,9 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!--<meta-data-->
-            <!--android:name="CHANNEL"-->
-            <!--android:value="${CHANNEL_VALUE}" />-->
+        <!-- <meta-data -->
+        <!-- android:name="CHANNEL" -->
+        <!-- android:value="${CHANNEL_VALUE}" /> -->
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -26,8 +26,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
         <activity
             android:name=".ImageHandleActivity"
             android:launchMode="singleInstance"
@@ -100,19 +98,22 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".ScreenShotActivity"></activity>
+        <activity android:name=".ScreenShotActivity" />
+
         <receiver android:name=".ScreenReciver">
             <intent-filter>
-                <action android:name="com.custemView.action.SCREEN_SHOT"/>
+                <action android:name="com.custemView.action.SCREEN_SHOT" />
             </intent-filter>
         </receiver>
         <receiver android:name=".ScreenShotDimen">
             <intent-filter>
-                <action android:name="android.intent.action.TIME_TICK"/>
-                <action android:name="android.intent.action.DATE_CHANGED"/>
-                <action android:name="android.intent.action.TIME_SET"/>
+                <action android:name="android.intent.action.TIME_TICK" />
+                <action android:name="android.intent.action.DATE_CHANGED" />
+                <action android:name="android.intent.action.TIME_SET" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".StackViewActivity"></activity>
     </application>
 
 </manifest>

@@ -79,7 +79,8 @@ public class MainActivity extends BaseActivity{
                 R.id.main_activity_calendar,
                 R.id.main_activity_recoder_animator,
                 R.id.main_activity_executor,
-                R.id.main_activity_screen_shot
+                R.id.main_activity_screen_shot,
+                R.id.main_activity_stack_view
         );
 
         SimpleDateFormat format = new SimpleDateFormat("MMM.EEEE");
@@ -360,6 +361,9 @@ public class MainActivity extends BaseActivity{
                 break;
             case R.id.main_activity_screen_shot:
                 startService(new Intent(this,ScreenShotService.class));
+                break;
+            case R.id.main_activity_stack_view:
+                goActivity(StackViewActivity.class);
                 break;
         }
     }

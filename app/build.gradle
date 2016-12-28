@@ -45,14 +45,31 @@ android {
 
         }
         publish {
-            minSdkVersion 11
-            applicationId 'com.example.administrator.custemview.publish'
-            targetSdkVersion 21
-            versionCode 6
-            versionName '4.4.2'
+
         }
+//        productFlavors.all { flavor ->
+//            flavor.manifestPlaceholders = [CHANNEL_VALUE: name]
+//        }
     }
+//    applicationVariants.all{ variant->
+//        variant.outputs.each { output->
+//            def oldFile = output.outputFile
+//            def newName = '';
+//            if(variant.buildType.name.equals('release')){
+//                println(variant.productFlavors[0].name)
+//                def releaseApkName = 'app-v' + defaultConfig.versionName + '-' + variant.productFlavors[0].name + '-release-signed.apk'
+//                output.outputFile = new File(oldFile.parent, releaseApkName)
+//            }
+//
+//            if(variant.buildType.name.equals('debug')){
+//                newName = oldFile.name.replace(".apk", "-v" + defaultConfig.versionName + "-build" + ".apk")
+//                output.outputFile = new File(oldFile.parent, newName)
+//            }
+//
+//        }
+//    }
 }
+
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
