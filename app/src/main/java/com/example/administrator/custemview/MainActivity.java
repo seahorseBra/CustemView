@@ -80,7 +80,8 @@ public class MainActivity extends BaseActivity{
                 R.id.main_activity_recoder_animator,
                 R.id.main_activity_executor,
                 R.id.main_activity_screen_shot,
-                R.id.main_activity_stack_view
+                R.id.main_activity_stack_view,
+                R.id.main_activity_reflect
         );
 
         SimpleDateFormat format = new SimpleDateFormat("MMM.EEEE");
@@ -364,6 +365,9 @@ public class MainActivity extends BaseActivity{
                 break;
             case R.id.main_activity_stack_view:
                 goActivity(StackViewActivity.class);
+                break;
+            case R.id.main_activity_reflect:
+                goActivity(ReflectAnotationActivtity.class);
                 break;
         }
     }
