@@ -81,7 +81,8 @@ public class MainActivity extends BaseActivity{
                 R.id.main_activity_executor,
                 R.id.main_activity_screen_shot,
                 R.id.main_activity_stack_view,
-                R.id.main_activity_reflect
+                R.id.main_activity_reflect,
+                R.id.main_activity_nested
         );
 
         SimpleDateFormat format = new SimpleDateFormat("MMM.EEEE");
@@ -368,6 +369,9 @@ public class MainActivity extends BaseActivity{
                 break;
             case R.id.main_activity_reflect:
                 goActivity(ReflectAnotationActivtity.class);
+                break;
+            case R.id.main_activity_nested:
+                goActivity(NestedActivity.class);
                 break;
         }
     }

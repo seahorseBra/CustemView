@@ -247,6 +247,14 @@
             android:text="Reflect"
             android:textColor="@color/colorAccent" />
 
+        <Button
+            android:id="@+id/main_activity_nested"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:text="NESTED"
+            android:textColor="@color/colorAccent" />
+
     </view.BarrageViewGroup>
 
 </LinearLayout>

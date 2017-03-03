@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
+    android:horizontalGap="2.5%p"
+    android:keyHeight="50dp"
+    android:keyWidth="30%p"
+    android:verticalGap="10dp">
+
+    <Row >
+        <Key
+            android:codes="65,66,67,49"
+            android:keyEdgeFlags="left"
+            android:keyLabel="ABC1"
+            />
+
+        <Key
+            android:codes="68,69,70,50"
+            android:keyLabel="DEF2"
+            />
+
+        <Key
+            android:codes="70,72,73,51"
+            android:keyEdgeFlags="right"
+            android:keyLabel="GHI3" />
+    </Row>
+
+    <Row>
+        <Key
+            android:codes="74,75,76,52"
+            android:keyEdgeFlags="left"
+            android:keyLabel="JKL4" />
+        <Key
+            android:codes="77,78,79,53"
+            android:keyLabel="MNO5" />
+        <Key
+            android:codes="80,81,82,54"
+            android:keyEdgeFlags="right"
+            android:keyLabel="PQR6" />
+    </Row>
+
+    <Row>
+        <Key
+            android:codes="83,84,85,55"
+            android:keyEdgeFlags="left"
+            android:keyLabel="STU7" />
+        <Key
+            android:codes="86,87,88,56"
+            android:keyLabel="VWX8" />
+        <Key
+            android:codes="89,90,57"
+            android:keyEdgeFlags="right"
+            android:keyLabel="YZ9" />
+    </Row>
+
+    <Row android:rowEdgeFlags="bottom">
+        <Key
+            android:codes="-3"
+            android:keyEdgeFlags="left"
+            android:keyLabel="清空"
+            android:horizontalGap="5%p"
+            android:keyIcon="@mipmap/sym_keyboard_clear"
+            android:keyWidth="42.5%p" />
+        <Key
+            android:codes="-5"
+            android:isRepeatable="true"
+            android:keyEdgeFlags="right"
+            android:keyLabel="删除"
+            android:horizontalGap="5%p"
+            android:keyIcon="@mipmap/sym_keyboard_delete"
+            android:keyWidth="42.5%p" />
+    </Row>
+</Keyboard>
