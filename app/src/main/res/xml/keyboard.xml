@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
-    android:horizontalGap="2.5%p"
-    android:keyHeight="50dp"
-    android:keyWidth="30%p"
+    android:horizontalGap="10dp"
+    android:keyHeight="60dp"
+    android:keyWidth="50dp"
     android:verticalGap="10dp">
 
     <Row >
@@ -56,16 +56,16 @@
             android:codes="-3"
             android:keyEdgeFlags="left"
             android:keyLabel="清空"
-            android:horizontalGap="5%p"
+            android:horizontalGap="10dp"
             android:keyIcon="@mipmap/sym_keyboard_clear"
-            android:keyWidth="42.5%p" />
+            android:keyWidth="75dp" />
         <Key
             android:codes="-5"
             android:isRepeatable="true"
             android:keyEdgeFlags="right"
             android:keyLabel="删除"
-            android:horizontalGap="5%p"
+            android:horizontalGap="10dp"
             android:keyIcon="@mipmap/sym_keyboard_delete"
-            android:keyWidth="42.5%p" />
+            android:keyWidth="75dp" />
     </Row>
 </Keyboard>

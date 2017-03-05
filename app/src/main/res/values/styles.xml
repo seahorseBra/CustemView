@@ -49,4 +49,9 @@
         <item name="android:windowShowAnimation">@anim/check_show_anim</item>
         <item name="android:windowHideAnimation">@anim/check_miss_anim</item>
     </style>
+    
+    <style name="popup_window_anim_key" parent="@android:style/Animation.Activity">
+        <item name="android:windowEnterAnimation">@anim/anim_popup</item>
+        <item name="android:windowExitAnimation">@anim/anim_popup_dissmis</item>
+    </style>
 </resources>

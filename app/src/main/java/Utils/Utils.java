@@ -1,5 +1,7 @@
 package utils;
 
+import android.content.res.Resources;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
@@ -22,6 +24,12 @@ public class Utils {
 
     public static int dp2Px(float dp) {
         final float scale = CApp.context.getResources()
+                .getDisplayMetrics().density;
+        return (int) (dp * scale + 0.5f);
+    }
+
+    public static int dp2Px(Resources resources,float dp) {
+        final float scale = resources
                 .getDisplayMetrics().density;
         return (int) (dp * scale + 0.5f);
     }
