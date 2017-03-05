@@ -73,13 +73,14 @@
         <activity android:name=".JNIActivity" />
         <activity android:name=".BluetoothActivity" />
         <activity android:name=".SingletonActivity" />
-        <activity android:name=".ViewDragTestActivity" >
+        <activity android:name=".ViewDragTestActivity">
             <intent-filter>
-                <action android:name="com.example.administrator.custemview.VIEW_DRAG"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="com.example.administrator.custemview.VIEW_DRAG" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".NotificationActivity"></activity>
+        <activity android:name=".NotificationActivity" />
         <activity android:name=".ScreenrecordActivity" />
         <activity android:name=".FragmentActivity" />
         <activity android:name=".RxJavaTestActivity" />
@@ -113,7 +114,8 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".StackViewActivity"></activity>
+        <activity android:name=".StackViewActivity" />
+        <activity android:name=".NestedActivity"></activity>
     </application>
 
 </manifest>

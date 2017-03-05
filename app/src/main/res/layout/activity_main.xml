@@ -223,16 +223,6 @@
             android:text="STACK"
             android:textColor="@color/colorAccent" />
 
-        <view.CustomCheckBox
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_margin="10dp"></view.CustomCheckBox>
-
-        <view.CustomCheckBox
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_margin="10dp"></view.CustomCheckBox>
->>>>>>> origin/Custem1.0
 
         <Button
             android:id="@+id/main_activity_view_drag"
@@ -249,7 +239,21 @@
             android:background="@color/colorPrimaryDark"
             android:text="ViewDrag"
             android:textColor="@color/colorAccent" />
+        <Button
+            android:id="@+id/main_activity_reflect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:text="Reflect"
+            android:textColor="@color/colorAccent" />
 
+        <Button
+            android:id="@+id/main_activity_nested"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:text="NESTED"
+            android:textColor="@color/colorAccent" />
 
     </view.BarrageViewGroup>
 
