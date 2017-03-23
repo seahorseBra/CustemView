@@ -83,7 +83,8 @@ public class MainActivity extends BaseActivity{
                 R.id.main_activity_stack_view,
                 R.id.main_activity_reflect,
                 R.id.main_activity_nested,
-                R.id.main_activity_keyboard
+                R.id.main_activity_keyboard,
+                R.id.main_activity_little_grid_view
         );
 
         SimpleDateFormat format = new SimpleDateFormat("MMM.EEEE");
@@ -376,6 +377,9 @@ public class MainActivity extends BaseActivity{
                 break;
             case R.id.main_activity_keyboard:
                 goActivity(CustemKeyboardActivity.class);
+                break;
+            case R.id.main_activity_little_grid_view:
+                goActivity(LittleGridViewActivity.class);
                 break;
         }
     }

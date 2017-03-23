@@ -9,13 +9,18 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.administrator.custemview.CustemKeyboardActivity">
 
-    <FrameLayout
-        android:layout_width="400dp"
-        android:layout_height="600dp">
+    <EditText
+        android:id="@+id/edit_text"
+        android:hint="输入城市名称第一个字母"
+        android:inputType="none"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-        <view.CusBoardView
-            android:id="@+id/key_board"
-            android:layout_width="400dp"
-            android:layout_height="200dp" />
-    </FrameLayout>
+    <view.CusBoardView
+        android:id="@+id/key_board"
+        android:layout_gravity="bottom"
+        android:layout_width="400dp"
+        android:focusableInTouchMode="true"
+        android:layout_height="200dp"
+        android:focusable="true" />
 </FrameLayout>

@@ -1,11 +1,11 @@
 package com.example.administrator.custemview;
 
+import android.app.Application;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -23,6 +23,7 @@ public class FragmentActivity extends AppCompatActivity implements View.OnClickL
     @Bind(R.id.content)
     ViewPager content;
     @Bind(R.id.button_one)
+
     Button buttonOne;
     @Bind(R.id.button_second)
     Button buttonSecond;

@@ -9,17 +9,20 @@
         <Key
             android:codes="65,66,67,49"
             android:keyEdgeFlags="left"
+            android:popupCharacters="ABC1"
             android:keyLabel="ABC1"
             />
 
         <Key
             android:codes="68,69,70,50"
+            android:popupCharacters="DEF2"
             android:keyLabel="DEF2"
             />
 
         <Key
             android:codes="70,72,73,51"
             android:keyEdgeFlags="right"
+            android:popupCharacters="GHI3"
             android:keyLabel="GHI3" />
     </Row>
 
@@ -27,13 +30,16 @@
         <Key
             android:codes="74,75,76,52"
             android:keyEdgeFlags="left"
+            android:popupCharacters="JKL4"
             android:keyLabel="JKL4" />
         <Key
             android:codes="77,78,79,53"
+            android:popupCharacters="MNO5"
             android:keyLabel="MNO5" />
         <Key
             android:codes="80,81,82,54"
             android:keyEdgeFlags="right"
+            android:popupCharacters="PQR6"
             android:keyLabel="PQR6" />
     </Row>
 
@@ -41,19 +47,22 @@
         <Key
             android:codes="83,84,85,55"
             android:keyEdgeFlags="left"
+            android:popupCharacters="STU7"
             android:keyLabel="STU7" />
         <Key
             android:codes="86,87,88,56"
+            android:popupCharacters="VWX8"
             android:keyLabel="VWX8" />
         <Key
             android:codes="89,90,57"
             android:keyEdgeFlags="right"
+            android:popupCharacters="YZ9"
             android:keyLabel="YZ9" />
     </Row>
 
     <Row android:rowEdgeFlags="bottom">
         <Key
-            android:codes="-3"
+            android:codes="4896"
             android:keyEdgeFlags="left"
             android:keyLabel="清空"
             android:horizontalGap="10dp"

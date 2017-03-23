@@ -30,6 +30,11 @@ public class PopViewForKeyboard extends View {
         mTextPaint.setTextSize(m14dp);
     }
 
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        onEventHandle(keyCode);
+//        return false;
+//    }
 
     public void onEventHandle(int event) {
         int primaryCode = 0;
@@ -64,7 +69,8 @@ public class PopViewForKeyboard extends View {
         if (key.codes.length == 4) {
             value = key.codes;
         } else if (key.codes.length == 3) {
-            value[1] = key.codes[0];
+            value[0] = key.codes[0];
+            value[1] = 0;
             value[2] = key.codes[1];
             value[3] = key.codes[2];
         }

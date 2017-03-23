@@ -19,7 +19,8 @@
         <!-- android:name="CHANNEL" -->
         <!-- android:value="${CHANNEL_VALUE}" /> -->
 
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:launchMode="standard">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -117,8 +118,11 @@
 
         <activity android:name=".StackViewActivity" />
         <activity android:name=".NestedActivity" />
-        <activity android:name=".CustemKeyboardActivity"
-            android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".CustemKeyboardActivity"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity android:name=".LittleGridViewActivity"></activity>
     </application>
 
 </manifest>

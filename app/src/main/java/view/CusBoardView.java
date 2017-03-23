@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.drawable.ColorDrawable;
 import android.inputmethodservice.Keyboard;
+import android.inputmethodservice.KeyboardView;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -30,6 +31,7 @@ import utils.Utils;
  */
 
 public class CusBoardView extends View {
+    public static final int KEYCODE_CLEAR = -7;
     private Keyboard mKeyboard = null;
     private List<Keyboard.Key> mKeys;
     private TextPaint mTextPaint;
@@ -75,6 +77,9 @@ public class CusBoardView extends View {
             public void backKey(int keyCode) {
                 if (mPopWindow.isShowing()) {
                     mPopWindow.dismiss();
+                    if (listener != null) {
+                        listener.onKey(keyCode);
+                    }
                     Toast.makeText(mContext, Character.toString((char)keyCode), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -83,7 +88,7 @@ public class CusBoardView extends View {
         mPopWindow.setAnimationStyle(R.style.popup_window_anim_key);
         mPopWindow.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);//必须设置宽和高
         mPopWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
-        mPopWindow.setFocusable(true);
+//        mPopWindow.setFocusable(true);
         ColorDrawable dw = new ColorDrawable(0000000000);
         mPopWindow.setBackgroundDrawable(dw);
     }
@@ -93,7 +98,7 @@ public class CusBoardView extends View {
     }
 
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int sizeW = MeasureSpec.getSize(widthMeasureSpec);
         int sizeY = MeasureSpec.getSize(heightMeasureSpec);
         int modeW = MeasureSpec.getMode(widthMeasureSpec);
@@ -106,24 +111,26 @@ public class CusBoardView extends View {
         setMeasuredDimension(sizeW, Math.max(sizeY, height * 4));
     }
 
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        onEventHandle(keyCode);
+//        return false;
+//    }
+
     public void onEventHandle(int event){
         if (!mPopWindow.isShowing()) {
             handleByView(event);
         } else {
-            handleByPopup(event);
+            hanleByPopWindow(event);
         }
     }
 
-
-    /**
-     * popupwido弹出时的处理
-     * @param event
-     */
-    private void handleByPopup(int event) {
+    private void hanleByPopWindow(int event) {
         if (mPopView != null) {
             mPopView.onEventHandle(event);
         }
     }
+
 
     /**
      * View自身位置的变化
@@ -132,8 +139,10 @@ public class CusBoardView extends View {
     private void handleByView(int event) {
         switch (event) {
             case KeyEvent.KEYCODE_DPAD_DOWN:
-                if (mCurrentKey < 9) {
+                if (mCurrentKey < 8) {
                     mCurrentKey += 3;
+                } else if (mCurrentKey == 8) {
+                    mCurrentKey += 2;
                 }
                 break;
             case KeyEvent.KEYCODE_DPAD_UP:
@@ -165,12 +174,19 @@ public class CusBoardView extends View {
      * @param key
      */
     private void openPopWindow(Keyboard.Key key) {
-        mPopView.setKey(key);
-        mPopWindow.showAsDropDown(this, key.x, key.y - getHeight());
+        if (TextUtils.isEmpty(key.popupCharacters)) {
+            if (listener != null) {
+                listener.onKey(key.codes[0]);
+            }
+        } else {
+            mPopView.setKey(key);
+            mPopWindow.showAsDropDown(this, key.x, key.y - getHeight());
+        }
     }
 
+
     @Override
-    protected void onDraw(Canvas canvas) {
+    public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         for (int i = 0; i < mKeys.size(); i++) {
             if (mCurrentKey == i) {
@@ -188,12 +204,7 @@ public class CusBoardView extends View {
 
     public interface OnKeyboardActionListener {
 
-
-        void onPress(int primaryCode);
-
-        void onRelease(int primaryCode);
-
-        void onKey(int primaryCode, int[] keyCodes);
+        void onKey(int primaryCode);
 
     }
 
