@@ -1,16 +1,25 @@
 package littlegridview;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.Keyframe;
+import android.animation.LayoutTransition;
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.support.annotation.LayoutRes;
+import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 
-import com.nineoldandroids.animation.ValueAnimator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +30,7 @@ import java.util.List;
  * auth: xll
  * date: 2016/12/15
  */
-public class LittleGridView extends ViewGroup{
+public class LittleGridView extends ViewGroup implements MeasureViewAdapter.Refresh{
     /**
      * 最大显示个数
      */
@@ -47,18 +56,82 @@ public class LittleGridView extends ViewGroup{
     private int spanCount = 1;  //每行个数
 
     MeasureViewAdapter adapter = null;
+    private LayoutTransition mLayoutTransition;
 
     public LittleGridView(Context context, AttributeSet attrs) {
         super(context, attrs);
         mLinePaint = new Paint();
         mLinePaint.setColor(0xfff5f0e9);
         mLinePaint.setStyle(Paint.Style.STROKE);
+
+        initTransition();
+    }
+
+    private void initTransition() {
+        mLayoutTransition = new LayoutTransition();
+        setLayoutTransition(mLayoutTransition);
+        mLayoutTransition.setStagger(LayoutTransition.CHANGE_APPEARING, 30);
+        mLayoutTransition.setStagger(LayoutTransition.CHANGE_DISAPPEARING, 30);
+        //设置每个动画持续的时间
+        mLayoutTransition.setDuration(300);
+        //初始化自定义的动画效果
+        customLayoutTransition();
+    }
+
+    private static final String TAG = "LittleGridView";
+    public void customLayoutTransition(){
+
+        /**
+         * Add Button
+         * LayoutTransition.APPEARING
+         * 增加一个Button时，设置该Button的动画效果
+         */
+        ObjectAnimator mAnimatorAppearing = ObjectAnimator.ofFloat(null, "translationY", 0f ,1.0f)
+                .setDuration(mLayoutTransition.getDuration(LayoutTransition.APPEARING));
+        ObjectAnimator mAnimatorAppearing1 = ObjectAnimator.ofFloat(null, "scaleY", 1.0f ,1.0f)
+                .setDuration(mLayoutTransition.getDuration(LayoutTransition.APPEARING));
+        //为LayoutTransition设置动画及动画类型
+//        mLayoutTransition.setAnimator(LayoutTransition.APPEARING, mAnimatorAppearing);
+
+
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playTogether(mAnimatorAppearing1, mAnimatorAppearing1);
+        mLayoutTransition.setAnimator(LayoutTransition.APPEARING, mAnimatorAppearing1);
+        mLayoutTransition.addTransitionListener(new LayoutTransition.TransitionListener() {
+            @Override
+            public void startTransition(LayoutTransition transition, ViewGroup container, View view, int transitionType) {
+
+            }
+
+            @Override
+            public void endTransition(LayoutTransition transition, ViewGroup container, View view, int transitionType) {
+
+            }
+        });
+        /**
+         * Delete Button
+         * LayoutTransition.DISAPPEARING
+         * 当删除一个Button时，设置该Button的动画效果
+         */
+        ObjectAnimator mObjectAnimatorDisAppearing = ObjectAnimator.ofFloat(null, "rotationX", 0.0f,90.0f)
+                .setDuration(mLayoutTransition.getDuration(LayoutTransition.DISAPPEARING));
+        mLayoutTransition.setAnimator(LayoutTransition.DISAPPEARING, mObjectAnimatorDisAppearing);
+        mObjectAnimatorDisAppearing.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                // TODO Auto-generated method stub
+                super.onAnimationEnd(animation);
+                View view = (View) ((ObjectAnimator) animation).getTarget();
+                view.setRotationX(0.0f);
+            }
+        });
     }
 
     public void setAdapter(MeasureViewAdapter adapter) {
         this.adapter = adapter;
+        adapter.setRefresh(this);
         this.spanCount = adapter.getSpanCount();
-        this.mShowMax = adapter.getTotleCount();
+        this.mShowMax = adapter.getDefaultCount();
     }
 
     @Override
@@ -104,7 +177,7 @@ public class LittleGridView extends ViewGroup{
     }
 
     public int getLineHeight() {
-        if (adapter.getTotleCount() == 0) {
+        if (adapter.getDefaultCount() == 0) {
             return 0;
         }
         if (mItemHeight == 0) {
@@ -123,7 +196,7 @@ public class LittleGridView extends ViewGroup{
          * 3. 如果view没有加入到容器，要放入容器中
          * 4. 此组最大显示6个
          */
-        int count = adapter.getTotleCount();
+        int count = adapter.getDefaultCount();
 
         for (int i = 0; i < count; i++) {
             LittleGridViewBaseHolder holder = createHolder(i);
@@ -171,6 +244,56 @@ public class LittleGridView extends ViewGroup{
 
 
 
+    @Override
+    public void refreshView() {
+        refresh();
+    }
+
+    public static abstract class ItemDecoration {
+        /**
+         * Draw any appropriate decorations into the Canvas supplied to the RecyclerView.
+         * Any content drawn by this method will be drawn before the item views are drawn,
+         * and will thus appear underneath the views.
+         *
+         * @param c Canvas to draw into
+         * @param parent RecyclerView this ItemDecoration is drawing into
+         * @param state The current state of RecyclerView
+         */
+        public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+            onDraw(c, parent);
+        }
+
+        /**
+         * @deprecated
+         * Override {@link #onDraw(Canvas, RecyclerView, RecyclerView.State)}
+         */
+        @Deprecated
+        public void onDraw(Canvas c, RecyclerView parent) {
+        }
+
+
+        public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
+            onDrawOver(c, parent);
+        }
+
+        @Deprecated
+        public void onDrawOver(Canvas c, RecyclerView parent) {
+        }
+
+
+        @Deprecated
+        public void getItemOffsets(Rect outRect, int itemPosition, RecyclerView parent) {
+            outRect.set(0, 0, 0, 0);
+        }
+
+
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+            getItemOffsets(outRect, ((RecyclerView.LayoutParams) view.getLayoutParams()).getViewLayoutPosition(),
+                    parent);
+        }
+    }
+
+
 
     /**
      * Desc:
@@ -180,7 +303,7 @@ public class LittleGridView extends ViewGroup{
      * @author zchao created at 2017/3/23 16:06
      * @see
     */
-    public abstract class LittleGridViewBaseHolder<T> {
+    public static abstract class LittleGridViewBaseHolder<T> {
 
         public View mItemView;
 

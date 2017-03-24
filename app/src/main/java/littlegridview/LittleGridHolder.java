@@ -51,6 +51,7 @@ public class LittleGridHolder extends FrameLayout implements MeasureViewAdapter.
 
     @Override
     public void refreshView() {
+        mLittleGridView.refresh();
         if (!(isOpen ^ adapter.isOpen())){
             return;
         }

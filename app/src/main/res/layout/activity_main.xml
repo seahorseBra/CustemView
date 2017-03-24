@@ -10,10 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.administrator.custemview.MainActivity">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
         <view.BarrageViewGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -276,5 +272,4 @@
                 android:textColor="@color/colorAccent" />
 
         </view.BarrageViewGroup>
-    </ScrollView>
 </FrameLayout>
