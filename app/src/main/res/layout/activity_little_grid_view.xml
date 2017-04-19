@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,23 +7,52 @@
     android:orientation="vertical"
     android:animateLayoutChanges="true"
     android:id="@+id/root"
-    tools:context="com.example.administrator.custemview.LittleGridViewActivity">
+    tools:context="com.example.administrator.custemview.LittleGridViewActivity"
+    tools:layout_editor_absoluteY="81dp"
+    tools:layout_editor_absoluteX="0dp">
 
-    <Button
-        android:id="@+id/btn"
-        android:text="展开"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+   <ImageView
+       android:id="@+id/img"
+       android:src="@drawable/hill_imgx"
+       android:layout_width="wrap_content"
+       android:layout_height="187dp"
+       tools:layout_editor_absoluteY="0dp"
+       tools:layout_editor_absoluteX="94dp" />
 
-    <littlegridview.LittleGridView
-        android:id="@+id/grid"
-        android:layout_margin="10dp"
-        android:padding="10dp"
-        android:background="#99f"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+   <Button
+       android:id="@+id/button6"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Button"
+       tools:layout_editor_absoluteY="329dp"
+       app:layout_constraintRight_toLeftOf="@+id/button7"
+       app:layout_constraintLeft_toLeftOf="parent" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+   <Button
+       android:id="@+id/button7"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Button"
+       tools:layout_editor_absoluteY="329dp"
+       app:layout_constraintLeft_toRightOf="@+id/button6"
+       app:layout_constraintRight_toLeftOf="@+id/button9" />
+
+   <Button
+       android:id="@+id/button8"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Button"
+       tools:layout_editor_absoluteY="329dp"
+       app:layout_constraintLeft_toRightOf="@+id/button9"
+       app:layout_constraintRight_toRightOf="parent" />
+
+   <Button
+       android:id="@+id/button9"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Button"
+       tools:layout_editor_absoluteY="329dp"
+       app:layout_constraintLeft_toRightOf="@+id/button7"
+       app:layout_constraintRight_toLeftOf="@+id/button8" />
+
+</android.support.constraint.ConstraintLayout>

@@ -74,7 +74,9 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
 
         public void bindDate(String text) {
             setTextViewText(R.id.text, text);
+
             TextView view = new TextView(context);
+
             view.getBackground();
             ImageView view1 = new ImageView(context);
 //            view.setBackgroundResource();

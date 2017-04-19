@@ -31,31 +31,7 @@ public class LittleGridViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_little_grid_view);
-        mBtn = (Button) findViewById(R.id.btn);
-        mGrid = (LittleGridView) findViewById(R.id.grid);
-        mRoot = (LinearLayout) findViewById(R.id.root);
-        mAdapter = new TestGridAdapter(this);
-        mGrid.setAdapter(mAdapter);
 
-        mList.add("阿文哥1");
-        mList.add("阿文哥2");
-        mList.add("阿文哥3");
-        mList.add("阿文哥4");
-        mList.add("阿文哥5");
-        mList.add("阿文哥6");
-        mList.add("阿文哥7");
-        mList.add("阿文哥8");
-
-        mAdapter.setmList(mList);
-        initTransition();
-        mBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isOpen = !isOpen;
-                mAdapter.setOpen(isOpen);
-                mBtn.setText(isOpen ? "折叠" : "展开");
-            }
-        });
     }
 
 

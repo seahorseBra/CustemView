@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:name="utils.CApp"
@@ -117,12 +118,15 @@
         </receiver>
 
         <activity android:name=".StackViewActivity" />
+        <activity android:name=".ReflectAnotationActivtity" />
         <activity android:name=".NestedActivity" />
         <activity
             android:name=".CustemKeyboardActivity"
             android:screenOrientation="landscape"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        <activity android:name=".LittleGridViewActivity"></activity>
+        <activity android:name=".LittleGridViewActivity" />
+        <activity android:name=".ImageDrawActivity" />
+        <activity android:name=".WebActivity"></activity>
     </application>
 
 </manifest>

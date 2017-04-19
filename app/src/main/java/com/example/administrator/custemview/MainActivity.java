@@ -84,7 +84,9 @@ public class MainActivity extends BaseActivity{
                 R.id.main_activity_reflect,
                 R.id.main_activity_nested,
                 R.id.main_activity_keyboard,
-                R.id.main_activity_little_grid_view
+                R.id.main_activity_little_grid_view,
+                R.id.main_activity_image_draw,
+                R.id.main_activity_web
         );
 
         SimpleDateFormat format = new SimpleDateFormat("MMM.EEEE");
@@ -380,6 +382,12 @@ public class MainActivity extends BaseActivity{
                 break;
             case R.id.main_activity_little_grid_view:
                 goActivity(LittleGridViewActivity.class);
+                break;
+            case R.id.main_activity_image_draw:
+                goActivity(ImageDrawActivity.class);
+                break;
+            case R.id.main_activity_web:
+                goActivity(WebActivity.class);
                 break;
         }
     }

@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.telephony.TelephonyManager;
 import android.view.View;
 import android.view.Window;
 import android.widget.RelativeLayout;
@@ -32,6 +33,7 @@ public class PhoneDetailInfoActivity extends BaseActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.setStatusBarColor(0x002c48ff);
         }
+
         initeRv();
         fillInfo();
     }
@@ -39,6 +41,8 @@ public class PhoneDetailInfoActivity extends BaseActivity {
 
     private void fillInfo() {
          List<PhoneInfo> info = new ArrayList();
+        TelephonyManager systemService = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
+        info.add(new PhoneInfo("设备ID", systemService.getDeviceId()));
         info.add(new PhoneInfo("主板（BOARD）", Build.BOARD));
 //        info.add(new PhoneInfo("指令集（SUPPORTED_ABIS）", Build.SUPPORTED_ABIS.toString()));
         info.add(new PhoneInfo("设备参数（DEVICE）", Build.DEVICE));

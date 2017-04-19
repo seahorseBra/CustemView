@@ -15,14 +15,6 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:id="@+id/main_activity_imghandle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimaryDark"
-                android:text="图片处理"
-                android:textColor="@color/colorAccent" />
-
-            <Button
                 android:id="@+id/main_activity_dropdown"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -270,6 +262,27 @@
                 android:background="@color/colorPrimaryDark"
                 android:text="GRIDVIEW"
                 android:textColor="@color/colorAccent" />
-
+            <Button
+                android:id="@+id/main_activity_image_draw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                android:text="IMGDRAW"
+                android:textColor="@color/colorAccent" />
+            <Button
+                android:id="@+id/main_activity_web"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                android:text="WEB"
+                android:textColor="@color/colorAccent" />
         </view.BarrageViewGroup>
+
+    <Button
+        android:id="@+id/main_activity_imghandle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:text="图片处理"
+        android:textColor="@color/colorAccent" />
 </FrameLayout>

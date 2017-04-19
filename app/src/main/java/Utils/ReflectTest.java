@@ -7,7 +7,7 @@ package utils;
 public class ReflectTest {
     private String word = "这是发射测试文字";
 
-    private String testMethed(){
-        return "这是反射测试方法";
+    private String testMethed(String word){
+        return "这是反射测试方法:" + word;
     }
 }
