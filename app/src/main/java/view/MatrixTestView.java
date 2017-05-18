@@ -40,7 +40,7 @@ public class MatrixTestView extends View {
         matrix1 = new Matrix();
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         matrix1.preScale(0.5f, 0.5f);
-        matrix.setScale(0.6f,0.6f);
+        matrix.setScale(5f,5f);
     }
 
     @Override
@@ -48,14 +48,14 @@ public class MatrixTestView extends View {
         changeMatrix();
         canvas.drawBitmap(bitmap, matrix, paint);
         canvas.drawBitmap(bitmap, matrix1, paint);
-//        invalidate();
+        invalidate();
     }
 
     private void changeMatrix() {
-//        matrix.preRotate(1, bitmap.getWidth()/2, bitmap.getHeight()/2);
+        matrix.preRotate(1, bitmap.getWidth()/2, bitmap.getHeight()/2);
         matrix.postTranslate(1, 1);
 
-        matrix1.getValues(value);
+        matrix.getValues(value);
         if (value[2] >= getWidth() || value[5] >= getHeight()) {
             matrix.reset();
             value[2] = 0;

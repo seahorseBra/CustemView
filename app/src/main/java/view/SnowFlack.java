@@ -76,8 +76,8 @@ public class SnowFlack implements WeatherFlackInterface {
      * 改变雪花位置
      */
     private void changePosition() {
+        matrix.preRotate(round, bitmap.getWidth()/2, bitmap.getHeight()/2);
         matrix.postTranslate(mXValue,mValue);
-        round++;
         matrix.getValues(mValue1);
         if (mValue1[2] >= mViewWidth ||mValue1[2] <= (-bitmap.getWidth()) || mValue1[5] >= mViewHeight ) {
             resetFlack();
