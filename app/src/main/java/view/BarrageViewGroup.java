@@ -34,7 +34,6 @@ public class BarrageViewGroup extends ViewGroup {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         for (int i = 0; i < getChildCount(); i++) {
             measureChild(getChildAt(i), widthMeasureSpec, heightMeasureSpec);
         }
@@ -42,31 +41,31 @@ public class BarrageViewGroup extends ViewGroup {
         height = MeasureSpec.getSize(heightMeasureSpec);
 
         int mode = MeasureSpec.getMode(heightMeasureSpec);
-        if (mode == MeasureSpec.AT_MOST) {
-            int totleHeight = 0;
-            int lineMaxHeight = 0;
-            int totlewidth = 0;
-            for (int i = 0; i < getChildCount(); i++) {
-                View child = getChildAt(i);
-                int measuredWidth = child.getMeasuredWidth();
-                int measuredHeight = child.getMeasuredHeight();
 
-                totlewidth += (measuredWidth + horizontalInterval);
-                lineMaxHeight = Math.max(lineMaxHeight, measuredHeight);
+        int totleHeight = 0;
+        int lineMaxHeight = 0;
+        int totlewidth = 0;
+        for (int i = 0; i < getChildCount(); i++) {
+            View child = getChildAt(i);
+            int measuredWidth = child.getMeasuredWidth();
+            int measuredHeight = child.getMeasuredHeight();
 
-                if (totlewidth > width) {
-                    totleHeight += lineMaxHeight + verticalInterval;
-                    totlewidth = measuredWidth;
-                    lineMaxHeight = measuredHeight;
-                }
+            totlewidth += (measuredWidth + horizontalInterval);
+            lineMaxHeight = Math.max(lineMaxHeight, measuredHeight);
 
-                if (totlewidth <= width && i == getChildCount() -1) {
-                    totleHeight += lineMaxHeight;
-                }
+            if (totlewidth > width) {
+                totleHeight += lineMaxHeight + verticalInterval;
+                totlewidth = measuredWidth;
+                lineMaxHeight = measuredHeight;
             }
 
-            height = totleHeight + getPaddingTop() + getPaddingBottom();
+            if (totlewidth <= width && i == getChildCount() - 1) {
+                totleHeight += lineMaxHeight;
+            }
         }
+
+        height = totleHeight + getPaddingTop() + getPaddingBottom();
+
         setMeasuredDimension(width + getPaddingLeft() + getPaddingRight(), height);
     }
 

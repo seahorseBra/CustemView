@@ -1,97 +1,105 @@
 package view;
 
 
-
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Point;
-import android.graphics.RadialGradient;
-import android.graphics.Shader;
 
 import utils.RandomGenerator;
+
 
 /**
  * 雪花的类, 移动, 移出屏幕会重新设置位置.
  */
-public class SnowFlack implements WeatherInterface{
-    // 雪花的角度
-    private static final float ANGE_RANGE = 0.1f; // 角度范围r
-    private static final float HALF_ANGLE_RANGE = ANGE_RANGE / 2f; // 一般的角度
-    private static final float HALF_PI = (float) Math.PI / 2f; // 半PI
-    private static final float ANGLE_SEED = 25f; // 角度随机种子
-    private static final float ANGLE_DIVISOR = 10000f;
-    // 雪花的移动速度
-    private static final float INCREMENT_LOWER = 2f;
-    private static final float INCREMENT_UPPER = 3f;
-
+public class SnowFlack implements WeatherFlackInterface {
     // 雪花的大小
-    private static final float FLAKE_SIZE_LOWER = 8f;
-    private static final float FLAKE_SIZE_UPPER = 25f;
+    private static final float FLAKE_SIZE_LOWER = 15f;
+    private final Point mPosition;
+    private final Paint mPaint;                 // 画笔
+    private final double mAngle = Math.PI / 4;  //雪花随机方向
+    private final Bitmap bitmap;                //雪花图片
+    private int mValue = 2;                     //雪花Y轴上移动速度
+    private int mXValue = 1;                    //雪花X轴上移动速度
+    private final int mAlpha;                   //雪花透明度
+    private int mViewWidth ,mViewHeight;        //View的总宽高
+    private int round = 1;
+    private Matrix matrix;
 
-    private final RandomGenerator mRandom; // 随机控制器
-    private final Point mPosition; // 雪花位置
-    private float mAngle; // 角度
-    private final float mIncrement; // 雪花的速度
-    private final float mFlakeSize; // 雪花的大小
-    private final Paint mPaint; // 画笔
-    private int[] color = {0x00ffffff,0x88ffffff,0x00ffffff};
-    private float[] position = {0,0.5f,1};
-    private SnowFlack(RandomGenerator random, Point position, float angle, float increment, float flakeSize, Paint paint) {
-        mRandom = random;
-        mPosition = position;
-        mIncrement = increment;
-        mFlakeSize = flakeSize;
+    private float[] mValue1 = new float[9];
+
+    private float scanValue = 0.5f;
+
+    private SnowFlack(int viewWidth, int viewHeight, Paint paint, Bitmap bitmap) {
+        this.bitmap = bitmap;
+        int x = (int) RandomGenerator.getRandom(0, viewWidth);
+        int y = (int) RandomGenerator.getRandom(0, viewHeight);
+        mPosition = new Point(x, y);
         mPaint = paint;
-        mAngle = angle;
+        mAlpha = (int) RandomGenerator.getRandom(25, 125);
+        double angle = RandomGenerator.getRandom(-(float) Math.PI/4, (float) Math.PI / 4);
+        mXValue = (int) (Math.tan(angle)*2);
+        mValue = (int) RandomGenerator.getRandom(2,4);
+
+        round = (int) RandomGenerator.getRandom(-1, 1);
+        mViewWidth = viewWidth;
+        mViewHeight = viewHeight;
+
+        matrix = new Matrix();
+        scanValue = RandomGenerator.getRandom(0.2f, 1f);
+        resetMatrix();
     }
 
-    public static SnowFlack create(int width, int height, Paint paint) {
-        RandomGenerator random = new RandomGenerator();
-        int x = random.getRandom(width);
-        int y = random.getRandom(height);
-        Point position = new Point(x, y);
-        float angle = random.getRandom(ANGLE_SEED) / ANGLE_SEED * ANGE_RANGE + HALF_PI - HALF_ANGLE_RANGE;
-        float increment = random.getRandom(INCREMENT_LOWER, INCREMENT_UPPER);
-        float flakeSize = random.getRandom(FLAKE_SIZE_LOWER, FLAKE_SIZE_UPPER);
-        return new SnowFlack(random, position, angle, increment, flakeSize, paint);
+    /**
+     * 创建一片雪花
+     * @param width
+     * @param height
+     * @param paint
+     * @param bitmap
+     * @return
+     */
+    public static SnowFlack create(int width, int height, Paint paint, Bitmap bitmap) {
+        if (width <= 0 || height <= 0) {
+            return null;
+        }
+        return new SnowFlack(width, height, paint, bitmap);
     }
 
-    // 绘制雪花
     public void draw(Canvas canvas) {
-        mPaint.setShader(new RadialGradient(mPosition.x, mPosition.y, mFlakeSize, 0x55ffffff, 0x11ffffff, Shader.TileMode.CLAMP));
-        canvas.drawCircle(mPosition.x, mPosition.y, mFlakeSize, mPaint);
+        mPaint.setAlpha(mAlpha);
+        changePosition();
+        canvas.drawBitmap(bitmap, matrix, mPaint);
     }
 
-    // 移动雪花
-    private void move(int width, int height) {
-        //x水平方向，那么需要晃动，主要设置这个值就可以，现在取消晃动了
-        //如果 mPosition.x不加上后面那个值，就不会晃动了
-        double x = mPosition.x + (mIncrement * Math.cos(mAngle));
-        //y是竖直方向，就是下落
-        double y = mPosition.y + (mIncrement * Math.sin(mAngle));
-
-        mAngle += mRandom.getRandom(-ANGLE_SEED, ANGLE_SEED) / ANGLE_DIVISOR;
-        //这个是设置雪花位置，如果在很短时间内刷新一次，就是连起来的动画效果
-        mPosition.set((int) x, (int) y);
-
-        // 移除屏幕, 重新开始
-        if (!isInside(width, height)) {
-            // 重置雪花
-            reset(width);
+    /**
+     * 改变雪花位置
+     */
+    private void changePosition() {
+        matrix.postTranslate(mXValue,mValue);
+        round++;
+        matrix.getValues(mValue1);
+        if (mValue1[2] >= mViewWidth ||mValue1[2] <= (-bitmap.getWidth()) || mValue1[5] >= mViewHeight ) {
+            resetFlack();
+            matrix.getValues(mValue1);
         }
     }
 
-    // 判断是否在其中
-    private boolean isInside(int width, int height) {
-        int x = mPosition.x;
-        int y = mPosition.y;
-        return x > mFlakeSize -5 && x + mFlakeSize <= width && y >= -mFlakeSize - 1 && y - mFlakeSize < height;
+    /**
+     * 重置雪花位置到开始位置
+     */
+    private void resetFlack() {
+        mPosition.y = 0;
+        mPosition.x = RandomGenerator.getRandom(mViewWidth);
+        double angle = RandomGenerator.getRandom(-(float) Math.PI/4, (float) Math.PI / 4);
+        mXValue = (int) (Math.tan(angle)*2);
+        resetMatrix();
     }
 
-    // 重置雪花
-    private void reset(int width) {
-        mPosition.x = mRandom.getRandom(width);
-        mPosition.y = (int) (-mFlakeSize - 1); // 最上面
-        mAngle = mRandom.getRandom(ANGLE_SEED) / ANGLE_SEED * ANGE_RANGE + HALF_PI - HALF_ANGLE_RANGE;
+    private void resetMatrix(){
+        matrix.reset();
+        matrix.setScale(scanValue, scanValue);
+        matrix.postTranslate(mPosition.x, mPosition.y);
     }
+
 }

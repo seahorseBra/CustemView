@@ -26,6 +26,8 @@ public class ClipPathView extends View{
     private Path path;
     private GradientDrawable gradientDrawable;
     private Paint paint;
+    private Path path1;
+    private Paint paint1;
 
     public ClipPathView(Context context) {
         this(context, null);
@@ -40,24 +42,32 @@ public class ClipPathView extends View{
         setBackgroundColor(Color.TRANSPARENT);
         path = new Path();
         path.moveTo(0, 90);
-        path.addCircle(0,90,7, Path.Direction.CCW);
         path.lineTo(150, 0);
-        path.addCircle(150, 0,7, Path.Direction.CCW);
         path.lineTo(300, 40);
-        path.addCircle(300, 40,7, Path.Direction.CCW);
         path.lineTo(400, 0);
         path.lineTo(400, 400);
         path.lineTo(0,400);
-//        path.close();
+        path.close();
+
+        path1 = new Path();
+        path1.moveTo(10, 100);
+        path1.lineTo(390, 100);
+        path1.lineTo(390, 200);
+        path1.lineTo(10, 200);
+        path1.close();
 
         gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, new int[]{Color.RED, Color.TRANSPARENT});
         gradientDrawable.setBounds(0,0,400,400);
 
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setStyle(Paint.Style.STROKE);
+        paint.setStyle(Paint.Style.FILL);
         paint.setPathEffect(new CornerPathEffect(50));
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
 
+        paint1 = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint1.setColor(Color.BLACK);
+        paint1.setTextSize(40);
+        invalidateDrawable(gradientDrawable);
     }
 
     @Override
@@ -67,5 +77,9 @@ public class ClipPathView extends View{
         gradientDrawable.draw(canvas);
         canvas.drawPath(path, paint);
         canvas.restore();
+
+        canvas.clipPath(path1);
+        canvas.drawColor(Color.YELLOW);
+        canvas.drawText("123", 20, 150, paint1);
     }
 }

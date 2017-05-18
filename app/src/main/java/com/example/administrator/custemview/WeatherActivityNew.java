@@ -94,7 +94,7 @@ public class WeatherActivityNew extends FragmentActivity {
                 if (type>=3) {
                     type = 0;
                 }
-                weatherBg.setWeatherType(type++);
+                weatherBg.setWeatherType(type++,true);
             }
         });
 

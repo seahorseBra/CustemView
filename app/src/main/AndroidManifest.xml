@@ -126,7 +126,9 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity android:name=".LittleGridViewActivity" />
         <activity android:name=".ImageDrawActivity" />
-        <activity android:name=".WebActivity"></activity>
+        <activity android:name=".WebActivity" />
+        <activity android:name=".WeatherBgActivity"
+            android:exported="true"></activity>
     </application>
 
 </manifest>

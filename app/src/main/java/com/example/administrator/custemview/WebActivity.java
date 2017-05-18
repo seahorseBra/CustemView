@@ -20,6 +20,7 @@ public class WebActivity extends BaseActivity {
         try {
             WebSettings settings = mWebView.getSettings();
             settings.setJavaScriptEnabled(true);
+            settings.setAppCacheEnabled(true);
             mWebView.setWebViewClient(new WebViewClient());
             mWebView.setWebChromeClient(new WebChromeClient());
             settings.setDefaultTextEncodingName("utf-8");
