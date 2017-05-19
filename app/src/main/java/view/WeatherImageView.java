@@ -33,9 +33,11 @@ import utils.Utils;
 public class WeatherImageView extends View {
     private int weatherType = -1;
     private boolean isDay = true;
-    private static final int NUM_SNOWFLAKES = 50;       //雪数量
+    private static final int NUM_SNOWFLAKES = 15;       //雪数量
     private static final int NUM_RAINFLAKES = 10;       //雨数量
-    private static final int NUM_CLOUDFLAKES = 3;       //云数量
+    private static final int NUM_CLOUDFLAKES = 1;       //云数量
+    private static final int NUM_SUNFLAKES = 1;         //太阳数量
+    private static final int NUM_MAIFLAKES = 1;         //霾数量
     private static final int DELAY = 5;
     private ArrayList<WeatherFlackInterface> mFlakes;   //各种天气图片集合
     private int mWidth;
@@ -76,28 +78,52 @@ public class WeatherImageView extends View {
             return;
         }
         switch (weatherType) {
+            //太阳
             case 0:
                 if (isDay) {
+                    Bitmap sunBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.tq_bg_sun_pic);
+                    Bitmap sunBitmap1 = BitmapFactory.decodeResource(getResources(), R.drawable.tq_bg_sun_shine2);
+                    mFlakes.clear();
+                    for (int i = 0; i < NUM_SUNFLAKES; ++i) {
+                        SunnyFlack snowFlack = SunnyFlack.create(mWidth, mHeight, paint, sunBitmap, sunBitmap1);
+                        if (snowFlack != null) {
+                            mFlakes.add(snowFlack);
+                        }
+                    }
                     switchImg = 1;
-                    paint.setShader(new RadialGradient(150, 100, viewheight - 100, 0x55ffffff, 0x00ffffff, Shader.TileMode.CLAMP));
                 } else {
                     switchImg = 0;
                 }
                 break;
+            //云
             case 1:
+                Bitmap cloudBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.tq_bg_cloud_pic);
+                mFlakes.clear();
                 for (int i = 0; i < NUM_CLOUDFLAKES; ++i) {
+                    CloudFlack snowFlack = CloudFlack.create(mWidth, mHeight, paint, cloudBitmap);
+                    if (snowFlack != null) {
+                        mFlakes.add(snowFlack);
+                    }
                 }
                 switchImg = 4;
                 break;
+            //各种雨
             case 4:
             case 5:
             case 7:
             case 8:
             case 10:
+                Bitmap bitmap1 = BitmapFactory.decodeResource(getResources(), R.drawable.tq_bg_rain_icon);
+                mFlakes.clear();
                 for (int i = 0; i < NUM_RAINFLAKES; ++i) {
+                    RainFlack snowFlack = RainFlack.create(mWidth, mHeight, paint, bitmap1);
+                    if (snowFlack != null) {
+                        mFlakes.add(snowFlack);
+                    }
                 }
                 switchImg = 2;
                 break;
+            //雪
             case 14:
                 Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.snow);
                 mFlakes.clear();
@@ -109,6 +135,18 @@ public class WeatherImageView extends View {
                 }
                 switchImg = 3;
                 break;
+            //霾
+            case 30:
+                Bitmap bitmapMai = BitmapFactory.decodeResource(getResources(), R.drawable.tq_bg_haze_pic);
+                mFlakes.clear();
+                for (int i = 0; i < NUM_MAIFLAKES; ++i) {
+                    MaiFlack snowFlack = MaiFlack.create(mWidth, mHeight, paint, bitmapMai);
+                    if (snowFlack != null) {
+                        mFlakes.add(snowFlack);
+                    }
+                }
+                switchImg = 5;
+                break;
             default:
                 switchImg = 0;
                 break;
@@ -119,10 +157,8 @@ public class WeatherImageView extends View {
 
 
     public void setWeatherType(int weatherType, boolean isday) {
-//        this.weatherType = weatherType;
-//        this.isDay = isday;
-        this.weatherType = 14;
-        this.isDay = true;
+        this.weatherType = weatherType;
+        this.isDay = isday;
         iniSnow();
     }
 
@@ -142,9 +178,7 @@ public class WeatherImageView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if (switchImg == 1) {
-            canvas.drawCircle(150, 100, viewheight - 100, paint);
-        }else if (switchImg == 2 || switchImg == 3 || switchImg == 4) {
+        if (switchImg == 1 || switchImg == 2 || switchImg == 3 || switchImg == 4|| switchImg == 5) {
             for (int i = 0; i < mFlakes.size(); i++) {
                 WeatherFlackInterface flake = mFlakes.get(i);
                 if (flake != null) {
@@ -154,7 +188,9 @@ public class WeatherImageView extends View {
         } else{
             canvas.restore();
         }
-        invalidate();   //无限刷新
+        if (switchImg == 1 ||switchImg == 2 || switchImg == 3 || switchImg == 4) {
+            invalidate();   //有动画的需要无限刷新
+        }
     }
 
 }

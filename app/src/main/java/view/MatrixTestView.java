@@ -39,15 +39,15 @@ public class MatrixTestView extends View {
         matrix = new Matrix();
         matrix1 = new Matrix();
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        matrix1.preScale(0.5f, 0.5f);
-        matrix.setScale(5f,5f);
+//        matrix1.preScale(0.5f, 0.5f);
+//        matrix.setScale(1f,1f);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         changeMatrix();
         canvas.drawBitmap(bitmap, matrix, paint);
-        canvas.drawBitmap(bitmap, matrix1, paint);
+//        canvas.drawBitmap(bitmap, matrix1, paint);
         invalidate();
     }
 
@@ -64,6 +64,5 @@ public class MatrixTestView extends View {
 
 //        matrix1.preRotate(2, bitmap.getWidth()/2, bitmap.getHeight()/2);
         matrix1.postTranslate(1,2);
-
     }
 }
