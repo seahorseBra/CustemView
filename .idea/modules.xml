@@ -5,7 +5,10 @@
       <module fileurl="file://$PROJECT_DIR$/CustemView.iml" filepath="$PROJECT_DIR$/CustemView.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/bluetoothsample/bluetoothsample.iml" filepath="$PROJECT_DIR$/bluetoothsample/bluetoothsample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bluetoothsample/bluetoothsample.iml" filepath="$PROJECT_DIR$/bluetoothsample/bluetoothsample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/javatest/javatest.iml" filepath="$PROJECT_DIR$/javatest/javatest.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib/lib.iml" filepath="$PROJECT_DIR$/lib/lib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/myapplication/myapplication.iml" filepath="$PROJECT_DIR$/myapplication/myapplication.iml" />
       <module fileurl="file://$PROJECT_DIR$/myapplication/myapplication.iml" filepath="$PROJECT_DIR$/myapplication/myapplication.iml" />
     </modules>
   </component>
