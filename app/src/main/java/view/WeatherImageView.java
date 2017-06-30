@@ -33,7 +33,7 @@ import utils.Utils;
 public class WeatherImageView extends View {
     private int weatherType = -1;
     private boolean isDay = true;
-    private static final int NUM_SNOWFLAKES = 15;       //雪数量
+    private static final int NUM_SNOWFLAKES = 50;       //雪数量
     private static final int NUM_RAINFLAKES = 10;       //雨数量
     private static final int NUM_CLOUDFLAKES = 1;       //云数量
     private static final int NUM_SUNFLAKES = 1;         //太阳数量
@@ -56,11 +56,11 @@ public class WeatherImageView extends View {
 
     public WeatherImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+//        setLayerType(View.LAYER_TYPE_HARDWARE, null);
         mFlakes = new ArrayList<>();
         paint = new Paint();
         paint.setAntiAlias(true);
         paint.setColor(Color.WHITE);
-
     }
 
     @Override

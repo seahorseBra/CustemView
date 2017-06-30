@@ -91,7 +91,7 @@ public class RxJavaTestActivity extends BaseActivity {
                     }
                 });*/
 
-        /*ArrayList<String> list = new ArrayList<>();
+        ArrayList<String> list = new ArrayList<>();
         list.add("a1");
         list.add("a2");
         list.add("a3");
@@ -105,7 +105,7 @@ public class RxJavaTestActivity extends BaseActivity {
                         Log.d(TAG, "call() called with: s = [" + s + "]");
                         mText.setText(s);
                     }
-                });*/
+                });
         //map变换
 /* Observable.create(new Observable.OnSubscribe<String>() {
             @Override
