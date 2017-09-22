@@ -90,7 +90,8 @@ public class MainActivity extends BaseActivity{
                 R.id.main_activity_little_grid_view,
                 R.id.main_activity_image_draw,
                 R.id.main_activity_web,
-                R.id.main_activity_weather_bg
+                R.id.main_activity_weather_bg,
+                R.id.main_activity_loacation
         );
 
         SimpleDateFormat format = new SimpleDateFormat("MMM.EEEE");
@@ -397,6 +398,9 @@ public class MainActivity extends BaseActivity{
                 break;
             case R.id.main_activity_weather_bg:
                 goActivity(WeatherBgActivity.class);
+                break;
+            case R.id.main_activity_loacation:
+                goActivity(LocationActivity.class);
                 break;
         }
     }

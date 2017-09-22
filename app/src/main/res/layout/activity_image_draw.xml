@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     tools:context="com.example.administrator.custemview.ImageDrawActivity">
 
-    <view.ClipPathView
-        android:layout_width="400px"
-        android:layout_height="400px" />
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="200dp"
+        android:background="#999"
+        android:layout_height="30dp" />
 </android.support.constraint.ConstraintLayout>

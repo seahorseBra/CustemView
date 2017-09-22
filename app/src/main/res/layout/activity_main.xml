@@ -296,6 +296,14 @@
                 android:background="@color/colorPrimaryDark"
                 android:text="天气背景"
                 android:textColor="@color/colorAccent" />
+
+            <Button
+                android:id="@+id/main_activity_loacation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                android:text="定位"
+                android:textColor="@color/colorAccent" />
         </view.BarrageViewGroup>
 
     </LinearLayout>

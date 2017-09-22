@@ -27,7 +27,7 @@ public class MyClass1 {
             file1 = new File(absolutePath + "\\data\\");
             if (file1.exists()) {
                 file1.delete();
-            }
+            }0
             file1.mkdirs();
             file1 = new File(file1.getAbsoluteFile() + "\\"+name);
             file1.createNewFile();
