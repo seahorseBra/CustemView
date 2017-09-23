@@ -62,7 +62,7 @@ public class SunnyFlack implements WeatherFlackInterface {
             }
         });
 
-        valueAnimator.setDuration(5000);
+        valueAnimator.setDuration(20000);
         valueAnimator.setRepeatMode(ValueAnimator.REVERSE);
         valueAnimator.setRepeatCount(ValueAnimator.INFINITE);
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {

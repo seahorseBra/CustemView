@@ -4,6 +4,8 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'org.dom4j:dom4j:2.0.1'
     compile 'mysql:mysql-connector-java:6.0.6'
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile files('lib/ZHConverter.jar')
 }
 
 sourceCompatibility = "1.7"

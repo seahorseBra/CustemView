@@ -8,6 +8,8 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Animatable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -15,6 +17,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -87,7 +90,8 @@ public class MainActivity extends BaseActivity{
                 R.id.main_activity_little_grid_view,
                 R.id.main_activity_image_draw,
                 R.id.main_activity_web,
-                R.id.main_activity_weather_bg
+                R.id.main_activity_weather_bg,
+                R.id.main_activity_loacation
         );
 
         SimpleDateFormat format = new SimpleDateFormat("MMM.EEEE");
@@ -307,7 +311,9 @@ public class MainActivity extends BaseActivity{
                 goActivity(ClockActivity.class);
                 break;
             case R.id.main_activity_colormattrix:
+                ToastMaster.showShortToast(this, "明天，敬请期待！");
                 goActivity(ColorMatrixActivity.class);
+
                 break;
             case R.id.main_activity_login:
                 goActivity(LogingActivity.class);
@@ -392,6 +398,9 @@ public class MainActivity extends BaseActivity{
                 break;
             case R.id.main_activity_weather_bg:
                 goActivity(WeatherBgActivity.class);
+                break;
+            case R.id.main_activity_loacation:
+                goActivity(LocationActivity.class);
                 break;
         }
     }

@@ -68,7 +68,7 @@ public class RxJavaTestActivity extends BaseActivity {
 
 
 
-       /* Observable.just(1,2,3)
+       Observable.just(1,2,3)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
                 .subscribe(new Action1<Integer>() {
@@ -77,7 +77,6 @@ public class RxJavaTestActivity extends BaseActivity {
                         mText.setText(String.valueOf(integer));
                     }
                 });
-*/
      /*   String[] words = {"111", "222", "333"};
         Observable.from(words)
                 .delay(1, TimeUnit.SECONDS)
@@ -91,7 +90,7 @@ public class RxJavaTestActivity extends BaseActivity {
                     }
                 });*/
 
-        /*ArrayList<String> list = new ArrayList<>();
+        ArrayList<String> list = new ArrayList<>();
         list.add("a1");
         list.add("a2");
         list.add("a3");
@@ -105,7 +104,7 @@ public class RxJavaTestActivity extends BaseActivity {
                         Log.d(TAG, "call() called with: s = [" + s + "]");
                         mText.setText(s);
                     }
-                });*/
+                });
         //map变换
 /* Observable.create(new Observable.OnSubscribe<String>() {
             @Override
@@ -161,35 +160,35 @@ public class RxJavaTestActivity extends BaseActivity {
         });*/
 
         //使用Transformar进行公共变换
-        LiftAllTransformar liftAllTransformar = new LiftAllTransformar();
-        Observable.just(1,2)
-                .compose(liftAllTransformar)
-                .subscribe(new Action1<String>() {
-                    @Override
-                    public void call(String s) {
-                        Log.d(TAG, "call() called with: s = [" + s + "]");
-                    }
-                });
-        
-        Task.call(new Callable<String>() {
-            @Override
-            public String call() throws Exception {
-                Log.d(TAG, "call() called");
-                return "true";
-            }
-        }).onSuccess(new Continuation<String, Integer>() {
-            @Override
-            public Integer then(Task<String> task) throws Exception {
-                Log.d(TAG, "then() called with: task = [" + task + "]");
-                Thread.sleep(2000);
-                return 100;
-            }
-        }, Executors.newSingleThreadExecutor()).continueWith(new Continuation<Integer, Void>() {
-            @Override
-            public Void then(Task<Integer> task) throws Exception {
-                return null;
-            }
-        });
+//        LiftAllTransformar liftAllTransformar = new LiftAllTransformar();
+//        Observable.just(1,2)
+//                .compose(liftAllTransformar)
+//                .subscribe(new Action1<String>() {
+//                    @Override
+//                    public void call(String s) {
+//                        Log.d(TAG, "call() called with: s = [" + s + "]");
+//                    }
+//                });
+//
+//        Task.call(new Callable<String>() {
+//            @Override
+//            public String call() throws Exception {
+//                Log.d(TAG, "call() called");
+//                return "true";
+//            }
+//        }).onSuccess(new Continuation<String, Integer>() {
+//            @Override
+//            public Integer then(Task<String> task) throws Exception {
+//                Log.d(TAG, "then() called with: task = [" + task + "]");
+//                Thread.sleep(2000);
+//                return 100;
+//            }
+//        }, Executors.newSingleThreadExecutor()).continueWith(new Continuation<Integer, Void>() {
+//            @Override
+//            public Void then(Task<Integer> task) throws Exception {
+//                return null;
+//            }
+//        });
     }
 
     public class LiftAllTransformar implements Observable.Transformer<Integer, String> {
