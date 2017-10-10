@@ -43,4 +43,11 @@
         android:layout_marginTop="10dp"
         android:background="#efefef"
         android:padding="5dp" />
+
+    <view.BreakViewGroup
+        android:id="@+id/bre"
+        android:background="#f9f"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </view.BreakViewGroup>
 </LinearLayout>

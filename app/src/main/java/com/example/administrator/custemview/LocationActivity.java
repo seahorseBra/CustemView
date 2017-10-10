@@ -18,6 +18,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import utils.LocationUtil;
+import view.BreakViewGroup;
 
 /**
  * Created by zchao on 2017/9/15.
@@ -35,13 +36,21 @@ public class LocationActivity extends BaseActivity {
     TextView locationLati;
     @Bind(R.id.location_long)
     TextView locationLong;
-
+    @Bind(R.id.bre)
+    BreakViewGroup mBre;
     private boolean flag;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.location_activity);
         ButterKnife.bind(this);
+        String[] aaa = {"的单独","的单独","的单独","的单独的单独的单独的单独的单独","的单独","的单独","的单独的单独的单独","的单独","的单独","的单独的单独","的单独","的单独","的单独的单独","的单独","的单独","的单独",};
+        mBre.removeAllViews();
+        for (int i = 0; i < aaa.length; i++) {
+            TextView textView = new TextView(this);
+            textView.setText(aaa[i]);
+            mBre.addView(textView);
+        }
     }
     /**
      * 最好定位
